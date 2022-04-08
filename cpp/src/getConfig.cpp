@@ -3,15 +3,14 @@
 #include <fstream>
 #include <vector>
 #include <errno.h>
+#include <mutex>
 
-#include "SimpleMutex.hpp"
+using namespace std;
 
-static SimpleMutex MUTEX;
+mutex MUTEX;
 
 #define LOCK MUTEX.lock()
 #define UNLOCK MUTEX.unlock()
-
-using namespace std;
 
 string getConfigAsString(const string &query, const string &defaultValue, const string &fileName)
 {
@@ -85,6 +84,12 @@ double getConfigAsDouble(const string &query, const double &defaultValue, const 
     return res;
 }
 
+Date getConfigAsDate(const std::string& query, const Date& defaultValue, const std::string& fileName)
+{
+    Date res(getConfigAsString(query, defaultValue.toStr(), fileName));
+    return res;
+}
+
 vector< string > getConfigAsVectorString(const string& query, const vector< string >& defaultValue, const string& fileName)
 {
     LOCK;
@@ -153,7 +158,7 @@ vector< int > getConfigAsVectorInt(const string& query, const vector< int >& def
         if (!it->empty())
         {
             int val = 0;
-            if (sscanf(it->c_str(), "%d", &val) != 1)
+            if (sscanf_s(it->c_str(), "%d", &val) != 1)
             {
                 res = defaultValue;
                 return res;
@@ -184,7 +189,7 @@ std::vector< unsigned int > getConfigAsVectorUInt(const string& query, const std
         if (!it->empty())
         {
             unsigned int val = 0u;
-            if (sscanf(it->c_str(), "%u", &val) != 1)
+            if (sscanf_s(it->c_str(), "%u", &val) != 1)
             {
                 res = defaultValue;
                 return res;
@@ -215,7 +220,7 @@ vector< float > getConfigAsVectorFloat(const string& query, const vector< float 
         if (!it->empty())
         {
             float val = 0.f;
-            if (sscanf(it->c_str(), "%f", &val) != 1)
+            if (sscanf_s(it->c_str(), "%f", &val) != 1)
             {
                 res = defaultValue;
                 return res;
@@ -246,7 +251,7 @@ vector< double > getConfigAsVectorDouble(const string& query, const vector< doub
         if (!it->empty())
         {
             double val = 0.;
-            if (sscanf(it->c_str(), "%lf", &val) != 1)
+            if (sscanf_s(it->c_str(), "%lf", &val) != 1)
             {
                 res = defaultValue;
                 return res;
@@ -256,6 +261,25 @@ vector< double > getConfigAsVectorDouble(const string& query, const vector< doub
         }
     }
     
+    return res;
+}
+
+vector<Date> getConfigAsVectorDate(const std::string& query, const std::vector<Date>& defaultValue, const std::string& fileName)
+{
+    vector<string> values;
+    for (vector<Date>::const_iterator it = defaultValue.begin(); it != defaultValue.end(); it++)
+        values.push_back(it->toStr());
+
+    values = getConfigAsVectorString(query, values, fileName);
+
+    vector<Date> res;
+    for (vector<string>::const_iterator it = values.begin(); it != values.end(); it++)
+    {
+        Date date(*it);
+        if (date.isValid())
+            res.push_back(date);
+    }
+
     return res;
 }
 
@@ -337,6 +361,11 @@ void setConfigDouble(const string &query, const double &value, const string &fil
     setConfigString(query, buffer, fileName);
 }
 
+void setConfigDate(const std::string& query, const Date& value, const std::string& fileName)
+{
+    setConfigString(query, value.toStr(), fileName);
+}
+
 void setConfigVectorString(const string& query, const vector< string >& value, const string& fileName)
 {
     string values;
@@ -393,5 +422,14 @@ void setConfigVectorDouble(const string& query, const vector< double >& value, c
         snprintf(buffer, sizeof(buffer), "%lf", *it);
         values.push_back(buffer);
     }
+    setConfigVectorString(query, values, fileName);
+}
+
+void setConfigVectorDate(const std::string& query, const std::vector<Date>& value, const std::string& fileName)
+{
+    vector<string> values;
+    for (vector<Date>::const_iterator it = value.begin(); it != value.end(); it++)
+        values.push_back(it->toStr());
+
     setConfigVectorString(query, values, fileName);
 }
