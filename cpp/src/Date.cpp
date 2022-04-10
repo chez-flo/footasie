@@ -61,7 +61,7 @@ bool Date::operator>(const Date& date) const
 
 bool Date::operator>=(const Date& date) const
 {
-	return operator>(date) || operator>=(date);
+	return operator>(date) || operator==(date);
 }
 
 Date& Date::operator+(int jour)
@@ -85,6 +85,11 @@ Date& Date::operator-(int jour)
 void Date::operator-=(int jour)
 {
 	operator+=(-jour);
+}
+
+bool Date::isWeek() const
+{
+	return m_tm.tm_wday != 0 && m_tm.tm_wday != 7;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Date& date)
