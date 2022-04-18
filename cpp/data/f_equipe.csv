@@ -1,0 +1,193 @@
+"eq_id","eq_nom","eq_ter_id","eq_jour","eq_coupe","eq_couleur","eq_couleur_ext","eq_soc_id","eq_commentaire"
+"1","Créneau Libre",NULL,NULL,"0",NULL,NULL,"0",NULL
+"2","SAP 1","3","mardi","1","Bleu / Blanc","Rouge","32","A valider après assemblée générale de l’association…"
+"3","BeMore","0","aucun","1","Rouge / Noir",,"13",
+"4","Amadeus 5","6","lundi","1","Rose","Noir","46",
+"5","Amadeus 14","6","jeudi","1","Orange","Vert","46",
+"6","Oxya 1","0",,"1","Rouge",,"0",NULL
+"7","Docapost 1","3","lundi","1","Bleu","Rouge","18",
+"8","Amadeus 17","1","vendredi","1","Bleu Ciel",,"46",
+"9","Amadeus 1","1","jeudi","1","Blanc","Noir","46","Bah faut faire graver le nom de l'équipe qui a gagné les 2 derniers championnats Asie sur la coupe. MRC"
+"10","ARM 2","3","mardi","1","Blanc","bleu","9",
+"11","Amicale PNS","6","jeudi","1","Bleu/Orange","Noir/Vert","7",
+"12","ST","4","aucun","1","Blanc / Bleu",,"36",
+"13","Crossknowledge","0","mardi","1","Blanc, Bleu et Noir",,"17",
+"14","Sogeti High Tech","4","mardi","1","Rouge et Blanc",,"34","Merci Thibaut pour l'organisation"
+"15","Air France 1","4","vendredi","1","Blancs",,"2",
+"16","Ausy","1","vendredi","1","Rouge","Jaune","0",NULL
+"17","Elocar","3","aucun","1","Noir","Blanc","19","Courage et merci Florian !!!!"
+"18","ASSCA 1","0","vendredi","1","Blanc",,"0",NULL
+"19","SAP 2","3","mardi","0","Bleu","Rouge","32",
+"20","Amadeus 8","1","aucun","1","Bleu","Orange","46",
+"21","Storm Consulting","0","vendredi","1","Jaune","Or","37",NULL
+"22","Atos 1","4","vendredi","1","Bleu",,"11",
+"23","Amadeus 13","6","jeudi","1","Bleu Ciel",,"46",
+"24","Silicon Mobility","3","mardi","1","Noir","Bleu","33",NULL
+"25","WallStreet Systems","4","lundi","1","Blanc","Orange","44","Si possible, éviter la poule de Fortinet"
+"26","Amadeus 12","4","mercredi","1","Bleu",,"0",NULL
+"27","Amadeus 9","1","vendredi","1","Orange","Noir","46",
+"28","Thales 1","3","aucun","1","Vert / Blanc (Rayé)",,"39",
+"29","Sopra 1","4",,"1","Rouge",,"0",NULL
+"30","Airbus","4","vendredi","1","Bleu","Noir ou blanc","4",
+"31","Appolonia","1","jeudi","1","Bleu",,"8",
+"32","Amadeus 7","1","mercredi","1","Vert","Vert","46",
+"33","Amadeus 15","1","jeudi","1","Turquoise","Noir","46",
+"34","Amadeus 2","5","aucun","1","Rouge",,"46",
+"35","Orange 1","0","jeudi","1","Orange / Noir",,"0",NULL
+"36","Amadeus 3","6","mardi","0","Bleu",,"46",NULL
+"37","CNAF","0","mardi","0","Grenat",,"15",
+"38","Pro BTP","7","mardi","1","Jaune",,"30",
+"39","Amadeus 6","7","aucun","1","Vert","Vert","46",
+"40","CNRS 2","0",,"1","Bleu",,"16",NULL
+"41","Fortinet 1","0","lundi","1","Noir","rouge","20",
+"42","INRIA","0","vendredi","1","Rouge","bleu","23",
+"43","Harvest","6","mercredi","1","Blanc",,"22",
+"44","Galderma 1","5",,"1","Bleu Ciel","Gris","0",NULL
+"45","Teach on Mars","3","mercredi","1","Jaune","Violet","38",
+"46","Alten","1","aucun","1","Rouge",,"6",
+"47","Amadeus 11","4","vendredi","1","Rouge","Blanc","46",
+"48","Amadeus 4","1","mardi","1","Jaune","Jaune","46",
+"49","Astek","5","vendredi","1","Vert",,"10",
+"50","USAC","0","mercredi","1","Blanc","Noir","43",
+"51","Sopra 2","4","vendredi","1","Blanc",,"0",NULL
+"52","ARM 1","3","mardi","1","Bleu","blanc","9",
+"53","Alithya","0","jeudi","1","Bleu",,"5","Chauuuud !"
+"54","Questel","4","lundi","0","Bleu / Or","Rouge","31",
+"55","Thales 2","3","aucun","1","Vert / Blanc (Rayé)",,"39",
+"56","CGI","4","aucun","1","Rouge",,"14",
+"57","Amadeus 18","6","jeudi","1","Orange / Indigo",,"0",NULL
+"58","Docapost 2","3","aucun","1","Blanc",,"18",
+"59","CNRS 1","0","aucun","1","Bleu Marine",,"16",
+"60","Air France 2","4","mardi","1","Blanc","Blanc","2","Merci de remplacer Philippe Ravaine par Julien Bourel jubourel@airfrance.fr"
+"61","Amadeus 16","1","aucun","1","Bleu","Blanc","46",
+"62","Cadence","0",,"1","Rouge / Blanc",,"0",NULL
+"63","Orange 2","0","jeudi","1","Orange / Noir",,"0",NULL
+"64","Itek","0",,"1","Noir",,"0",NULL
+"65","Atos 2","6","vendredi","1","Bleu","Jaune","11",
+"66","Fortinet 2","7","lundi","1","Blanc/Rouge",,"20",
+"67","Kinaxia","0","lundi","1","Noir",,"0",NULL
+"68","Transvalor/INEO Défense","3","mardi","1","Noir","Orange","41",NULL
+"69","Amadeus 10","6","jeudi","1","Blanc / Rouge",,"46",
+"70","Orange Labs","3","lundi","1","Orange","Blanc","28",
+"71","Sysnetics-Labs","0",,"1","Noir / Jaune Fluo",,"0",NULL
+"72","ASSCA 2","0","mardi","1","Blanc",,"0",NULL
+"73","Galderma 2","5",,"1","Bleu Ciel","Gris","0",NULL
+"74","Vodafone","0","vendredi","0","Rouge",,"0",NULL
+"75","Oxya 2","0",,"1","Vert / Blanc",,"0",NULL
+"80","Intel 1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"81","Avisto",NULL,NULL,"1",NULL,NULL,"0",NULL
+"87","Scaleo Chip",NULL,NULL,"1",NULL,NULL,"0",NULL
+"94","Ficha-KS",NULL,NULL,"1",NULL,NULL,"0",NULL
+"96","Pro BTP 1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"97","IQ SIM",NULL,NULL,"1",NULL,NULL,"0",NULL
+"98","Ausy 1",NULL,"aucun","1","jaune","jaune","12",NULL
+"103","Pro BTP 2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"104","Docapost",NULL,NULL,"1",NULL,NULL,"0",NULL
+"106","Astek 2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"108","Sysnetic-labs",NULL,NULL,"1",NULL,NULL,"0",NULL
+"110","Elsys Design",NULL,NULL,"1",NULL,NULL,"0",NULL
+"114","Oxya",NULL,NULL,"0",NULL,NULL,"29",NULL
+"120","Intel 2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"121","Altran",NULL,NULL,"1",NULL,NULL,"0",NULL
+"125","C2R",NULL,NULL,"1",NULL,NULL,"0",NULL
+"128","RTE Multimedia",NULL,NULL,"1",NULL,NULL,"0",NULL
+"133","Sogeti France",NULL,NULL,"1",NULL,NULL,"0",NULL
+"139","Fortinet",NULL,NULL,"1",NULL,NULL,"0",NULL
+"143","Ricardo France",NULL,NULL,"1",NULL,NULL,"0",NULL
+"144","Graphie 4",NULL,NULL,"1",NULL,NULL,"0",NULL
+"148","INEO Défense",NULL,NULL,"1",NULL,NULL,"0",NULL
+"150","Transvalor",NULL,NULL,"1",NULL,NULL,"0",NULL
+"187","Elsys",NULL,NULL,"1",NULL,NULL,"0",NULL
+"208","Ricardo",NULL,NULL,"1",NULL,NULL,"0",NULL
+"225","RTE Services",NULL,NULL,"1",NULL,NULL,"0",NULL
+"228","Amadeus 19",NULL,NULL,"1",NULL,NULL,"0",NULL
+"230","Amical",NULL,NULL,"0",NULL,NULL,"0",NULL
+"259","Sopra Steria 1","3","mardi","1","Blanc",,"35","les responsables vont certainement changer"
+"264","Galderma",NULL,NULL,"1",NULL,NULL,"21",NULL
+"265","Sopra Steria 2","3","mardi","1","Rouge","blanc","35",
+"272","Kinaxia 1","4","mardi","0","Noir","Blanc","24",
+"274","Orange SCE","4","mercredi","0","Orange / Noir",,"28",
+"286","Nice ATC","0","jeudi","1","Blanc",,"25",
+"287","INGEY","0","aucun","1","bleu / Vert","noir / blanc - orange - rouge","51","hate de reprendre :)"
+"288","NXP","3","jeudi","1","bleu ciel",,"26",
+"294","Kinaxia 2","4","jeudi","1","Blanc","Noir","24",
+"295","AddixWare","0","lundi","1","Bleu",,"1",
+"296","Ausy 2",NULL,NULL,"1",NULL,NULL,"12",NULL
+"300","Sopra Steria 3","3","mardi","1","blanc",,"35",
+"302","Travelaer",NULL,NULL,"0",NULL,NULL,"42",NULL
+"303","Fenyx Consult","0","lundi","1","Blanc","Blanc","45",
+"304","Transperfect","3","aucun","1","Gris","Gris","40",
+"305","Akka 2","0","lundi","0","TBD",,"3",
+"306","Meilleurtaux.com","5","aucun","1","Orange ","Noir ","48",
+"307","Bioparc and Co","5","aucun","1","blanc",,"49",
+"308","Rugby Tag",NULL,NULL,"1",NULL,NULL,"0","Equipe créée pour prendre un créneau le vendredi à Chabert suite à la reconstruction du CIV"
+"309","rabie","0","aucun","1","blanc","bleu","35",
+"310","Wealth Squad","5","vendredi","1","Rose","Vert clair","52",
+"311","Oticon Medical","5","aucun","1","Orange","Blanc","53",
+"1000000","Coupe Phases de Poule",NULL,NULL,"0",NULL,NULL,"0",NULL
+"2000000","Coupe Phases Finales",NULL,NULL,"0",NULL,NULL,"0",NULL
+"20000001","A1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000002","A2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000003","B1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000004","B2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000005","C1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000006","C2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000007","D1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000008","D2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000009","E1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000010","E2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000011","F1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000012","F2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000013","G1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000014","G2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000015","H1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000016","H2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000017","I1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000018","I2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000019","J1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000020","J2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000021","K1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000022","K2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000023","L1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000024","L2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000025","M1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000026","M2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000027","N1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000028","N2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000029","O1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000030","O2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000031","P1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000032","P2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000101","Q16_1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000102","Q16_2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000103","Q16_3",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000104","Q16_4",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000105","Q16_5",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000106","Q16_6",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000107","Q16_7",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000108","Q16_8",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000109","Q16_9",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000110","Q16_10",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000111","Q16_11",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000112","Q16_12",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000113","Q16_13",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000114","Q16_14",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000115","Q16_15",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000116","Q16_16",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000117","Q8_1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000118","Q8_2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000119","Q8_3",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000120","Q8_4",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000121","Q8_5",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000122","Q8_6",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000123","Q8_7",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000124","Q8_8",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000125","Q4_1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000126","Q4_2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000127","Q4_3",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000128","Q4_4",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000129","Q2_1",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000130","Q2_2",NULL,NULL,"1",NULL,NULL,"0",NULL
+"20000228","WE+","0","aucun","1","Bleu","Rouge","54",NULL
+"20000249","Two Stars","0","mercredi","1","Orange","Or","0",NULL
+"20000253","Instant System","0","mardi","1","Violet","Blanc","50",

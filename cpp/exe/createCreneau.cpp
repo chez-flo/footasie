@@ -74,8 +74,13 @@ int main(int argc, char **argv)
 
     // terrains
     std::vector<int> dispoChabert = { 0, 2, 2, 2, 2, 1, 0 };
+    dispoChabert = getConfigAsVectorInt("Disponibilite Chabert", dispoChabert, "config.ini");
+
     std::vector<int> dispoBiot = { 0, 2, 1, 2, 2, 2, 0 };
+    dispoBiot = getConfigAsVectorInt("Disponibilite Biot", dispoBiot, "config.ini");
+
     std::vector<int> dispoFontonne = { 0, 2, 2, 0, 2, 2, 0 };
+    dispoFontonne = getConfigAsVectorInt("Disponibilite Fontonne", dispoFontonne, "config.ini");
 
     // construction de la liste des creneaux disponibles
     std::vector<Creneau> creneaux;
@@ -96,6 +101,8 @@ int main(int argc, char **argv)
                 creneaux.push_back(Creneau(date, 3, NULL));
         }
     }
+
+    std::cout << "Nombre total de creneaux: " << (int)creneaux.size() << std::endl;
 
     return 0;
 }
