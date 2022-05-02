@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-
+import CustomCalendar from "./components/calendar/CustomCalendar"
 function App() {
   return (
     <div className="App">
@@ -8,9 +8,12 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Foot Asie App
-        </p>
-        
+        </p>        
       </header>
+      <div className='content'>
+        <CustomCalendar/>
+      </div>
+
     </div>
   );
 }
