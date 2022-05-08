@@ -1,13 +1,5 @@
 #include <Date.hpp>
-
 #include <sstream>
-
-Date::Date()
-	:m_tm({ 0 })
-	,m_isValid(false)
-{
-
-}
 
 Date::Date(const std::string& str)
 	:m_tm({ 0 })
@@ -19,11 +11,6 @@ Date::Date(const std::string& str)
 Date::Date(const Date& date)
 	:m_tm(date.m_tm)
 	,m_isValid(date.m_isValid)
-{
-
-}
-
-Date::~Date()
 {
 
 }

@@ -6,12 +6,14 @@ include_directories(src)
 set(HEADERS
 	src/Creneau.hpp
 	src/Date.hpp
+	src/Equipe.hpp
 	src/getConfig.hpp
 	src/Match.hpp)
 
 set(SOURCES
 	src/Creneau.cpp
-	src/Date.cpp	
+	src/Date.cpp
+	src/Equipe.cpp
 	src/getConfig.cpp
 	src/Match.cpp)
 

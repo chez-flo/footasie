@@ -8,10 +8,10 @@
 class Date
 {
 public:
-	Date();
+	Date() = default;
 	Date(const std::string& str);
 	Date(const Date& date);
-	~Date();
+	~Date() = default;
 
 	bool operator==(const Date& date) const;
 	bool operator!=(const Date& date) const;
@@ -32,8 +32,8 @@ public:
 	std::string toStr() const;
 	bool isValid() const { return m_isValid; }
 private:
-	tm m_tm;
-	bool m_isValid;
+	tm m_tm = { 0 };
+	bool m_isValid = false;
 
 	void parseStr(const std::string& str);
 };
