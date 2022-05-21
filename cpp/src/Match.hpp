@@ -1,10 +1,14 @@
 #ifndef MATCH_HPP
 #define MATCH_HPP
 
+#include <Date.hpp>
+#include <Equipe.hpp>
+
 class Match
 {
 public:
-	Match();
+	Match() = default;
+	~Match() = default;
 
 	
 private:

@@ -8,14 +8,16 @@ set(HEADERS
 	src/Date.hpp
 	src/Equipe.hpp
 	src/getConfig.hpp
-	src/Match.hpp)
+	src/Match.hpp
+	src/Poule.hpp)
 
 set(SOURCES
 	src/Creneau.cpp
 	src/Date.cpp
 	src/Equipe.cpp
 	src/getConfig.cpp
-	src/Match.cpp)
+	src/Match.cpp
+	src/Poule.cpp)
 
 #DATA
 set(DATA ${CMAKE_CURRENT_SOURCE_DIR}/data)

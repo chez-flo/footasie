@@ -1,10 +1,116 @@
+#include <random>
 #include <iostream>
+#include <algorithm>
 #include <getConfig.hpp>
+#include <Poule.hpp>
 
-#include <Equipe.hpp>
+void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::string>& nomPoules, std::map<std::string, Poule>& out)
+{
+    // nombre de poules
+    const int nbPoules = (int)nomPoules.size();
+    const int nbEquipes = std::ceil((int)equipe.size() / nbPoules);
+
+    // init random
+    static std::random_device rd;  //Will be used to obtain a seed for the random number engine
+    static std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<> rand(0, nbPoules-1);
+
+    // copie de toutes les equipes
+    std::vector<std::string> all = equipe;
+
+    // traitement des equipes avec ami
+    for (std::vector<std::string>::const_iterator it = all.begin(); it != all.end();)
+    {
+        const Equipe& equipe = Equipe::byName(*it);
+
+        // est-ce que l'equipe est valide ?
+        if (!equipe.isValid())
+        {
+            it = all.erase(it);
+            continue;
+        }
+        // est-ce que l'equipe a un ami valide ?
+        const Equipe& ami = equipe.ami();
+        if (!ami.isValid())
+        {
+            it++;
+            continue;
+        }
+        // est-ce que l'ami est au meme niveau ?
+        std::vector<std::string>::const_iterator jt = std::find(all.begin(), all.end(), ami.nom());
+        if (jt != all.end())
+        {
+            // tirages aleatoires
+            int p1 = rand(gen);
+            for (int n = 0; n < nbPoules && (int)out[nomPoules[p1]].equipes().size() >= nbEquipes; ++n, p1 = (p1 + 1) % nbPoules);
+            int p2 = (p1 + 1) % nbPoules;
+            for (int n = 0; n < nbPoules && (int)out[nomPoules[p2]].equipes().size() >= nbEquipes; ++n, p2 = (p2 + 1) % nbPoules);
+
+            // ajouts
+            out[nomPoules[p1]].addEquipe(*it);
+            out[nomPoules[p2]].addEquipe(*jt);
+
+            // increment
+            all.erase(jt);
+            it = all.erase(it);
+        }
+        else
+        {
+            it++;
+        }
+    }
+
+    // traitement des autres equipes
+    for (std::vector<std::string>::const_iterator it = all.begin(); it != all.end();)
+    {
+        const Equipe& equipe = Equipe::byName(*it);
+
+        // on a deja teste si l'equipe est valide
+        int p1 = rand(gen);
+        for (int n = 0; n < nbPoules && (int)out[nomPoules[p1]].equipes().size() >= nbEquipes; ++n, p1 = (p1 + 1) % nbPoules);
+
+        // ajouts
+        out[nomPoules[p1]].addEquipe(*it);
+
+        // increment
+        it = all.erase(it);
+    }
+}
 
 int main(int argc, char **argv)
 {
+    // recuperation des equipes
     Equipe::readCSV("data/f_equipe.csv");
+
+    // recuperation equipes niveau
+    const std::vector<std::string> niveauA = getConfigAsVectorString("Equipes niveau A", {}, "config.ini");
+    const std::vector<std::string> niveauB = getConfigAsVectorString("Equipes niveau B", {}, "config.ini");
+    const std::vector<std::string> niveauC = getConfigAsVectorString("Equipes niveau C", {}, "config.ini");
+    const std::vector<std::string> niveauD = getConfigAsVectorString("Equipes niveau D", {}, "config.ini");
+
+    // tirage poules
+    std::map<std::string, Poule> poule;
+    const std::vector<std::string> pouleNameA = getConfigAsVectorString("Noms poule A", {}, "config.ini");
+    const std::vector<std::string> pouleNameB = getConfigAsVectorString("Noms poule B", {}, "config.ini");
+    const std::vector<std::string> pouleNameC = getConfigAsVectorString("Noms poule C", {}, "config.ini");
+    const std::vector<std::string> pouleNameD = getConfigAsVectorString("Noms poule D", {}, "config.ini");
+    tiragePoule(niveauA, pouleNameA, poule);
+    tiragePoule(niveauB, pouleNameB, poule);
+    tiragePoule(niveauC, pouleNameC, poule);
+    tiragePoule(niveauD, pouleNameD, poule);
+
+    // arbitrage
+    for (std::map<std::string, Poule>::iterator it = poule.begin(); it != poule.end(); it++)
+    {
+        const std::string& name = it->first;
+        Poule& p = it->second;
+        const std::string arbitre = getConfigAsString("Arbitre poule " + name, "", "config.ini");
+        Poule& a = poule[arbitre];
+        for (std::vector<Equipe>::const_iterator jt = a.equipes().begin(); jt != a.equipes().end(); jt++)
+            p.addArbitre(jt->nom());
+    }
+
+    // generation matchs
+
     return 0;
 }

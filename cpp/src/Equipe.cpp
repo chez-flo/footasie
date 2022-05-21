@@ -7,11 +7,12 @@ using namespace std;
 
 map<std::string, Equipe> Equipe::m_byName;
 
-Equipe::Equipe(const unsigned int id, const std::string& name, const unsigned int terrain, const std::string entrainement)
+Equipe::Equipe(const unsigned int id, const std::string& name, const unsigned int terrain, const std::string& entrainement, const std::string& ami)
 	: m_id(id)
 	, m_name(name)
 	, m_terrain(terrain)
 	, m_entrainement(entrainement)
+	, m_ami(ami)
 	, m_isValid(true)
 {
 	m_byName[m_name] = *this;
@@ -22,6 +23,7 @@ Equipe::Equipe(const Equipe& eq)
 	, m_name(eq.m_name)
 	, m_terrain(eq.m_terrain)
 	, m_entrainement(eq.m_entrainement)
+	, m_ami(eq.m_ami)
 	, m_isValid(eq.m_isValid)
 {
 	m_byName[m_name] = *this;
@@ -111,7 +113,8 @@ void Equipe::readCSV(const std::string& filename)
 		getline(handle, line);
 		
 		const string name = findName(line);
-		m_byName[name] = Equipe(findId(line), name, findTerrain(line), findEntrainement(line));
+		if (!name.empty())
+			m_byName[name] = Equipe(findId(line), name, findTerrain(line), findEntrainement(line));
 	}
 }
 
