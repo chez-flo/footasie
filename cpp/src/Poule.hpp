@@ -26,6 +26,9 @@ private:
 	std::vector<Equipe> m_arbitre;
 
 	std::vector<Match> m_match;
+
+	// methodes usuelles
+	bool ontIlsDejaJoue(const Equipe* eq1, const Equipe* eq2) const;
 };
 
 #endif	// POULE_HPP

@@ -8,11 +8,11 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
 {
     // nombre de poules
     const int nbPoules = (int)nomPoules.size();
-    const int nbEquipes = std::ceil((int)equipe.size() / nbPoules);
+    const int nbEquipes = (int)std::ceil((int)equipe.size() / nbPoules);
 
     // init random
-    static std::random_device rd;  //Will be used to obtain a seed for the random number engine
-    static std::mt19937 gen(rd()); //Standard mersenne_twister_engine seeded with rd()
+    static std::random_device rd;   // seed
+    static std::default_random_engine gen(rd());
     std::uniform_int_distribution<> rand(0, nbPoules-1);
 
     // copie de toutes les equipes
@@ -61,19 +61,16 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
     }
 
     // traitement des autres equipes
-    for (std::vector<std::string>::const_iterator it = all.begin(); it != all.end();)
+    for (const std::string& name : all)
     {
-        const Equipe& equipe = Equipe::byName(*it);
+        const Equipe& equipe = Equipe::byName(name);
 
         // on a deja teste si l'equipe est valide
         int p1 = rand(gen);
         for (int n = 0; n < nbPoules && (int)out[nomPoules[p1]].equipes().size() >= nbEquipes; ++n, p1 = (p1 + 1) % nbPoules);
 
         // ajouts
-        out[nomPoules[p1]].addEquipe(*it);
-
-        // increment
-        it = all.erase(it);
+        out[nomPoules[p1]].addEquipe(name);
     }
 }
 
@@ -100,17 +97,19 @@ int main(int argc, char **argv)
     tiragePoule(niveauD, pouleNameD, poule);
 
     // arbitrage
-    for (std::map<std::string, Poule>::iterator it = poule.begin(); it != poule.end(); it++)
+    for (std::pair<const std::string, Poule>& it : poule)
     {
-        const std::string& name = it->first;
-        Poule& p = it->second;
+        const std::string& name = it.first;
+        Poule& p = it.second;
         const std::string arbitre = getConfigAsString("Arbitre poule " + name, "", "config.ini");
         Poule& a = poule[arbitre];
-        for (std::vector<Equipe>::const_iterator jt = a.equipes().begin(); jt != a.equipes().end(); jt++)
-            p.addArbitre(jt->nom());
+        for (const Equipe& jt : a.equipes())
+            p.addArbitre(jt.nom());
     }
 
     // generation matchs
+    for (std::map<std::string, Poule>::iterator it = poule.begin(); it != poule.end(); it++)
+        it->second.genereMatchs();
 
     return 0;
 }
