@@ -10,6 +10,12 @@ function CustomCalendar(props) {
         <FullCalendar
           plugins={[ dayGridPlugin ]}
           initialView="dayGridMonth"
+          events={[
+            { title: 'match 1', date: '2022-06-16' },
+            { title: 'match 2', date: '2022-06-16' },
+            { title: 'match 3', date: '2022-06-16' },
+            { title: 'match 4', date: '2022-06-16' },
+          ]}
         />
   );
 }

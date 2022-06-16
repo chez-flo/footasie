@@ -1,19 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
 import CustomCalendar from "./components/calendar/CustomCalendar"
+import AppHeader from "./components/header/AppHeader"
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Foot Asie App
-        </p>        
-      </header>
+      <AppHeader/>
       <div className='content'>
         <CustomCalendar/>
       </div>
-
     </div>
   );
 }
