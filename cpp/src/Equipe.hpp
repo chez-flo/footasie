@@ -8,7 +8,7 @@ class Equipe
 {
 public:
 	Equipe() = default;
-	Equipe(const unsigned int id, const std::string& name, const unsigned int terrain = 0u, const std::string& entrainement = "", const std::string& ami = "");
+	Equipe(const unsigned int id, const std::string& name, const unsigned int terrain = 0u, const std::string& entrainement = "", const unsigned int ami = 0u);
 	Equipe(const Equipe& eq);
 	~Equipe() = default;
 
@@ -19,7 +19,7 @@ public:
 	static Equipe& byName(const std::string& name);
 
 	// getters
-	const Equipe& ami() const { return byName(m_ami); }
+	const Equipe& ami() const { return byName(m_byId[m_ami]); }
 	const std::string& nom() const { return m_name; }
 
 private:
@@ -27,10 +27,11 @@ private:
 	std::string m_name = "";
 	unsigned int m_terrain = 0u;
 	std::string m_entrainement = "";
-	std::string m_ami = "";
+	unsigned int m_ami = 0u;
 	bool m_isValid = false;
 	
 	static std::map<std::string, Equipe> m_byName;
+	static std::map<unsigned int, std::string> m_byId;
 };	//	Equipe
 
 #endif	//	EQUIPE_HPP

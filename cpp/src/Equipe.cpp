@@ -6,8 +6,9 @@
 using namespace std;
 
 map<std::string, Equipe> Equipe::m_byName;
+map<unsigned int, std::string> Equipe::m_byId;
 
-Equipe::Equipe(const unsigned int id, const std::string& name, const unsigned int terrain, const std::string& entrainement, const std::string& ami)
+Equipe::Equipe(const unsigned int id, const std::string& name, const unsigned int terrain, const std::string& entrainement, const unsigned int ami)
 	: m_id(id)
 	, m_name(name)
 	, m_terrain(terrain)
@@ -16,6 +17,7 @@ Equipe::Equipe(const unsigned int id, const std::string& name, const unsigned in
 	, m_isValid(true)
 {
 	m_byName[m_name] = *this;
+	m_byId[m_id] = m_name;
 }
 
 Equipe::Equipe(const Equipe& eq)
@@ -27,6 +29,7 @@ Equipe::Equipe(const Equipe& eq)
 	, m_isValid(eq.m_isValid)
 {
 	m_byName[m_name] = *this;
+	m_byId[m_id] = m_name;
 }
 
 bool Equipe::operator==(const Equipe& eq) const
@@ -94,6 +97,24 @@ namespace {
 
 		return subline.substr(1u, subline.length() - 2u);
 	}
+
+	unsigned int findAmi(const string& line)
+	{
+		string::size_type d = line.find(",");
+		d = line.find(",", d + 1u);
+		d = line.find(",", d + 1u);
+		d = line.find(",", d + 1u);
+		string::size_type f = line.find(",", d + 1u);
+		if (f == string::npos || f >= line.length() || f - d < 3u)
+			return 0u;
+
+		const string subline = line.substr(d + 1u, f - d - 1u);
+		if (subline.front() != '"' || subline.back() != '"')
+			return 0u;
+
+		unsigned int out = 0u;
+		return strtoul(subline.substr(1u, subline.length() - 1).c_str(), NULL, 10);
+	}
 }
 
 void Equipe::readCSV(const std::string& filename)
@@ -114,7 +135,7 @@ void Equipe::readCSV(const std::string& filename)
 		
 		const string name = findName(line);
 		if (!name.empty())
-			m_byName[name] = Equipe(findId(line), name, findTerrain(line), findEntrainement(line));
+			m_byName[name] = Equipe(findId(line), name, findTerrain(line), findEntrainement(line), findAmi(line));
 	}
 }
 
