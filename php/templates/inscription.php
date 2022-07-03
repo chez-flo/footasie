@@ -218,12 +218,12 @@
 										<option value="">--- Veuillez choisir ---</option>
 										<option value="0">Nouvelle soci&eacute;t&eacute;</option>
 									<?php
-										$sSQLTerrain = "select soc_id, soc_nom " .
+										$sSQLSociete = "select soc_id, soc_nom " .
 												" from " . TBL_SOCIETE . 
 												" order by soc_nom " ;
-										$resultTerrain = $mysqli->query($sSQLTerrain) ;
-										while ($rowTerrain = mysqli_fetch_array($resultTerrain)) {
-											extract($rowTerrain) ;
+										$resultSociete = $mysqli->query($sSQLSociete) ;
+										while ($rowSociete = mysqli_fetch_array($resultSociete)) {
+											extract($rowSociete) ;
 											echo "<option value='".$soc_id."'>".$soc_nom."</option>" ;
 										}
 									?>
@@ -279,7 +279,7 @@
 								<td align='right'>&Eacute;quipe amie : </td>
 								<td>
 									<select name="ami_id_new" id="ami_id_new">
-										<option value="0">Aucun</option>
+										<option value="0">Aucune</option>
 									<?php
 										$sSQLAmi = 	"select eq_id, eq_nom" .
 													" from " . TBL_EPS . ", " . 

@@ -501,7 +501,7 @@
 		global $mysqli ;
 		$aff="" ;
 		if($eq!="") {
-			$sSQLSocId = "select soc_id soc, eq_ter_id ter, eq_jour, eq_coupe, eq_couleur, eq_couleur_ext " .
+			$sSQLSocId = "select soc_id soc, eq_ter_id ter, eq_jour, eq_ami_id ami, eq_coupe, eq_couleur, eq_couleur_ext " .
 					" from " . TBL_SOCIETE . ", " . TBL_EQUIPE . 
 					" where eq_soc_id = soc_id " .
 					" and eq_id = '".$eq."' " .
@@ -566,6 +566,31 @@
 							$eq_jour=="jeudi" ? $aff .= "<option value='jeudi' selected>Jeudi</option>" : $aff .= "<option value='jeudi'>Jeudi</option>" ;
 							$eq_jour=="vendredi" ? $aff .= "<option value='vendredi' selected>Vendredi</option>" : $aff .= "<option value='vendredi'>Vendredi</option>" ;
 						$aff .= "</select>" .
+					"</td>" .
+				"</tr>" .
+				"<tr>" .
+					"<td align='right'>&Eacute;quipe amie : </td>" .
+					"<td>" .
+						"<select name='eq_ami_id' id='eq_ami_id'>" .
+							"<option value=''>Aucune</option>" ;
+							$sSQLAmi = 	"select eq_id, eq_nom" .
+										" from " . TBL_EPS . ", " . 
+											TBL_EQUIPE . 
+										" where eps_eq_id = eq_id " .
+											" and eq_id not in (1,230)" .
+											" and eps_sai_annee = '".SAISON."' " .
+											" and eps_pou_id = 2 " .
+										" order by eq_nom " ;
+							$resultAmi = $mysqli->query($sSQLAmi) ;
+							while ($rowAmi = mysqli_fetch_array($resultAmi)) {
+								extract($rowAmi) ;
+								if($eq_id==$ami) {
+									$aff .= "<option value='".$eq_id."' selected>".$eq_nom."</option>" ;
+								} else {
+									$aff .= "<option value='".$eq_id."'>".$eq_nom."</option>" ;
+								}
+							}
+				$aff .= "</select>" .
 					"</td>" .
 				"</tr>" .
 				"<tr>" .
@@ -743,7 +768,7 @@
 	function selectAmi($ami="0") {
 		global $mysqli ;
 		$option = "" ;
-		$option .= "<option value='0' selected>Aucun</option>" ;
+		$option .= "<option value='0' selected>Aucune</option>" ;
 		$sql = 	"select eq_id, eq_nom" .
 				" from " . TBL_EPS . ", " . 
 					TBL_EQUIPE . 
