@@ -1,0 +1,615 @@
+/*@media (max-width: 640px) {
+	* {
+		box-sizing: border-box;
+	}
+	
+	body {
+		width: auto;
+		margin: 0;
+		padding: 0;
+	}
+}*/
+
+@font-face {
+	font-family: "ABeeZee";
+	src: url('fonts/ABeeZee-Regular.otf');
+}
+@font-face {
+	font-family: "ABeeZee";
+	font-style: italic;
+	src: url('fonts/ABeeZee-Italic.otf');
+}
+
+@font-face {
+	font-family: "SourceSansPro";
+	src: url('fonts/SourceSansPro-Regular.ttf');
+}
+@font-face {
+	font-family: "SourceSansPro";
+	font-style: italic;
+	src: url('fonts/SourceSansPro-Italic.ttf');
+}
+
+body{
+	/*font-family: 'Source code pro', Calibri, Times New Roman, Times, Verdana, sans-serif;*/
+	font-family: SourceSansPro, Times New Roman, serif;
+	font-size: 15px ;
+	/*background-color: #DDEBF7 ;*/
+	background-color: #F2FDFF ;
+	/*width: 1800px;*/
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*table {
+	border-radius:10px;
+}*/
+
+tr {
+	height:15px ;
+}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	font-weight: bold ; 
+}
+
+nav {
+	width: 100%;
+	/*background-color: #F2F7FD ;*/
+}
+
+nav > ul{
+	margin: 0px ;
+	padding: 0px ;
+}
+
+nav > ul > li {
+	float: left ;
+	position: relative;
+}
+
+nav li {
+	list-style-type: none ;
+}
+
+nav > ul::after {
+	content: "" ;
+	display: block;
+	clear : both ;
+}
+
+nav a {
+	display: inline-block ;
+	text-decoration: none ;
+}
+
+nav > ul > li > a {
+	padding: 20px 30px ;
+	color: #000;
+}
+
+input, select, textarea {
+	vertical-align: middle;
+	border-radius:10px;
+	text-decoration:none;
+	background-color: white; 
+	border: 1px solid #CCF2FF;
+}
+
+input, select, select option {
+	padding: 0 5px 0 5px;
+	height: 25px;
+}
+
+textarea {
+	padding: 10px;
+	height: 150px;
+	text-align:justify;
+}
+
+/*.submenu {
+	display: none ;
+	background-color : #FFFFFF ;
+}
+
+nav li:hover .submenu {
+	display: inline-block ;
+	position: absolute;
+	top: 100%;
+	left: 0px;
+	padding: 0px;
+	z-index: 100000;
+}
+
+.submenu li {
+	border-bottom: 1px solid #CCC ;
+}
+
+.submenu li a {
+	padding: 10px 30px ;
+	font-size: 15px; 
+	color: #222538 ;
+	margin-right: 30px ;
+}
+
+.submenu li:hover a {
+	color: #EEE ;
+	font-weight: bold;
+}*/
+
+.error, .msgError {
+	color: red ;
+}
+
+.col100 { width: 100px ; }
+.col150 { width: 150px ; }
+.col200 { width: 200px ; }
+.col250 { width: 250px ; }
+.col300 { width: 300px ; }
+.col350 { width: 350px ; }
+.col400 { width: 400px ; }
+.col450 { width: 450px ; }
+.col500 { width: 500px ; }
+.col550 { width: 550px ; }
+.col600 { width: 600px ; }
+.col650 { width: 650px ; }
+.col700 { width: 700px ; }
+
+.col200 select {
+	padding-top: 10px;
+	height: 300px;
+}
+
+.col200 option {
+	vertical-align: middle;
+	height: auto;
+}
+
+.optionGroup, .optionGroup1 {
+    font-weight: bold;
+	color: #000000 ;
+	cursor : pointer ;
+}
+
+.optionGroup1 {
+    font-style: italic;
+	text-align: center;
+}
+    
+.optionChild {
+    padding-left: 15px;
+}
+/* Boutons */
+
+.boutonDem, .boutonModArb, .boutonMajScore, .boutonReport, .boutonAnnuler, .boutonValider, .boutonRefuserDate, .boutonRefuserReport, .boutonRetour, .boutonRazScore, .boutonSupprimer, .boutonConvoquer, .boutonInviteJoueur {
+	height: 25px;
+	text-align:center;
+	vertical-align: middle;
+	border-radius:20px;
+	padding: 2px 10px 2px 10px;
+	margin: 0 2px 0 2px;
+	text-decoration:none;
+	-webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+	background-color: white; 
+}
+
+.boutonRetour:hover, .boutonDem:hover, .boutonModArb:hover, .boutonMajScore:hover, .boutonReport:hover, .boutonAnnuler:hover, .boutonValider:hover, .boutonRefuserDate:hover, .boutonRefuserReport:hover, .boutonRazScore:hover, .boutonSupprimer:hover, .boutonConvoquer:hover, .boutonInviteJoueur:hover {
+	font-weight: normal;
+	color: white;
+	cursor: pointer;
+}
+
+.boutonRetour, .boutonRefuserReport { color: #FF0000; border: 1px solid #FF0000; }
+.boutonValider, .boutonConvoquer { color: #4CAF50; border: 1px solid #4CAF50; }
+.boutonMajScore, .boutonRazScore, .boutonInviteJoueur { color: #66D9FF; border: 1px solid #66D9FF; }
+.boutonReport { color: #E6AC00; border: 1px solid #E6AC00; }
+.boutonAnnuler { color: #FFCCD4; border: 1px solid #FFCCD4; }
+.boutonModArb, .boutonRefuserDate {color: #FFC966; border: 1px solid #FFC966; }
+.boutonDem { color: #7BEA7B; border: 1px solid #7BEA7B; }
+.boutonSupprimer { color: #000000; border: 1px solid #000000; }
+
+.boutonRetour:hover, .boutonRefuserReport:hover { background-color: #FF4D4D; }
+.boutonValider:hover, .boutonConvoquer:hover { background-color: #7BEA7B; }
+.boutonMajScore:hover, .boutonRazScore:hover, .boutonInviteJoueur:hover { background-color: #CCF2FF; }
+.boutonReport:hover { background-color: #FFD24D; }
+.boutonAnnuler:hover { background-color: #FFE6EA; }
+.boutonModArb:hover, .boutonRefuserDate:hover { background-color: #FFE4B3; }
+.boutonDem:hover { background-color: #D3F8D3; }
+.boutonSupprimer:hover { background-color: #4d4d4d; }
+
+
+.optionOk {
+	/*background-color: #d3f8d3;*/
+	color: #1fc71f;
+	font-weight: bold;
+	
+}
+
+.optionSemaine {
+	color: #E6AC00;
+}
+
+.optionMemeJour {
+	color: red;
+}
+
+.optionJoker, .optionReserve {
+	/*background-color: #ffe4b3;*/
+	color: #ff4d4d;
+}
+
+.submenu {
+	display: none ;
+	background-color : #FFFFFF ;
+}
+
+nav li:hover .submenu {
+	display: inline-block ;
+	position: absolute;
+	top: 100%;
+	left: 0px;
+	padding: 0px;
+	z-index: 100000;
+}
+
+.submenu li {
+	border-bottom: 1px solid #CCC ;
+	padding: 10px 30px ;
+	font-size: 15px; 
+	color: #222538 ;
+	width: 110% ;
+	background-color : #FFFFFF ;
+}
+
+.submenu a {
+	color: #333333 ;
+}
+
+#menuChampionnat a, #menuCoupe a, #menuCompte a {
+	color: #333333 ;
+}
+
+#menuChampionnat_ li, #menuCoupe_ li, #menuCompte_ li {
+	padding: 10px 0 0 0;
+	color : #11c1f3 ;
+	border: none ;
+	font-weight: normal;
+}
+
+#menuChampionnat_, #menuCoupe_, #menuCompte_ {
+	padding-left: 10px;
+}
+
+#menuChampionnat_ li:hover a, #menuCoupe_ li:hover a, #menuCompte_ li:hover a {
+	color : #11c1f3 ;
+}
+
+.submenu li:hover {
+	color: #11c1f3 ;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.menu {
+	width: 100%;
+	font-size: 25px;
+	vertical-align: top;
+	padding-left: 40px ;
+}
+
+.menu img{
+	position: absolute;
+	left:0;
+}
+
+.menu:hover {
+	/*border-top: 5px solid #e44d26;*/
+	cursor: default;
+}
+
+.menu .submenu li:hover a, .menu .submenu li:hover ul li:hover a, .menu .submenu li:hover ul li {
+	color : #11c1f3 ;
+}
+
+.menu .submenu li:hover ul li:hover a {
+	font-weight: bold;
+}
+
+.menu .submenu li:hover ul li a {
+	color : #000000 ;
+}
+
+.menu .submenu li:hover ul li:hover a {
+	color : #11c1f3 ;
+}
+
+.PagePrincipale {
+	width:100% ;
+}
+
+.overflow {
+	height: 650px ;
+	display: block ;
+	overflow: auto ;
+	border: 1px solid grey ;
+}
+
+.gagne, .gagne a, .equipe, .equipe a {
+	color: #28a54c ;
+}
+
+.perdu, .perdu a {
+	color: #ef473a ; 
+}
+
+.nul, .nul a {
+	color: #11c1f3 	; 
+}
+
+.bold, .equipe {
+	font-weight: bold ;
+}
+
+.bgColorPair {
+	background-color: #F0F0FF ;
+}
+
+.bgColorImpair {
+	background-color: #FFFFFF ;
+}
+
+.titreStade {
+	font-weight: bold ; 
+	text-align: center;
+	font-size: 20px ;
+}
+
+.adresseStade { 
+	text-align: center;
+}
+
+.tabCoupe { 
+	border: 1px solid black ;
+	margin-bottom:20px ;
+}
+
+.tabCoupe td { 
+	border: none ;
+}
+
+.tabClassement, .tabClassementCoupe { 
+	border: 1px solid grey ;
+	margin-bottom:15px ;
+	margin-top:15px ;
+}
+
+.tabClassement { 
+	margin-top: 60px ;
+}
+
+
+.tabClassement td, .tabClassementCoupe td{ 
+	border: 1px solid grey ;
+}
+
+.tabCalendrier {
+	overflow: auto ;
+	height: 200px ;
+}
+
+.tabCalendrier, .tabCalendrier td { 
+	border: 1px solid grey ;
+}
+
+.tabCalInt, .tabCalInt td { 
+	border: none ;
+}
+
+.tabCalendrierEquipe, .tabJoueursEquipe {
+	width: 100% ;
+	border-spacing : 0;
+	border-collapse : collapse;
+}
+
+.tabCalendrierEquipe tr, .tabJoueursEquipe tr {
+	border-bottom: 1px solid #F0F0FF ;
+	height: 50px ;
+}
+
+.tabCalendrierEquipe #titre {
+	height: auto ;
+}
+
+.tabJoueursEquipe td img {
+	vertical-align: middle;
+}
+
+.tabDetail, .tabCoupeF, .tabAccueil, .tabAccueilMobile, .tabGestionEquipe, .tabValidInscription {
+	border-spacing : 0;
+	border-collapse : collapse;
+	/*border-radius: 10px;*/
+}
+.tabDetail {
+	width: 100% ;
+}
+
+.tabCoupeF, .tabGestionEquipe {
+	width: 80% ;
+}
+
+.tabValidInscription  {
+	width: 90% ;
+}
+
+.tabAccueil {
+	width: 60% ;
+	margin-top: 10px;
+}
+
+.tabAccueilMobile {
+	width: 90% ;
+	margin-top: 10px;
+}
+
+.tabAccueil th, .tabAccueilMobile th {
+	text-align: left ;
+	height: 30px ;
+	cursor: pointer;
+}
+
+.tabAccueil th img, .tabAccueilMobile th img {
+	position: absolute;
+}
+
+.tabAccueil td, .tabAccueilMobile td {
+	padding-left: 20px ;
+}
+
+
+.tabDetail th, .tabCoupeF th, .tabValidInscription th {
+	font-weight: bold ;
+	background-color: #F0F0FF ;
+	height: 30px ;
+	cursor: pointer;
+}
+
+.tabDetail th img, .tabCoupeF th img {
+	position: absolute;
+	margin-left: 10px;
+}
+
+.tabDetail td, .tabCoupeF td, .Titulaire, .Joker, .tabValidInscription td {
+	background-color: #FFFFFF ;
+	border-bottom: 2px solid #F0F0FF ;
+	padding-left : 10px;
+	padding-right : 10px;
+}
+
+.tabDetail table td, .tabCoupeF table td {
+	border-bottom: none ;
+	
+}
+
+.tabGestionEquipe th {
+	font-weight: bold ;
+	background-color: #F0F0FF ;
+	height: 30px ;
+}
+
+.Titulaire, .Joker {
+	text-align: center ;
+	cursor: pointer;
+}
+
+.Titulaire:hover, .Joker:hover {
+	background-color: #F0FFFF ;
+}
+
+.Joker {
+	background-color: #FAFAFA ;
+}
+
+.Titulaire {
+	background-color: #FFFFFF ;
+}
+
+/*input, textarea, select {
+	height: 30px;
+	vertical-align: middle;
+	border-radius:10px;
+	border: 1px solid #F0F0FF;
+	padding: 0 10px 0 10px;
+}
+
+input {
+    background-color: white; 
+    color: #4CAF50; 
+    border: 1px solid #4CAF50;
+}
+
+input {
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+input:hover {
+    background-color: #4CAF50; 
+    color: white;
+	cursor: pointer;
+}
+
+input:active {
+    background-color: white; 
+    color: #4CAF50; 
+}
+
+select option {
+	border-radius:10px;
+}*/
+
+.titreDetail {
+	font-weight: bold ;
+	font-size: 35px ;
+}
+
+.sousTitreDetail {
+	font-style: italic ;
+	font-size: 20px ;
+}
+
+.right {
+	text-align: right ;
+}
+
+.left {
+	text-align: left ;
+}
+
+.center {
+	text-align: center ;
+}
+
+.listeJoueur {
+	padding-left: 10px ;
+	font-size: 20px ;
+}
+
+.tabJoueur {
+	margin-top: 20px ;
+	margin-bottom: 20px ;
+}
+
+.tabJoueur, .tabJoueur td {
+	background-color: white;
+	font-size: 20px ;
+	border: 1px solid #CCF2FF;
+}
+
+.main {
+	cursor : pointer ;
+}
+
+.icone {
+	width: 20px ;
+	height: 20px ; 
+	vertical-align: middle;
+}
+
+.participe { color: green ; }
+.attente { color: grey ; }
+.refuse { color: red ; }
+.bgParticipe { background-color: #C0F7D4 ; }
+.bgAttente { background-color: #FEFECE ; }
+.bgRefuse { background-color: #FFBCBC ; }
+
+.chEquipe select {
+	font-size: 50px ;
+	height: 70px ;
+}

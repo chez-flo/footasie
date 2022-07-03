@@ -1,0 +1,4 @@
+PerlSetVar AuthFile htpasswd.txt
+AuthName "Accès sécurisé au site footasie" 
+AuthType Basic 
+Require valid-user 

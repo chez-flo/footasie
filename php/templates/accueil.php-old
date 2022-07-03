@@ -1,0 +1,611 @@
+<?php include('templates/bandeau.php') ; ?>
+
+<script>
+$(document).ready(function(){
+	$("#jour th").click(function(){
+        $("#jour_	").toggle("fast");
+		$('img:visible', this).hide().siblings().show();
+    });
+
+    $("#res th").click(function(){
+        $("#res_	").toggle("fast");
+		$('img:visible', this).hide().siblings().show();
+    });
+	
+	$("#semaine th").click(function(){
+        $("#semaine_ ").toggle("fast");
+		$('img:visible', this).hide().siblings().show();
+    });
+	
+	$("#libre th").click(function(){
+        $("#libre_ ").toggle("fast");
+		$('img:visible', this).hide().siblings().show();
+    });
+	
+	$("#equipe th").click(function(){
+        $("#equipe_ ").toggle("fast");
+		$('img:visible', this).hide().siblings().show();
+    });
+});
+</script>
+
+<div class = "PagePrincipale">
+<center>
+<!--<FONT SIZE=+4><b><blink>COVID-19</blink><br/>Annulation des matchs jusqu'&agrave; nouvel ordre</b> </FONT>-->
+<table cellpadding=0 cellspacing=0 class='tabAccueil<?php if(isMobile()) { echo "Mobile" ; } ?>' id='jour' >
+	<TR>
+		<TH colspan="8">
+			Matchs du jour
+			<img src="<?php echo IMG ; ?>down.png" alt="down" height="20" width="20">
+			<img src="<?php echo IMG ; ?>right.png" alt="right" height="20" width="20" style="display: none;">
+		</TH>
+	</TR>
+	<?php
+		$arbId2 = "" ;
+		$sSQL = "SELECT eve_id, cre_date, MONTH(cre_date) mois, CONCAT(CASE dayofweek(cre_date) WHEN 2 THEN 'Lundi' WHEN 3 THEN 'Mardi' WHEN 4 THEN 'Mercredi' WHEN 5 THEN 'Jeudi' WHEN 6 THEN 'Vendredi' ELSE 'autre' END, " .
+			" date_format(cre_date, ' %d '), " .
+			" CASE month(cre_date) WHEN 1 THEN 'Janvier' WHEN 2 THEN 'F&eacute;vrier' WHEN 3 THEN 'Mars' WHEN 4 THEN 'Avril' WHEN 5 THEN 'Mai' WHEN 6 THEN 'Juin' " .
+			" WHEN 7 THEN 'Juillet' WHEN 8 THEN 'Ao&ucirc;t' WHEN 9 THEN 'Septembre' WHEN 10 THEN 'Octobre' WHEN 11 THEN 'Novembre' WHEN 12 THEN 'D&eacute;cembre' ELSE 'autre' END) jour, " .
+			" cre_id, e1.eq_nom eq1, e2.eq_nom eq2, e3.eq_nom arb, e1.eq_id eqId1, e2.eq_id eqId2, e3.eq_id arbId, ter_nom, sco1.sco_bp score1, sco2.sco_bp score2, sco1.sco_pen pen1, sco2.sco_pen pen2, CONCAT(eve_nom, ' : ', pou_nom) poule, eve_id, " .
+			" CASE when mat_statut = 1 then '" . COLOR_JOUE . "' when cre_date < sysdate() then '" . COLOR_ATTENTE . "' when mat_statut = 2 then '" . COLOR_REPORT . "' when mat_statut = 3 then '" . COLOR_ARBITRAGE . "' when cre_date > sysdate() then '" . COLOR_PROGRAMME . "' else '' end style, " .
+			" mat_id, mat_statut, pou_nom, ter_adresse " .
+			" FROM " . TBL_EVENEMENT . ", " . TBL_SAISON . ", " . TBL_POULE . ", " . TBL_SCORE . " sco1, " . TBL_SCORE . " sco2, " . TBL_EPS . ", " . TBL_EQUIPE . " e1, " . TBL_EQUIPE . " e2, " . TBL_EQUIPE . " e3, " . TBL_MATCH . ", " . TBL_CRENEAU . ", " . TBL_TERRAIN . 
+			" WHERE eve_id = pou_eve_id " .
+				" and eps_eq_id = e1.eq_id " .
+				" and eps_pou_id = pou_id " .
+				" and sai_pou_id = pou_id " .
+				" and mat_eq_id_1 = e1.eq_id " .
+				" and mat_eq_id_2 = e2.eq_id " .
+				" and mat_eq_id_3 = e3.eq_id " .
+				" and cre_mat_id = mat_id " .
+				" and cre_ter_id = ter_id " .
+				" and mat_id = sco1.sco_mat_id " .
+				" and mat_id = sco2.sco_mat_id " .
+				" and mat_eq_id_1 = sco1.sco_eq_id " .
+				" and mat_eq_id_2 = sco2.sco_eq_id " .
+				" and mat_pou_id = pou_id " .
+				" and mat_sai_annee = sai_annee " .
+				" and eps_sai_annee = sai_annee " .
+				" and sai_annee = '" . SAISON . "' " .
+				" and date_format(cre_date, '%Y%m%d') = date_format(now(), '%Y%m%d') " .
+			" ORDER BY cre_date, ter_nom, cre_id " ;
+		$result = $mysqli->query($sSQL) ;
+		//echo $sSQL ;
+		$mois_prec = "" ;
+		$i=0 ;
+		$nbMatchJour=0 ;
+		while ($row = mysqli_fetch_array($result)) {
+			extract($row) ;
+			$nbMatchJour++;
+			extract(color($score1, $score2, $pen1, $pen2)) ;
+			echo "<tr id='jour_' style='height: 27px'>" ;
+			echo "<td align='left' style='border-left:5px solid ".$style."'>".$jour."</td>" ;
+			echo "<td align='right' class='".$color1."'>" ;
+				echo "<a href='index.php?op=eq&id=".$eqId1."'>".$eq1."</a>" ;
+				$sSQLPen1 = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $eqId1 ;
+				$resultPen1 = $mysqli->query($sSQLPen1) ;
+				while ($rowPen1 = mysqli_fetch_array($resultPen1)) {
+					extract($rowPen1) ;
+					echo "<sup>" . $pen_type . "</sup>" ;
+				}
+			echo "</td>" ;
+			echo "<td align='center'>" ;
+			if($score1!="" && $score1==$score2 && $eve_id==4) {
+				echo $score1." (".$pen1.") - (".$pen2.") ".$score2 ;
+			} else {
+				echo $score1." - ".$score2 ;
+			}
+			echo "</td>" ;
+			echo "<td align='left' class='".$color2."'>" ;
+				echo "<a href='index.php?op=eq&id=".$eqId2."'>".$eq2."</a>" ;
+				$sSQLPen2 = "select pen_type from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $eqId2 ;
+				$resultPen2 = $mysqli->query($sSQLPen2) ;
+				while ($rowPen2 = mysqli_fetch_array($resultPen2)) {
+					extract($rowPen2) ;
+					echo "<sup>" . $pen_type . "</sup>" ;
+				}
+			echo "</td>" ;
+			echo "<td align='left'>" ;
+				echo "<a href='index.php?op=eq&id=".$arbId."'>".$arb."</a>" ;
+				$sSQLArb = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $arbId ;
+				$resultArb = $mysqli->query($sSQLArb) ;
+				while ($rowArb = mysqli_fetch_array($resultArb)) {
+					extract($rowArb) ;
+					echo "<sup>" . $pen_type . "</sup>" ;
+				}
+				$sSQLArb2 = "select eq_id arbId2, eq_nom arb2 from " . TBL_MATCH . ", " . TBL_EQUIPE . " where mat_id = " . $mat_id . " and mat_eq_id_4 = eq_id ;" ;
+				$resultArb2 = $mysqli->query($sSQLArb2) ;
+				while ($rowArb2 = mysqli_fetch_array($resultArb2)) {
+					extract($rowArb2) ;
+					echo " & <a href='index.php?op=eq&id=".$arbId2."'>".$arb2."</a>" ;
+					$sSQLArb2 = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $arbId2 ;
+					$resultArb2 = $mysqli->query($sSQLArb2) ;
+					while ($rowArb2 = mysqli_fetch_array($resultArb2)) {
+						extract($rowArb2) ;
+						echo "<sup>" . $pen_type . "</sup>" ;
+					}
+				}
+			echo "</td>" ;
+			echo "<td align='left'>".lienMap($ter_nom, $ter_adresse)."</td>" ;
+			echo "<td align='left'>" ;
+				if($pou_nom!= "Amical") {
+					echo "<a href='index.php?op=cal&s=".$pou_nom."'>".$poule."</a>" ;
+				} else {
+					echo $poule ;
+				}
+			echo "</td>" ;
+			if(isCapitaine() && $arb!= "Amical") {
+				echo "<td>" ;
+				if($style==COLOR_ATTENTE) {
+					if($arbId==$_SESSION["eq_id"] || $arbId2==$_SESSION["eq_id"]) {
+						echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+					} else if($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"]) {
+						echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Envoyer Score</a>" ;
+					}
+				}
+				if($style!=COLOR_JOUE &&
+					($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"])) {
+					echo "<a class='boutonReport' href=\"index.php?op=demRep&id=".$mat_id."&opp=a\";'>Demander Report</a>" ;
+				}
+				echo "</td>" ;
+			}
+			/*if(isCapitaine() && $style==COLOR_ATTENTE) {
+				echo "<td>" ;
+				if($arbId==$_SESSION["eq_id"]) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+				} else if($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"]) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Envoyer Score</a>" ;
+				}
+				echo "</td>" ;
+			}*/
+			if(isAdmin() && $eq2!="") {
+				echo "<td>" ;
+				if($style==COLOR_ATTENTE && $eve_id!=1) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+					echo "<a class='boutonReport' href=\"index.php?op=rep&id=".$mat_id."&opp=a\";'>Reporter</a>" ;
+				}
+				elseif($style==COLOR_JOUE && $eve_id!=1) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+				} else {
+					if($mat_statut!=1) {
+						echo "<a class='boutonReport' href=\"index.php?op=rep&id=".$mat_id."&opp=a\";'>Reporter</a>" ;
+						echo "<a class='boutonModArb' href=\"index.php?op=modArb&id=".$mat_id."&opp=a\";'>Modifier Arbitre</a>" ;
+					}
+				}
+				echo "</td>" ;
+			}
+			echo "</tr>" ;
+			$arbId2="";
+			$arb2="";
+		}
+		if($nbMatchJour==0) {
+			echo "<tr id='jour_'>" .
+				"<td colspan='3'>" .
+					"Aucun match pr&eacutevu aujourd'hui" .
+				"</td>" .
+			"</tr>";
+		}
+	?>
+</TABLE>
+<table cellpadding=0 cellspacing=0 class='tabAccueil<?php if(isMobile()) { echo "Mobile" ; } ?>' id='res' >
+	<TR>
+		<TH colspan="8" style="color: red;">
+			Matchs en attente de r&eacute;sultat ou de report
+			<img src="<?php echo IMG ; ?>down.png" alt="down" height="20" width="20">
+			<img src="<?php echo IMG ; ?>right.png" alt="right" height="20" width="20" style="display: none;">
+		</TH>
+	</TR>
+	<?php
+		$sSQL = "SELECT cre_date, MONTH(cre_date) mois, CONCAT(CASE dayofweek(cre_date) WHEN 2 THEN 'Lundi' WHEN 3 THEN 'Mardi' WHEN 4 THEN 'Mercredi' WHEN 5 THEN 'Jeudi' WHEN 6 THEN 'Vendredi' ELSE 'autre' END, " .
+			" date_format(cre_date, ' %d '), " .
+			" CASE month(cre_date) WHEN 1 THEN 'Janvier' WHEN 2 THEN 'F&eacute;vrier' WHEN 3 THEN 'Mars' WHEN 4 THEN 'Avril' WHEN 5 THEN 'Mai' WHEN 6 THEN 'Juin' " .
+			" WHEN 7 THEN 'Juillet' WHEN 8 THEN 'Ao&ucirc;t' WHEN 9 THEN 'Septembre' WHEN 10 THEN 'Octobre' WHEN 11 THEN 'Novembre' WHEN 12 THEN 'D&eacute;cembre' ELSE 'autre' END) jour, " .
+			" cre_id, e1.eq_nom eq1, e2.eq_nom eq2, e3.eq_nom arb, e1.eq_id eqId1, e2.eq_id eqId2, e3.eq_id arbId, ter_nom, sco1.sco_bp score1, sco2.sco_bp score2, sco1.sco_pen pen1, sco2.sco_pen pen2, CONCAT(eve_nom, ' : ', pou_nom) poule, eve_id, " .
+			" CASE when mat_statut = 1 then '" . COLOR_JOUE . "' when cre_date < sysdate() then '" . COLOR_ATTENTE . "' when mat_statut = 2 then '" . COLOR_REPORT . "' when mat_statut = 3 then '" . COLOR_ARBITRAGE . "' when cre_date > sysdate() then '" . COLOR_PROGRAMME . "' else '' end style, " .
+			" mat_id, mat_statut, pou_nom, ter_adresse " .
+			" FROM " . TBL_EVENEMENT . ", " . TBL_SAISON . ", " . TBL_POULE . ", " . TBL_SCORE . " sco1, " . TBL_SCORE . " sco2, " . TBL_EPS . ", " . TBL_EQUIPE . " e1, " . TBL_EQUIPE . " e2, " . TBL_EQUIPE . " e3, " . TBL_MATCH . ", " . TBL_CRENEAU . ", " . TBL_TERRAIN . 
+			" WHERE eve_id = pou_eve_id " .
+				" and eps_eq_id = e1.eq_id " .
+				" and eps_pou_id = pou_id " .
+				" and sai_pou_id = pou_id " .
+				" and mat_eq_id_1 = e1.eq_id " .
+				" and mat_eq_id_2 = e2.eq_id " .
+				" and mat_eq_id_3 = e3.eq_id " .
+				" and cre_mat_id = mat_id " .
+				" and cre_ter_id = ter_id " .
+				" and mat_id = sco1.sco_mat_id " .
+				" and mat_id = sco2.sco_mat_id " .
+				" and mat_eq_id_1 = sco1.sco_eq_id " .
+				" and mat_eq_id_2 = sco2.sco_eq_id " .
+				" and mat_pou_id = pou_id " .
+				" and mat_sai_annee = sai_annee " .
+				" and eps_sai_annee = sai_annee " .
+				" and sai_annee = '" . SAISON . "' " .
+				" and date_format(cre_date, '%Y%m%d') < date_format(now(), '%Y%m%d') " .
+				" and eve_id > 1 " .
+				" and mat_statut <> 1 " .
+				//" and cre_id > 6001 " .
+			" ORDER BY cre_date, ter_nom, cre_id " ;
+		$result = $mysqli->query($sSQL) ;
+		//echo $sSQL ;
+		$mois_prec = "" ;
+		$i=0 ;
+		$nbMatchJour=0 ;
+		while ($row = mysqli_fetch_array($result)) {
+			extract($row) ;
+			$nbMatchJour++;
+			extract(color($score1, $score2, $pen1, $pen2)) ;
+			echo "<tr id='res_' style='height: 27px'>" ;
+			echo "<td align='left' style='border-left:5px solid ".$style."'>".$jour."</td>" ;
+			echo "<td align='right' class='".$color1."'>" ;
+				echo "<a href='index.php?op=eq&id=".$eqId1."'>".$eq1."</a>" ;
+				$sSQLPen1 = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $eqId1 ;
+				$resultPen1 = $mysqli->query($sSQLPen1) ;
+				while ($rowPen1 = mysqli_fetch_array($resultPen1)) {
+					extract($rowPen1) ;
+					echo "<sup>" . $pen_type . "</sup>" ;
+				}
+			echo "</td>" ;
+			echo "<td align='center'>" ;
+			if($score1!="" && $score1==$score2 && $eve_id==4) {
+				echo $score1." (".$pen1.") - (".$pen2.") ".$score2 ;
+			} else {
+				echo $score1." - ".$score2 ;
+			}
+			echo "</td>" ;
+			echo "<td align='left' class='".$color2."'>" ;
+				echo "<a href='index.php?op=eq&id=".$eqId2."'>".$eq2."</a>" ;
+				$sSQLPen2 = "select pen_type from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $eqId2 ;
+				$resultPen2 = $mysqli->query($sSQLPen2) ;
+				while ($rowPen2 = mysqli_fetch_array($resultPen2)) {
+					extract($rowPen2) ;
+					echo "<sup>" . $pen_type . "</sup>" ;
+				}
+			echo "</td>" ;
+			echo "<td align='left'>" ;
+				echo "<a href='index.php?op=eq&id=".$arbId."'>".$arb."</a>" ;
+				$sSQLArb = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $arbId ;
+				$resultArb = $mysqli->query($sSQLArb) ;
+				while ($rowArb = mysqli_fetch_array($resultArb)) {
+					extract($rowArb) ;
+					echo "<sup>" . $pen_type . "</sup>" ;
+				}
+				$sSQLArb2 = "select eq_id arbId2, eq_nom arb2 from " . TBL_MATCH . ", " . TBL_EQUIPE . " where mat_id = " . $mat_id . " and mat_eq_id_4 = eq_id ;" ;
+				$resultArb2 = $mysqli->query($sSQLArb2) ;
+				while ($rowArb2 = mysqli_fetch_array($resultArb2)) {
+					extract($rowArb2) ;
+					echo " & <a href='index.php?op=eq&id=".$arbId2."'>".$arb2."</a>" ;
+					$sSQLArb2 = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $arbId2 ;
+					$resultArb2 = $mysqli->query($sSQLArb2) ;
+					while ($rowArb2 = mysqli_fetch_array($resultArb2)) {
+						extract($rowArb2) ;
+						echo "<sup>" . $pen_type . "</sup>" ;
+					}
+				}
+			echo "</td>" ;
+			echo "<td align='left'>".lienMap($ter_nom, $ter_adresse)."</td>" ;
+			echo "<td align='left'>" ;
+				if($pou_nom!= "Amical") {
+					echo "<a href='index.php?op=cal&s=".$pou_nom."'>".$poule."</a>" ;
+				} else {
+					echo $poule ;
+				}
+			echo "</td>" ;
+			if(isCapitaine() && $arb!= "Amical") {
+				echo "<td>" ;
+				if($style==COLOR_ATTENTE) {
+					if($arbId==$_SESSION["eq_id"] || $arbId2==$_SESSION["eq_id"]) {
+						echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+					} else if($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"]) {
+						echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Envoyer Score</a>" ;
+					}
+				}
+				if($style!=COLOR_JOUE &&
+					($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"])) {
+					echo "<a class='boutonReport' href=\"index.php?op=demRep&id=".$mat_id."&opp=a\";'>Demander Report</a>" ;
+				}
+				echo "</td>" ;
+			}
+			/*if(isCapitaine() && $style==COLOR_ATTENTE) {
+				echo "<td>" ;
+				if($arbId==$_SESSION["eq_id"]) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+				} else if($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"]) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Envoyer Score</a>" ;
+				}
+				echo "</td>" ;
+			}*/
+			if(isAdmin() && $eq2!="") {
+				echo "<td>" ;
+				if($style==COLOR_ATTENTE) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+					echo "<a class='boutonReport' href=\"index.php?op=rep&id=".$mat_id."&opp=a\";'>Reporter</a>" ;
+					echo "<a class='boutonModArb' href=\"index.php?op=rel&id=".$mat_id."&opp=a\";'>Relancer</a>" ;
+				}
+				elseif($style==COLOR_JOUE) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+				} else {
+					if($mat_statut!=1) {
+						echo "<a class='boutonReport' href=\"index.php?op=rep&id=".$mat_id."&opp=a\";'>Reporter</a>" ;
+						echo "<a class='boutonModArb' href=\"index.php?op=modArb&id=".$mat_id."&opp=a\";'>Modifier Arbitre</a>" ;
+					}
+				}
+				echo "</td>" ;
+			}
+			echo "</tr>" ;
+			$arbId2="";
+			$arb2="";			
+		}
+		if($nbMatchJour==0) {
+			echo "<tr id='res_'>" .
+				"<td colspan='3'>" .
+					"Aucun match en attente" .
+				"</td>" .
+			"</tr>";
+		}
+	?>
+</TABLE>
+<table cellpadding=0 cellspacing=0 class='tabAccueil<?php if(isMobile()) { echo "Mobile" ; } ?>' id='semaine'>
+	<TR>
+		<TH colspan="8">
+			Matchs de la semaine
+			<img src="<?php echo IMG ; ?>down.png" alt="down" height="20" width="20" style="display: none;">
+			<img src="<?php echo IMG ; ?>right.png" alt="right" height="20" width="20">
+		</TH>
+	</TR>
+	<?php
+		$sSQL = "SELECT cre_date, MONTH(cre_date) mois, CONCAT(CASE dayofweek(cre_date) WHEN 2 THEN 'Lundi' WHEN 3 THEN 'Mardi' WHEN 4 THEN 'Mercredi' WHEN 5 THEN 'Jeudi' WHEN 6 THEN 'Vendredi' ELSE 'autre' END, " .
+			" date_format(cre_date, ' %d '), " .
+			" CASE month(cre_date) WHEN 1 THEN 'Janvier' WHEN 2 THEN 'F&eacute;vrier' WHEN 3 THEN 'Mars' WHEN 4 THEN 'Avril' WHEN 5 THEN 'Mai' WHEN 6 THEN 'Juin' " .
+			" WHEN 7 THEN 'Juillet' WHEN 8 THEN 'Ao&ucirc;t' WHEN 9 THEN 'Septembre' WHEN 10 THEN 'Octobre' WHEN 11 THEN 'Novembre' WHEN 12 THEN 'D&eacute;cembre' ELSE 'autre' END) jour, " .
+			" cre_id, e1.eq_nom eq1, e2.eq_nom eq2, e3.eq_nom arb, e1.eq_id eqId1, e2.eq_id eqId2, e3.eq_id arbId, ter_nom, sco1.sco_bp score1, sco2.sco_bp score2, sco1.sco_pen pen1, sco2.sco_pen pen2, CONCAT(eve_nom, ' : ', pou_nom) poule, eve_id, " .
+			" CASE when mat_statut = 1 then '" . COLOR_JOUE . "' when cre_date < sysdate() then '" . COLOR_ATTENTE . "' when mat_statut = 2 then '" . COLOR_REPORT . "' when mat_statut = 3 then '" . COLOR_ARBITRAGE . "' when cre_date > sysdate() then '" . COLOR_PROGRAMME . "' else '' end style, " .
+			" mat_id, mat_statut, pou_nom, ter_adresse " .
+			" FROM " . TBL_EVENEMENT . ", " . TBL_SAISON . ", " . TBL_POULE . ", " . TBL_SCORE . " sco1, " . TBL_SCORE . " sco2, " . TBL_EPS . ", " . TBL_EQUIPE . " e1, " . TBL_EQUIPE . " e2, " . TBL_EQUIPE . " e3, " . TBL_MATCH . ", " . TBL_CRENEAU . ", " . TBL_TERRAIN . 
+			" WHERE eve_id = pou_eve_id " .
+				" and eps_eq_id = e1.eq_id " .
+				" and eps_pou_id = pou_id " .
+				" and sai_pou_id = pou_id " .
+				" and mat_eq_id_1 = e1.eq_id " .
+				" and mat_eq_id_2 = e2.eq_id " .
+				" and mat_eq_id_3 = e3.eq_id " .
+				" and cre_mat_id = mat_id " .
+				" and cre_ter_id = ter_id " .
+				" and mat_id = sco1.sco_mat_id " .
+				" and mat_id = sco2.sco_mat_id " .
+				" and mat_eq_id_1 = sco1.sco_eq_id " .
+				" and mat_eq_id_2 = sco2.sco_eq_id " .
+				" and mat_pou_id = pou_id " .
+				" and mat_sai_annee = sai_annee " .
+				" and eps_sai_annee = sai_annee " .
+				" and sai_annee = '" . SAISON . "' " .
+				" and date_format(cre_date, '%V') = date_format(now(), '%V') " .
+			" ORDER BY cre_date, ter_nom, cre_id " ;
+		$result = $mysqli->query($sSQL) ;
+		//echo $sSQL ;
+		$mois_prec = "" ;
+		$i=0 ;
+		$nbMatchSemaine=0 ;
+		while ($row = mysqli_fetch_array($result)) {
+			extract($row) ;
+			$nbMatchSemaine++;
+			extract(color($score1, $score2, $pen1, $pen2)) ;
+			echo "<tr id='semaine_' style='display: none; height: 27px'>" ;
+			echo "<td align='left' style='border-left:5px solid ".$style."'>".$jour."</td>" ;
+			echo "<td align='right' class='".$color1."'>" ;
+				echo "<a href='index.php?op=eq&id=".$eqId1."'>".$eq1."</a>" ;
+				$sSQLPen1 = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $eqId1 ;
+				$resultPen1 = $mysqli->query($sSQLPen1) ;
+				while ($rowPen1 = mysqli_fetch_array($resultPen1)) {
+					extract($rowPen1) ;
+					echo "<sup>" . $pen_type . "</sup>" ;
+				}
+			echo "</td>" ;
+			echo "<td align='center'>" ;
+			if($score1!="" && $score1==$score2 && $eve_id==4) {
+				echo $score1." (".$pen1.") - (".$pen2.") ".$score2 ;
+			} else {
+				echo $score1." - ".$score2 ;
+			}
+			echo "</td>" ;
+			echo "<td align='left' class='".$color2."'>" ;
+				echo "<a href='index.php?op=eq&id=".$eqId2."'>".$eq2."</a>" ;
+				$sSQLPen2 = "select pen_type from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $eqId2 ;
+				$resultPen2 = $mysqli->query($sSQLPen2) ;
+				while ($rowPen2 = mysqli_fetch_array($resultPen2)) {
+					extract($rowPen2) ;
+					echo "<sup>" . $pen_type . "</sup>" ;
+				}
+			echo "</td>" ;
+			echo "<td align='left'>" ;
+				echo "<a href='index.php?op=eq&id=".$arbId."'>".$arb."</a>" ;
+				$sSQLArb = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $arbId ;
+				$resultArb = $mysqli->query($sSQLArb) ;
+				while ($rowArb = mysqli_fetch_array($resultArb)) {
+					extract($rowArb) ;
+					echo "<sup>" . $pen_type . "</sup>" ;
+				}
+				$sSQLArb2 = "select eq_id arbId2, eq_nom arb2 from " . TBL_MATCH . ", " . TBL_EQUIPE . " where mat_id = " . $mat_id . " and mat_eq_id_4 = eq_id ;" ;
+				$resultArb2 = $mysqli->query($sSQLArb2) ;
+				while ($rowArb2 = mysqli_fetch_array($resultArb2)) {
+					extract($rowArb2) ;
+					echo " & <a href='index.php?op=eq&id=".$arbId2."'>".$arb2."</a>" ;
+					$sSQLArb2 = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $arbId2 ;
+					$resultArb2 = $mysqli->query($sSQLArb2) ;
+					while ($rowArb2 = mysqli_fetch_array($resultArb2)) {
+						extract($rowArb2) ;
+						echo "<sup>" . $pen_type . "</sup>" ;
+					}
+				}
+			echo "</td>" ;
+			echo "<td align='left'>".lienMap($ter_nom, $ter_adresse)."</td>" ;
+			echo "<td align='left'>" ;
+				if($pou_nom!= "Amical") {
+					echo "<a href='index.php?op=cal&s=".$pou_nom."'>".$poule."</a>" ;
+				} else {
+					echo $poule ;
+				}
+			echo "</td>" ;
+			if(isCapitaine() && $arb!= "Amical") {
+				echo "<td>" ;
+				if($style==COLOR_ATTENTE) {
+					if($arbId==$_SESSION["eq_id"] || $arbId2==$_SESSION["eq_id"]) {
+						echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+					} else if($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"]) {
+						echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Envoyer Score</a>" ;
+					}
+				}
+				if($style!=COLOR_JOUE &&
+					($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"])) {
+					echo "<a class='boutonReport' href=\"index.php?op=demRep&id=".$mat_id."&opp=a\";'>Demander Report</a>" ;
+				}
+				echo "</td>" ;
+			}
+			/*if(isCapitaine() && $style==COLOR_ATTENTE) {
+				echo "<td>" ;
+				if($arbId==$_SESSION["eq_id"]) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+				} else if($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"]) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Envoyer Score</a>" ;
+				}
+				echo "</td>" ;
+			}*/
+			if(isAdmin() && $eq2!="") {
+				echo "<td>" ;
+				if($style==COLOR_ATTENTE) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+					echo "<a class='boutonReport' href=\"index.php?op=rep&id=".$mat_id."&opp=a\";'>Reporter</a>" ;
+				}
+				elseif($style==COLOR_JOUE) {
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+				} else {
+					if($mat_statut!=1) {
+						echo "<a class='boutonReport' href=\"index.php?op=rep&id=".$mat_id."&opp=a\";'>Reporter</a>" ;
+						echo "<a class='boutonModArb' href=\"index.php?op=modArb&id=".$mat_id."&opp=a\";'>Modifier Arbitre</a>" ;
+					}
+				}
+				echo "</td>" ;
+			}
+			echo "</tr>" ;
+			$arbId2="";
+			$arb2="";
+		}
+		if($nbMatchSemaine==0) {
+			echo "<tr id='semaine_' style='display: none;'>" .
+				"<td colspan='3'>" .
+					"Aucun match pr&eacutevu cette semaine" .
+				"</td>" .
+			"</tr>";
+		}
+	?>
+</TABLE>
+<table cellpadding=0 cellspacing=0 class='tabAccueil<?php if(isMobile()) { echo "Mobile" ; } ?>' id='libre'>
+	<TR>
+		<TH colspan="8">
+			Cr&eacute;neaux libres des 2 semaines &agrave; venir
+			<img src="<?php echo IMG ; ?>down.png" alt="down" height="20" width="20" style="display: none;">
+			<img src="<?php echo IMG ; ?>right.png" alt="right" height="20" width="20">
+		</TH>
+	</TR>
+	<?php
+		$sSQL = "SELECT cre_date, MONTH(cre_date) mois, CONCAT(CASE dayofweek(cre_date) WHEN 2 THEN 'Lundi' WHEN 3 THEN 'Mardi' WHEN 4 THEN 'Mercredi' WHEN 5 THEN 'Jeudi' WHEN 6 THEN 'Vendredi' ELSE 'autre' END, " .
+			" date_format(cre_date, ' %d '), " .
+			" CASE month(cre_date) WHEN 1 THEN 'Janvier' WHEN 2 THEN 'F&eacute;vrier' WHEN 3 THEN 'Mars' WHEN 4 THEN 'Avril' WHEN 5 THEN 'Mai' WHEN 6 THEN 'Juin' " .
+			" WHEN 7 THEN 'Juillet' WHEN 8 THEN 'Ao&ucirc;t' WHEN 9 THEN 'Septembre' WHEN 10 THEN 'Octobre' WHEN 11 THEN 'Novembre' WHEN 12 THEN 'D&eacute;cembre' ELSE 'autre' END) jour, " .
+			" cre_id, eq_nom eq1, '' eq2, '' arb, eq_id eqId1, '' eqId2, '' arbId, ter_nom, '' score1, '' score2, '' pen1, '' pen2, '' poule, '' eve_id, " .
+			" '" . COLOR_LIBRE . "' style, mat_id, mat_statut " .
+			" FROM " . TBL_EVENEMENT . ", " . TBL_SAISON . ", " . TBL_POULE . ", " . TBL_EPS . ", " . TBL_EQUIPE . ", " . TBL_MATCH . ", " . TBL_CRENEAU . ", " . TBL_TERRAIN . 
+			" WHERE eve_id = pou_eve_id " .
+				" and eps_eq_id = eq_id " .
+				" and eps_pou_id = pou_id " .
+				" and sai_pou_id = pou_id " .
+				" and mat_eq_id_1 = eq_id " .
+				" and cre_mat_id = mat_id " .
+				" and cre_ter_id = ter_id " .
+				" and mat_sai_annee = sai_annee " .
+				" and eps_sai_annee = sai_annee " .
+				" and sai_annee = '" . SAISON . "' " .
+				" and mat_eq_id_2 is null " .
+				" and mat_pou_id = pou_id " .
+				//" and date_format(cre_date, '%V') = date_format(now(), '%V') " .
+				//A tester en fin d'année civile
+				" and cre_date between now() and date_add(now(), INTERVAL 2 WEEK) " .
+				" and cre_date >= now() " .
+			" ORDER BY cre_date, ter_nom, cre_id " ;
+		$result = $mysqli->query($sSQL) ;
+		//echo $sSQL ;
+		$mois_prec = "" ;
+		$i=0 ;
+		$nbCreneau=0 ;
+		while ($row = mysqli_fetch_array($result)) {
+			extract($row) ;
+			$nbCreneau++;
+			extract(color($score1, $score2, $pen1, $pen2)) ;
+			echo "<tr id='libre_' style='display: none; height: 27px'>" ;
+			echo "<td align='left' style='border-left:5px solid ".$style."'>".$jour."</td>" ;
+			echo "<td align='left'>".$ter_nom."</td>" ;
+			if($eqId1==1) {
+				echo "<td align='left'><a class='boutonDem' href=\"index.php?op=dem&id=".$cre_id."&opp=a\";'>Demander</a></td>" ;
+			}
+			if(isAdmin() && $eq2=="") {
+				echo "<td><a class='boutonDem' href=\"index.php?op=addM&id=".$cre_id."&opp=a\";'>Ajout Match</a></td>" ;
+			}
+			echo "</tr>" ;
+		}
+		if($nbCreneau==0) {
+			echo "<tr id='libre_' style='display: none;'>" .
+				"<td colspan='3'>" .
+					"Aucun cr&eacute;neau libre sur les 2 semaines &agrave; venir" .
+				"</td>" .
+			"</tr>";
+		}
+	?>
+</TABLE>
+<table cellpadding=0 cellspacing=0 class='tabAccueil<?php if(isMobile()) { echo "Mobile" ; } ?>' id='equipe'>
+	<TR>
+		<TH colspan="8">
+			Liste des &eacute;quipes inscrites avec mails
+			<img src="<?php echo IMG ; ?>down.png" alt="down" height="20" width="20">
+			<img src="<?php echo IMG ; ?>right.png" alt="right" height="20" width="20" style="display: none;">
+		</TH>
+	</TR>
+	<?php
+	if(isAdmin() || isCapitaine()) { 
+		$sSQLEquipe = "select eq_id, eq_nom" .
+					" from " . TBL_EPS . ", " . 
+						TBL_EQUIPE . 
+					" where eps_eq_id = eq_id " .
+						" and eq_id not in (1,230)" .
+						" and eps_sai_annee = '".SAISON."' " .
+						" and eps_pou_id = 2 " .
+					" order by eq_nom " ;
+		$resultEquipe = $mysqli->query($sSQLEquipe) ;
+		while ($rowEquipe = mysqli_fetch_array($resultEquipe)) {
+			extract($rowEquipe) ;
+			$sSQLCor = "select jou_nom, jou_mail " .
+							" from " . TBL_EQUIPE_CORRESP . ", " .
+							TBL_JOUEUR .
+							" where ec_eq_id = '".$eq_id."' " .
+								" and ec_jou_id = jou_id ;" ;
+			$resultCor = $mysqli->query($sSQLCor) ;
+			$flagCor = false ;
+			$corresp = "" ;
+			while ($rowCor = mysqli_fetch_array($resultCor)) {
+				extract($rowCor) ;
+				if($flagCor) { $corresp .= "; " ; }
+				$corresp .= $jou_mail ;
+				$flagCor = true ;
+			}			
+			echo "<tr id='equipe_' style='height: 27px'>" ;
+				echo "<TD>".$eq_nom."</TD>" ;
+				echo "<TD>".$corresp."</TD>" ;
+			echo "</TR>" ;
+		}
+	} else {
+		echo "<tr id='equipe_' style='height: 27px'>" ;
+			echo "<TD>Veuillez-vous connecter pour afficher la liste</TD>" ;
+		echo "</TR>" ;
+	}
+	?>
+</TABLE>
+</div>
