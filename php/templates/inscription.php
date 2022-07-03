@@ -157,7 +157,7 @@
 					<td align="justify">
 						<center><b>Veuillez lire attentivement les indications de ce paragraphe.</b></center>
 						<p>Remplissez ce bulletin pour toutes les équipes de votre société.</p>
-						<p><b>IMPORTANT</b> : vous trouverez une question demandant si vous souhiatez vous insrire pour la coupe ELOCAR. Merci d'y répondre afin que nous sachions comment nous organiser.Bien entendu, la tenue ou non de cette coupe, ainsi que la formule qu'elle adoptera dépendra du nombre de participants et des créneaux que nous aurons réussi à obtenir.</p>
+						<p><b>IMPORTANT</b> : vous trouverez une question demandant si vous souhaitez vous inscrire pour la coupe ELOCAR. Merci d'y répondre afin que nous sachions comment nous organiser. Bien entendu, la tenue ou non de cette coupe, ainsi que la formule qu'elle adoptera dépendra du nombre de participants et des créneaux que nous aurons réussi à obtenir.</p>
 						<p>Je vous rappelle que l'inscription avait été fixée l'année dernière à 300€ pour le championnat et le tarif de la coupe reste à définir (gratuite les dernières années, mais de l'ordre de 50€ les années précédentes). Ces valeurs indicatives sont susceptibles d'évoluer légèrement en fonction des tarifs de location des terrains que nous ne connaissons pas encore tous.</p>
 						<p>Mon mail est <u><i><a href="mailto:foot@asiesophia.fr">foot@asiesophia.fr</a></i></u> ou <u><i><a href="mailto:florian.joyeux@gmail.com">florian.joyeux@gmail.com</a></i></u> si vous avez des questions à poser au préalable.</p>
 					</td>
@@ -272,6 +272,29 @@
 										<option value="mercredi">Mercredi</option>
 										<option value="jeudi">Jeudi</option>
 										<option value="vendredi">Vendredi</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td align='right'>&Eacute;quipe amie : </td>
+								<td>
+									<select name="ami_id_new" id="ami_id_new">
+										<option value="0">Aucun</option>
+									<?php
+										$sSQLAmi = 	"select eq_id, eq_nom" .
+													" from " . TBL_EPS . ", " . 
+														TBL_EQUIPE . 
+													" where eps_eq_id = eq_id " .
+														" and eq_id not in (1,230)" .
+														" and eps_sai_annee = '".SAISON."' " .
+														" and eps_pou_id = 2 " .
+													" order by eq_nom " ;
+										$resultAmi = $mysqli->query($sSQLAmi) ;
+										while ($rowAmi = mysqli_fetch_array($resultAmi)) {
+											extract($rowAmi) ;
+											echo "<option value='".$eq_id."'>".$eq_nom."</option>" ;
+										}
+									?>
 									</select>
 								</td>
 							</tr>

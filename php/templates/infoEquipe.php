@@ -8,7 +8,8 @@
 							" eq_couleur_ext = '" . securite_bdd($couleur_ext) . "', " .
 							" eq_coupe = '" . $coupe . "', " .
 							" eq_ter_id = '" . $eq_ter_id . "', " .
-							" eq_jour = '" . $jour . "' " .
+							" eq_jour = '" . $jour . "', " .
+							" eq_ami_id = '" . $eq_ami_id . "' " .
 						" WHERE eq_id = '" . $_POST['eq_id'] . "' " ;
 			$resultUpdate = $mysqli->query($sSQLUpdate) ;
 			envoiMailInfosEquipe($_SESSION['utilisateur']) ;
@@ -29,7 +30,7 @@
 		<Form name="form" action="#" method="POST"/>
 			<table colspan="2" align="center"/>
 				<?php
-					$sSQL = "SELECT eq_id, eq_nom, eq_jour, eq_ter_id, eq_coupe, eq_couleur, eq_couleur_ext " .
+					$sSQL = "SELECT eq_id, eq_nom, eq_jour, eq_ter_id, eq_ami_id, eq_coupe, eq_couleur, eq_couleur_ext " .
 						" FROM " . TBL_JOUEUR . ", " . TBL_EQUIPE_CORRESP . ", " . TBL_EQUIPE . 
 						" WHERE jou_id = ec_jou_id " .
 							" AND eq_id = ec_eq_id " .
@@ -54,6 +55,9 @@
 							echo "</tr>" ;
 							echo "<tr>" ;
 							echo "<td align='right'>Terrain &agrave; &eacute;viter : </td><td><select name='eq_ter_id' id='eq_ter_id'/>".selectTerrain($eq_ter_id)."</select></td>" ;
+							echo "</tr>" ;
+							echo "<tr>" ;
+							echo "<td align='right'>&Eacute;quipe amie : </td><td><select name='eq_ami_id' id='eq_ami_id'/>".selectAmi($eq_ami_id)."</select></td>" ;
 							echo "</tr>" ;
 							echo "<tr>" ;
 							echo "<td align='right'>Coupe* : </td><td><select name='coupe' id='coupe'/>".selectOuiNon($eq_coupe)."</select></td>" ;

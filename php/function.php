@@ -740,6 +740,30 @@
 		return $option ;
 	}
 	
+	function selectAmi($ami="0") {
+		global $mysqli ;
+		$option = "" ;
+		$option .= "<option value='0' selected>Aucun</option>" ;
+		$sql = 	"select eq_id, eq_nom" .
+				" from " . TBL_EPS . ", " . 
+					TBL_EQUIPE . 
+				" where eps_eq_id = eq_id " .
+					" and eq_id not in (1,230)" .
+					" and eps_sai_annee = '".SAISON."' " .
+					" and eps_pou_id = 2 " .
+				" order by eq_nom " ;
+		$result = $mysqli->query($sql) ;
+		while ($row = mysqli_fetch_array($result)) {
+			extract($row) ;
+			if($eq_id==$ami) {
+				$option .= "<option value='".$eq_id."' selected>".ucfirst($eq_nom)."</option>" ;
+			} else {
+				$option .= "<option value='".$eq_id."'>".ucfirst($eq_nom)."</option>" ;
+			} 
+		}
+		return $option ;
+	}
+	
 	function selectOuiNon($jour="non") {
 		$option = "" ;
 		$tabJour = array('non',
