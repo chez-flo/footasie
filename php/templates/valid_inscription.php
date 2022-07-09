@@ -16,7 +16,7 @@
 				<TH>Commentaires</TH>
 			</TR>
 			<?php
-				$sSQLEquipe = "select eq_id, eq_commentaire, eq_nom, soc_nom, eq_ter_id, eq_jour, eq_ami_id, eq_coupe, eq_couleur, eq_couleur_ext " .
+				$sSQLEquipe = "select eq_id, eq_commentaire, eq_nom nom, soc_nom, eq_ter_id, eq_jour, eq_ami_id ami_id, eq_coupe, eq_couleur, eq_couleur_ext " .
 					" from " . TBL_EPS . ", " . 
 						TBL_EQUIPE . ", " .
 						TBL_SOCIETE .  
@@ -50,9 +50,9 @@
 					while ($rowTer = mysqli_fetch_array($resultTer)) {
 						extract($rowTer) ;
 					}
-					$sSQLAmi = "select eq_nom " .
+					$sSQLAmi = "select eq_nom ami_nom " .
 									" from " . TBL_EQUIPE .
-									" where eq_ami_id = '".$eq_ami_id."' ;" ;
+									" where eq_id = '".$ami_id."' ;" ;
 					$resultAmi = $mysqli->query($sSQLAmi) ;
 					$ami_nom = "" ;
 					while ($rowAmi = mysqli_fetch_array($resultAmi)) {
@@ -60,7 +60,7 @@
 					}
 					$eq_coupe==1 ? $coupe = "Oui" : $coupe = "non" ;
 					echo "<TR>" ;
-						echo "<TD>".$eq_nom."</TD>" ;
+						echo "<TD>".$nom."</TD>" ;
 						echo "<TD>".$soc_nom."</TD>" ;
 						echo "<TD>".$corresp."</TD>" ;
 						echo "<TD>".$ter_nom."</TD>" ;

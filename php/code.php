@@ -455,6 +455,7 @@ header('Content-type: text/html; charset=UTF-8');
 		$sSQL = "update f_equipe " .
 					"set eq_ter_id = '" . securite_bdd($ter_id) ."', " .
 					"eq_jour = '" . securite_bdd($jour) ."', " .
+					"eq_ami_id = '" . securite_bdd($eq_ami_id) ."', " .
 					"eq_coupe = '" . securite_bdd($coupe) ."', " .
 					"eq_couleur = '" . securite_bdd($couleur) ."', " .
 					"eq_couleur_ext = '" . securite_bdd($couleur_ext) ."', " .
@@ -565,8 +566,8 @@ header('Content-type: text/html; charset=UTF-8');
 				extract($rowMax) ;
 			}
 			$sSQLEq =  "insert into " . TBL_EQUIPE .  
-						" (eq_id, eq_nom, eq_ter_id, eq_jour,eq_coupe, eq_couleur, eq_couleur_ext, eq_soc_id, eq_commentaire) " .
-						" values ('".$eq_id_new."', '".securite_bdd($eq_nom_new)."', '".securite_bdd($ter_id_new)."', '".securite_bdd($jour_new)."', '".securite_bdd($coupe_new)."', '".securite_bdd($couleur_new)."', '".securite_bdd($couleur_ext_new)."', '".securite_bdd($soc_id_new)."', '".securite_bdd($commentaire_new)."') ;" ;
+						" (eq_id, eq_nom, eq_ter_id, eq_jour, eq_ami_id, eq_coupe, eq_couleur, eq_couleur_ext, eq_soc_id, eq_commentaire) " .
+						" values ('".$eq_id_new."', '".securite_bdd($eq_nom_new)."', '".securite_bdd($ter_id_new)."', '".securite_bdd($jour_new)."', '".securite_bdd($ami_id_new)."', '".securite_bdd($coupe_new)."', '".securite_bdd($couleur_new)."', '".securite_bdd($couleur_ext_new)."', '".securite_bdd($soc_id_new)."', '".securite_bdd($commentaire_new)."') ;" ;
 			$resultEq = $mysqli->query($sSQLEq) ;
 			$eq_id = $mysqli->insert_id ;
 		}
