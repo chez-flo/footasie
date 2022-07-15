@@ -16,11 +16,12 @@ public:
 	bool isValid() const { return m_isValid; }
 
 	static void readCSV(const std::string& filename);
-	static Equipe& byName(const std::string& name) { return m_byName[name]; }
-	static Equipe& byId(const unsigned int& id) { return byName(m_byId[id]); }
+	static Equipe* byName(const std::string& name);
+	static Equipe* byId(const unsigned int& id) { return byName(m_byId[id]); }
 
 	// getters
-	const Equipe& ami() const { return byName(m_byId[m_ami]); }
+	unsigned int id() const { return m_id; }
+	const Equipe* ami() const { return byName(m_byId[m_ami]); }
 	const std::string& nom() const { return m_name; }
 
 private:

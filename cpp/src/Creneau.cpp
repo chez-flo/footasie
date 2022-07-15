@@ -115,7 +115,6 @@ void Creneau::fromCSV(const std::string& filename)
 	// lecture de toutes les lignes
 	while (!handle.eof() && handle.is_open())
 	{
-		// les 4 1ers champs nous interessent
 		getline(handle, line);
 
 		const Date date = findDate(line);

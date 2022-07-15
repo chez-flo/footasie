@@ -26,23 +26,23 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
     // traitement des equipes avec ami
     for (std::vector<std::string>::const_iterator it = all.begin(); it != all.end();)
     {
-        const Equipe& equipe = Equipe::byName(*it);
+        const Equipe* equipe = Equipe::byName(*it);
 
         // est-ce que l'equipe est valide ?
-        if (!equipe.isValid())
+        if (!equipe || !equipe->isValid())
         {
             it = all.erase(it);
             continue;
         }
         // est-ce que l'equipe a un ami valide ?
-        const Equipe& ami = equipe.ami();
-        if (!ami.isValid())
+        const Equipe* ami = equipe->ami();
+        if (!ami || !ami->isValid())
         {
             it++;
             continue;
         }
         // est-ce que l'ami est au meme niveau ?
-        std::vector<std::string>::const_iterator jt = std::find(all.begin(), all.end(), ami.nom());
+        std::vector<std::string>::const_iterator jt = std::find(all.begin(), all.end(), ami->nom());
         if (jt != all.end())
         {
             // tirages aleatoires
@@ -68,8 +68,6 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
     // traitement des autres equipes
     for (const std::string& name : all)
     {
-        const Equipe& equipe = Equipe::byName(name);
-
         // on a deja teste si l'equipe est valide
         int p1 = rand(gen);
         for (int n = 0; n < nbPoules && (int)out[nomPoules[p1]].equipes().size() >= nbEquipes; ++n, p1 = (p1 + 1) % nbPoules);
@@ -82,7 +80,8 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
 int main(int argc, char **argv)
 {
     // recuperation des equipes
-    Equipe::readCSV("data/f_equipe.csv");
+    std::string filename = getConfigAsString("Fichier CSV equipe", "data/f_equipe.csv", "config.ini");
+    Equipe::readCSV(filename);
 
     // recuperation equipes niveau
     const std::vector<std::string> niveauA = getConfigAsVectorString("Equipes niveau A", {}, "config.ini");
@@ -115,6 +114,10 @@ int main(int argc, char **argv)
     // generation matchs
     for (std::map<std::string, Poule>::iterator it = poule.begin(); it != poule.end(); it++)
         it->second.genereMatchs();
+
+    // sauvegarde de la liste des matchs au format CSV
+    filename = getConfigAsString("Fichier CSV match", "data/f_match.csv", "config.ini");
+    Match::toCSV(filename);
 
     return 0;
 }

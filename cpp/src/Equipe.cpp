@@ -137,3 +137,12 @@ void Equipe::readCSV(const std::string& filename)
 			Equipe e(findId(line), name, findTerrain(line), findEntrainement(line), findAmi(line));
 	}
 }
+
+Equipe* Equipe::byName(const std::string& name)
+{
+	std::map<std::string, Equipe>::iterator it = m_byName.find(name);
+	if (it == m_byName.end())
+		return nullptr;
+
+	return &it->second;
+}
