@@ -78,7 +78,6 @@ namespace {
 		if (subline.front() != '"' || subline.back() != '"')
 			return 0u;
 
-		unsigned int out = 0u;
 		return strtoul(subline.substr(1u, subline.length() - 1).c_str(), NULL, 10);
 	}
 
@@ -135,11 +134,6 @@ void Equipe::readCSV(const std::string& filename)
 		
 		const string name = findName(line);
 		if (!name.empty())
-			m_byName[name] = Equipe(findId(line), name, findTerrain(line), findEntrainement(line), findAmi(line));
+			Equipe e(findId(line), name, findTerrain(line), findEntrainement(line), findAmi(line));
 	}
-}
-
-Equipe& Equipe::byName(const std::string& name)
-{
-	return m_byName[name];
 }

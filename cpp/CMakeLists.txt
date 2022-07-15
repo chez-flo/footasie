@@ -8,6 +8,7 @@ set(HEADERS
 	src/Date.hpp
 	src/Equipe.hpp
 	src/getConfig.hpp
+	src/global.hpp
 	src/Match.hpp
 	src/Poule.hpp)
 
@@ -25,6 +26,7 @@ set(DATA ${CMAKE_CURRENT_SOURCE_DIR}/data)
 #EXE
 add_executable(createCreneau exe/createCreneau.cpp ${HEADERS} ${SOURCES})
 add_executable(createMatch exe/createMatch.cpp ${HEADERS} ${SOURCES})
+add_executable(createChampionnat exe/createChampionnat.cpp ${HEADERS} ${SOURCES})
 
 #LINK TO DATA
 # pour que cela fonctionne sur Windows 10/+, activer le mode developpeur de Windows

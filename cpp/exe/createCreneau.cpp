@@ -83,8 +83,6 @@ int main(int argc, char **argv)
     dispoFontonne = getConfigAsVectorInt("Disponibilite Fontonne", dispoFontonne, "config.ini");
 
     // construction de la liste des creneaux disponibles
-    std::vector<Creneau> creneaux;
-
     for (Date date = annee[0]; date < annee[1]; date += 1)
     {
         // test ferie ou vacances
@@ -92,17 +90,21 @@ int main(int argc, char **argv)
         {
             // chabert
             for (int n = 0; n < dispoChabert[date.weekday()]; ++n)
-                creneaux.push_back(Creneau(date, 1, NULL));
+                Creneau c(date, 1);
             // biot
             for (int n = 0; n < dispoBiot[date.weekday()]; ++n)
-                creneaux.push_back(Creneau(date, 2, NULL));
+                Creneau c(date, 2);
             // fontonne
             for (int n = 0; n < dispoFontonne[date.weekday()]; ++n)
-                creneaux.push_back(Creneau(date, 3, NULL));
+                Creneau c(date, 3);
         }
     }
 
-    std::cout << "Nombre total de creneaux: " << (int)creneaux.size() << std::endl;
+    // sauvegarde de la liste des creneaux au format CSV
+    const std::string filename = getConfigAsString("Fichier CSV creneau", "data/f_creneau.csv", "config.ini");
+    Creneau::toCSV(filename);
+
+    std::cout << "Nombre total de creneaux: " << (int)Creneau::getCreneaux().size() << std::endl;
 
     return 0;
 }

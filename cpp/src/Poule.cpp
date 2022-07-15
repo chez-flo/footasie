@@ -32,7 +32,7 @@ namespace
 	std::vector<std::vector<int> > genereTable(const int nbEquipes)
 	{
 		// alloc
-		std::vector<std::vector<int> > out = std::vector<std::vector<int> >(nbEquipes-1u, std::vector<int>(nbEquipes, -1));
+		std::vector<std::vector<int> > out = std::vector<std::vector<int> >((unsigned int)nbEquipes-1u, std::vector<int>(nbEquipes, -1));
 
 		// remplissage circulaire des nbEquipes-1u
 		for (int e = 0; e < nbEquipes-1; ++e)
@@ -95,7 +95,7 @@ void Poule::genereMatchs()
 			Equipe* arb = (eq1 == nullptr || eq2 == nullptr) ? nullptr : arbitres[idArb];
 			if (!ontIlsDejaJoue(eq1, eq2))
 			{
-				m_match.push_back(Match(j+1, eq1, eq2, arb, nullptr));
+				m_match.push_back(Match(m_id, j+1, eq1, eq2, arb, nullptr));
 				if (arb != nullptr)
 					idArb = (idArb + 1) % (int)arbitres.size();
 			}
@@ -112,7 +112,7 @@ void Poule::genereMatchs()
 		Equipe* eq1 = m_match[n].equipe2();
 		Equipe* eq2 = m_match[n].equipe1();
 		Equipe* arb = arbitres[idArb];
-		m_match.push_back(Match(m_match[n].journee() + nbJournees, eq1, eq2, arb, nullptr));
+		m_match.push_back(Match(m_id, m_match[n].journee() + nbJournees, eq1, eq2, arb, nullptr));
 		idArb = (idArb + 1) % (int)arbitres.size();
 	}
 }

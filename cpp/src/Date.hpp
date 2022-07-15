@@ -30,6 +30,7 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& stream, const Date& date);
 	std::string toStr() const;
+	std::string toCSVLine() const;
 	bool isValid() const { return m_isValid; }
 private:
 	tm m_tm = { 0 };

@@ -14,6 +14,9 @@ public:
 	// getters
 	const std::vector<Equipe>& equipes() const { return m_equipe; }
 
+	// setters
+	void setIdPoule(const unsigned int id) { m_id = id; }
+
 	// adders
 	void addEquipe(const std::string& name);
 	void addArbitre(const std::string& name);
@@ -22,6 +25,8 @@ public:
 	void genereMatchs();
 
 private:
+	unsigned int m_id = 0u;
+
 	std::vector<Equipe> m_equipe;
 	std::vector<Equipe> m_arbitre;
 

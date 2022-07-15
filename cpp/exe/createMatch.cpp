@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <getConfig.hpp>
+#include <global.hpp>
 #include <Poule.hpp>
 
 void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::string>& nomPoules, std::map<std::string, Poule>& out)
@@ -17,6 +18,10 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
 
     // copie de toutes les equipes
     std::vector<std::string> all = equipe;
+
+    // initialisation des poules
+    for (std::vector<std::string>::const_iterator it = nomPoules.begin(); it != nomPoules.end(); it++)
+        out[*it].setIdPoule(POULES.find(*it)->second);
 
     // traitement des equipes avec ami
     for (std::vector<std::string>::const_iterator it = all.begin(); it != all.end();)
