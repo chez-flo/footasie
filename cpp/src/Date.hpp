@@ -25,7 +25,7 @@ public:
 	Date& operator-(int jour);
 	void operator-=(int jour);
 
-	bool isWeek() const;
+	bool isThisDay(const std::string& day) const;
 	int weekday() const { return m_tm.tm_wday; }
 
 	friend std::ostream& operator<<(std::ostream& stream, const Date& date);

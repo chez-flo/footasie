@@ -74,9 +74,21 @@ void Date::operator-=(int jour)
 	operator+=(-jour);
 }
 
-bool Date::isWeek() const
+bool Date::isThisDay(const std::string& day) const
 {
-	return m_tm.tm_wday != 0 && m_tm.tm_wday != 7;
+	switch (m_tm.tm_wday)
+	{
+	case 0:	return day == "dimanche";
+	case 1:	return day == "lundi";
+	case 2:	return day == "mardi";
+	case 3:	return day == "mercredi";
+	case 4:	return day == "jeudi";
+	case 5:	return day == "vendredi";
+	case 6:	return day == "samedi";
+	default:break;
+	}
+
+	return false;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Date& date)

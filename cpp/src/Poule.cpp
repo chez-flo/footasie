@@ -5,16 +5,16 @@
 
 void Poule::addEquipe(const std::string& name)
 {
-	const Equipe* equipe = Equipe::byName(name);
+	Equipe* equipe = Equipe::byName(name);
 	if (equipe && equipe->isValid())
-		m_equipe.push_back(*equipe);
+		m_equipe.push_back(equipe);
 }
 
 void Poule::addArbitre(const std::string& name)
 {
-	const Equipe* equipe = Equipe::byName(name);
+	Equipe* equipe = Equipe::byName(name);
 	if (equipe && equipe->isValid())
-		m_arbitre.push_back(*equipe);
+		m_arbitre.push_back(equipe);
 }
 
 namespace
@@ -63,11 +63,11 @@ void Poule::genereMatchs()
 {
 	// liste des equipes de base
 	std::vector<Equipe*> equipes;
-	for (Equipe& eq : m_equipe)
-		equipes.push_back(&eq);
+	for (Equipe*& eq : m_equipe)
+		equipes.push_back(eq);
 	std::vector<Equipe*> arbitres;
-	for (Equipe& eq : m_arbitre)
-		arbitres.push_back(&eq);
+	for (Equipe*& eq : m_arbitre)
+		arbitres.push_back(eq);
 	// gestion du nombre impair d'equipes
 	if ((int)equipes.size() % 2 == 1)
 		equipes.push_back(nullptr);
@@ -119,11 +119,15 @@ void Poule::genereMatchs()
 
 bool Poule::ontIlsDejaJoue(const Equipe* eq1, const Equipe* eq2) const
 {
+	const unsigned int id1 = eq1 ? eq1->id() : 0u;
+	const unsigned int id2 = eq2 ? eq2->id() : 0u;
 	for (const Match& match : m_match)
 	{
-		if (match.equipe1() == eq1 && match.equipe2() == eq2)
+		const unsigned int jd1 = match.equipe1() ? match.equipe1()->id() : 0u;
+		const unsigned int jd2 = match.equipe2() ? match.equipe2()->id() : 0u;
+		if (jd1 == id1 && jd2 == id2)
 			return true;
-		if (match.equipe1() == eq2 && match.equipe2() == eq1)
+		if (jd1 == id2 && jd2 == id1)
 			return true;
 	}
 	return false;

@@ -4,6 +4,8 @@
 #include <Date.hpp>
 #include <Equipe.hpp>
 
+#include <vector>
+
 class Match
 {
 public:
@@ -24,9 +26,13 @@ public:
 	Equipe* arbitre1() const { return Equipe::byId(m_arb1); }
 	Equipe* arbitre2() const { return Equipe::byId(m_arb2); }
 
+	bool isThisEquipeParticipating(const Equipe* equipe) const;
+
 	static const Match* byId(const unsigned int id);
 	static void toCSV(const std::string& filename);
 	static void fromCSV(const std::string& filename);
+
+	static std::vector<Match> getJournee(const unsigned int journee);
 	
 private:
 	static std::map<unsigned int, Match> m_byId;

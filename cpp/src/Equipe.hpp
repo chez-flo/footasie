@@ -23,6 +23,8 @@ public:
 	unsigned int id() const { return m_id; }
 	const Equipe* ami() const { return byName(m_byId[m_ami]); }
 	const std::string& nom() const { return m_name; }
+	unsigned int terrain() const { return m_terrain; }
+	const std::string& entrainement() const { return m_entrainement; }
 
 private:
 	unsigned int m_id = 0u;

@@ -16,11 +16,14 @@ public:
 	const Date& date() const { return m_date; }
 	int stade() const { return m_stade; }
 	unsigned int match() const { return m_match; }
+	void setMatch(const Match& match) { m_match = match.id(); }
 	bool isValid() const { return m_isValid; }
 
-	static const std::vector<Creneau>& getCreneaux() { return m_creneaux; }
+	static std::vector<Creneau>& getCreneaux() { return m_creneaux; }
 	static void toCSV(const std::string& filename);
 	static void fromCSV(const std::string& filename);
+
+	static std::vector<Creneau> getCreneauxFromDate(const Date& date);
 
 private:
 	static std::vector<Creneau> m_creneaux;

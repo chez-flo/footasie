@@ -123,6 +123,18 @@ void Creneau::fromCSV(const std::string& filename)
 	}
 }
 
+std::vector<Creneau> Creneau::getCreneauxFromDate(const Date& date)
+{
+	std::vector<Creneau> out;
+	for (const Creneau& c : m_creneaux)
+	{
+		if (c.date() == date)
+			out.push_back(c);
+	}
+
+	return out;
+}
+
 std::string Creneau::toCSVLine() const
 {
 	static const unsigned int FREEID = SAISON * 10000u;

@@ -38,6 +38,16 @@ Match::Match(const unsigned int poule, const unsigned int journee, Equipe* eq1, 
 	m_byId.insert({ m_id, *this });
 }
 
+bool Match::isThisEquipeParticipating(const Equipe* equipe) const
+{
+	if (equipe == nullptr)		return false;
+	if (equipe->id() == m_eq1)	return true;
+	if (equipe->id() == m_eq2)	return true;
+	if (equipe->id() == m_arb1)	return true;
+	if (equipe->id() == m_arb2)	return true;
+	return false;
+}
+
 const Match* Match::byId(const unsigned int id)
 {
 	std::map<unsigned int, Match>::const_iterator it = m_byId.find(id);
@@ -109,6 +119,19 @@ void Match::fromCSV(const std::string& filename)
 				Equipe::byId(findUInt(line, 4u)),	// arbitre 2
 				findUInt(line, 0u));				// id
 	}
+}
+
+std::vector<Match> Match::getJournee(const unsigned int journee)
+{
+	std::vector<Match> out;
+
+	for (const std::pair<unsigned int, Match>& m : m_byId)
+	{
+		if (m.second.journee() == journee)
+			out.push_back(m.second);
+	}
+
+	return out;
 }
 
 string Match::toCSVLine() const

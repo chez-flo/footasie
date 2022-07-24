@@ -12,7 +12,7 @@ public:
 	~Poule() = default;
 
 	// getters
-	const std::vector<Equipe>& equipes() const { return m_equipe; }
+	const std::vector<Equipe*>& equipes() const { return m_equipe; }
 
 	// setters
 	void setIdPoule(const unsigned int id) { m_id = id; }
@@ -27,8 +27,8 @@ public:
 private:
 	unsigned int m_id = 0u;
 
-	std::vector<Equipe> m_equipe;
-	std::vector<Equipe> m_arbitre;
+	std::vector<Equipe*> m_equipe;
+	std::vector<Equipe*> m_arbitre;
 
 	std::vector<Match> m_match;
 

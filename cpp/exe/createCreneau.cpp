@@ -41,7 +41,7 @@ int main(int argc, char **argv)
         Date("08/05/2023"),     // 8 mai
         Date("18/05/2023"),     // ascension
         Date("29/05/2023")      // pentecote
-        };
+    };
     ferie = getConfigAsVectorDate("Jours feries", ferie, "config.ini");
 
     // vacances

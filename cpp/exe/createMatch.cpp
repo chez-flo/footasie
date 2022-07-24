@@ -18,6 +18,7 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
 
     // copie de toutes les equipes
     std::vector<std::string> all = equipe;
+    std::vector<std::string> allAmi;
 
     // initialisation des poules
     for (std::vector<std::string>::const_iterator it = nomPoules.begin(); it != nomPoules.end(); it++)
@@ -57,6 +58,7 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
 
             // increment
             all.erase(jt);
+            it = std::find(all.begin(), all.end(), equipe->nom());
             it = all.erase(it);
         }
         else
@@ -107,8 +109,8 @@ int main(int argc, char **argv)
         Poule& p = it.second;
         const std::string arbitre = getConfigAsString("Arbitre poule " + name, "", "config.ini");
         Poule& a = poule[arbitre];
-        for (const Equipe& jt : a.equipes())
-            p.addArbitre(jt.nom());
+        for (Equipe* const& jt : a.equipes())
+            p.addArbitre(jt->nom());
     }
 
     // generation matchs
