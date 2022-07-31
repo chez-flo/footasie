@@ -63,11 +63,34 @@ bool testArbitrage(const Match& match, const Creneau& creneau)
         const Match* m = Match::byId(c.match());
         if (m == nullptr)   continue;
 
-        // est-ce que l'une des equipe joue ou arbitre ?
+        // est-ce que l'une des equipes joue ou arbitre ?
         if (match.isThisEquipeParticipating(m->equipe1()))  return false;
         if (match.isThisEquipeParticipating(m->equipe2()))  return false;
         if (match.isThisEquipeParticipating(m->arbitre1())) return false;
         if (match.isThisEquipeParticipating(m->arbitre2())) return false;
+    }
+
+    return true;
+}
+
+// return true si ami OK
+bool testAmi(const Match& match, const Creneau& creneau)
+{
+    // creneaux du jour
+    std::vector<Creneau> creneaux = Creneau::getCreneauxFromDate(creneau.date());
+
+    // analyse des creneaux du jour
+    for (const Creneau& c : creneaux)
+    {
+        // recuperation du match associe
+        const Match* m = Match::byId(c.match());
+        if (m == nullptr)   continue;
+
+        // est-ce que l'une des equipes a un ami qui joue ou arbitre ?
+        if (match.isThisEquipePlaying(m->equipe1()->ami())) return false;
+        if (match.isThisEquipePlaying(m->equipe2()->ami())) return false;
+        if (m->isThisEquipePlaying(match.equipe1()->ami())) return false;
+        if (m->isThisEquipePlaying(match.equipe2()->ami())) return false;
     }
 
     return true;
@@ -95,6 +118,7 @@ void createChampionnat(const unsigned int enchainement, const std::vector<Date>&
                 if (!testPreference(match, creneau))                            continue;   // preferences (jour et terrain)
                 if (!testEnchainement(match, creneau, enchainement, lastMatch)) continue;   // enchainement
                 if (!testArbitrage(match, creneau))                             continue;   // arbitrage
+                if (!testAmi(match, creneau))                                   continue;   // ami
 
                 // tous les tests sont OK, on met a jour le creneau et on arrete la boucle
                 OK = true;
@@ -124,6 +148,22 @@ int main(int argc, char** argv)
 
     // liste des ponts
     std::vector<Date> pont = {
+        Date("01/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("02/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("03/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("04/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("05/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("06/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("07/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("08/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("09/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("10/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("11/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("12/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("13/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("14/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("15/09/2022"),     // debut de saison 2eme semaine de septembre
+        Date("16/09/2022"),     // debut de saison 2eme semaine de septembre
         Date("04/01/2023"),     // juste apres nouvel an
         Date("05/01/2023"),     // juste apres nouvel an
         Date("06/01/2023"),     // juste apres nouvel an
@@ -137,6 +177,27 @@ int main(int argc, char** argv)
     // sauvegarde championnat (format CSV)
     filename = getConfigAsString("Fichier CSV championnat", "data/f_creneau_championnat.csv", "config.ini");
     Creneau::toCSV(filename);
+
+
+    // logs
+    // nombre de creneaux alloues
+    int nbAlloue = 0;
+    for (const Creneau& c : Creneau::getCreneaux())
+        if (c.match() != SAISON * 10000u)
+            ++nbAlloue;
+    std::cout << "Nombre de creneaux alloues: " << nbAlloue << std::endl;
+    setConfigInt("Nombre de creneaux alloues", nbAlloue, "resultat.ini");
+
+    // nombre de creneaux libres en fin d'annee
+    int nbLibre = 0;
+    for (std::vector<Creneau>::const_reverse_iterator it = Creneau::getCreneaux().rbegin(); it != Creneau::getCreneaux().rend(); ++it)
+    {
+        if (it->match() != SAISON * 10000u)
+            break;
+        ++nbLibre;
+    }
+    std::cout << "Nombre de creneaux libres en fin d'annee: " << nbLibre << std::endl;
+    setConfigInt("Nombre de creneaux libres en fin d'annee", nbLibre, "resultat.ini");
 
     return 0;
 }

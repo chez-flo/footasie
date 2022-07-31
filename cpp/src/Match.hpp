@@ -26,12 +26,15 @@ public:
 	Equipe* arbitre1() const { return Equipe::byId(m_arb1); }
 	Equipe* arbitre2() const { return Equipe::byId(m_arb2); }
 
+	bool isThisEquipePlaying(const Equipe* equipe) const;
 	bool isThisEquipeParticipating(const Equipe* equipe) const;
 
+	static void clear();
 	static const Match* byId(const unsigned int id);
 	static void toCSV(const std::string& filename);
 	static void fromCSV(const std::string& filename);
 
+	static const std::map<unsigned int, Match>& getMatch() { return m_byId; }
 	static std::vector<Match> getJournee(const unsigned int journee);
 	
 private:

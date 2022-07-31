@@ -121,5 +121,8 @@ int main(int argc, char **argv)
     filename = getConfigAsString("Fichier CSV match", "data/f_match.csv", "config.ini");
     Match::toCSV(filename);
 
+    std::cout << "Nombre total de matchs: " << (int)Match::getMatch().size() << std::endl;
+    setConfigInt("Nombre total de matchs", (int)Match::getMatch().size(), "resultat.ini");
+
     return 0;
 }

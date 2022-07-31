@@ -2,7 +2,7 @@
 "1","Créneau Libre",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "2","SAP 1","3","mardi","0","1","Bleu / Blanc","Rouge","32","A valider après assemblée générale de l’association…"
 "3","BeMore","0","aucun","0","1","Rouge / Noir",,"13",
-"4","Amadeus 5","6","lundi","0","1","Rose","Noir","46",
+"4","Amadeus 5","1","lundi","34","1","Rose","Noir","46",
 "5","Amadeus 14","6","jeudi","0","1","Orange","Vert","46",
 "6","Oxya 1","0",,"0","1","Rouge",,"0",NULL
 "7","Docapost 1","3","mercredi","0","1","Bleu","Rouge","18",
@@ -29,7 +29,7 @@
 "28","Thales 1","3","mercredi","55","1","Vert / Blanc (Rayé)",,"39",
 "29","Sopra 1","4",,"0","1","Rouge",,"0",NULL
 "30","Airbus","4","vendredi","0","1","Bleu","Noir ou blanc","4",
-"31","Appolonia","1","jeudi","0","1","Bleu",,"8",
+"31","Appolonia","1","jeudi","11","1","Bleu",,"8",
 "32","Amadeus 7","1","mercredi","0","1","Vert","Vert","46",
 "33","Amadeus 15","1","jeudi","0","1","Turquoise","Noir","46",
 "34","Amadeus 2","5","aucun","0","1","Rouge",,"46",
@@ -46,7 +46,7 @@
 "45","Teach on Mars","3","mercredi","0","1","Jaune","Violet","38",
 "46","Alten","1","aucun","0","1","Rouge",,"6",
 "47","Amadeus 11","5","vendredi","9","1","Rouge","Blanc","46",
-"48","Amadeus 4","1","vendredi","39","1","Jaune","Jaune","46","Salut Florian, comme l'année dernière nous aimerions privilégier le terrain de la Fontonne et plutôt jouer les lundis et jeudis, dans la mesure du possible bien sûr. Merci"
+"48","Amadeus 4","1","mercredi","39","1","Jaune","Jaune","46","Salut Florian, comme l'année dernière nous aimerions privilégier le terrain de la Fontonne et plutôt jouer les lundis et jeudis, dans la mesure du possible bien sûr. Merci"
 "49","Astek","5","vendredi","0","1","Vert",,"10",
 "50","USAC","0","mercredi","0","1","Blanc","Noir","43",
 "51","Sopra 2","4","vendredi","0","1","Blanc",,"0",NULL
@@ -56,10 +56,10 @@
 "55","Thales 2","3","aucun","28","0","Vert / Blanc (Rayé)",,"39",
 "56","CGI","4","aucun","61","1","Rouge",,"14",
 "57","Amadeus 18","6","jeudi","0","1","Orange / Indigo",,"0",NULL
-"58","Docapost 2","3","aucun","0","1","Blanc",,"18",
+"58","Docapost 2","3","aucun","7","1","Blanc",,"18",
 "59","CNRS 1","0","aucun","0","1","Bleu Marine",,"16",
 "60","Air France 2","4","mardi","0","1","Blanc","Blanc","2","Merci de remplacer Philippe Ravaine par Julien Bourel jubourel@airfrance.fr"
-"61","Amadeus 16","1","aucun","0","1","Bleu","Blanc","46",
+"61","Amadeus 16","1","aucun","53","1","Bleu","Blanc","46",
 "62","Cadence","0",,"0","1","Rouge / Blanc",,"0",NULL
 "63","Orange 2","0","jeudi","0","1","Orange / Noir",,"0",NULL
 "64","Itek","0",,"0","1","Noir",,"0",NULL
@@ -68,7 +68,7 @@
 "67","Kinaxia","0","lundi","0","1","Noir",,"0",NULL
 "68","Transvalor/INEO Défense","3","mardi","0","1","Noir","Orange","41",NULL
 "69","Amadeus 10","6","jeudi","0","1","Blanc / Rouge",,"46",
-"70","Orange Labs","3","lundi","0","1","Orange","Blanc","28",
+"70","Orange Labs","3","lundi","13","1","Orange","Blanc","28","Harvest & ProBTP aussi sont des équipes amis ... désolé on est ami  avec plein d'équipes"
 "71","Sysnetics-Labs","0",,"0","1","Noir / Jaune Fluo",,"0",NULL
 "72","ASSCA 2","0","mardi","0","1","Blanc",,"0",NULL
 "73","Galderma 2","5",,"0","1","Bleu Ciel","Gris","0",NULL
@@ -105,13 +105,13 @@
 "259","Sopra Steria 1","3","mardi","0","1","Blanc",,"35","les responsables vont certainement changer"
 "264","Galderma",NULL,NULL,"0","1",NULL,NULL,"21",NULL
 "265","Sopra Steria 2","3","mardi","0","1","Rouge","blanc","35",
-"272","Kinaxia 1","4","mardi","0","0","Noir","Blanc","24",
+"272","Kinaxia 1","3","mardi","295","0","Noir","Blanc","24","Il faudrait renommer l'équipe en Septeo Proptech (on a été rachetés)"
 "274","Orange SCE","4","mercredi","0","0","Orange / Noir",,"28",
 "286","Nice ATC","0","jeudi","0","1","Blanc",,"25",
 "287","INGEY","0","aucun","0","1","bleu / Vert","noir / blanc - orange - rouge","51",
 "288","NXP","3","jeudi","0","1","bleu ciel",,"26",
 "294","Kinaxia 2","4","jeudi","0","1","Blanc","Noir","24",
-"295","AddixWare","0","lundi","0","1","Bleu",,"1",
+"295","AddixWare","0","aucun","0","1","Bleu marine",,"1",
 "296","Ausy 2",NULL,NULL,"0","1",NULL,NULL,"12",NULL
 "300","Sopra Steria 3","3","mardi","0","1","blanc",,"35",
 "302","Travelaer",NULL,NULL,"0","0",NULL,NULL,"42",NULL

@@ -105,6 +105,7 @@ int main(int argc, char **argv)
     Creneau::toCSV(filename);
 
     std::cout << "Nombre total de creneaux: " << (int)Creneau::getCreneaux().size() << std::endl;
+    setConfigInt("Nombre total de creneaux", (int)Creneau::getCreneaux().size(), "resultat.ini");
 
     return 0;
 }

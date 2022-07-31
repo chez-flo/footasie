@@ -38,6 +38,14 @@ Match::Match(const unsigned int poule, const unsigned int journee, Equipe* eq1, 
 	m_byId.insert({ m_id, *this });
 }
 
+bool Match::isThisEquipePlaying(const Equipe* equipe) const
+{
+	if (equipe == nullptr)		return false;
+	if (equipe->id() == m_eq1)	return true;
+	if (equipe->id() == m_eq2)	return true;
+	return false;
+}
+
 bool Match::isThisEquipeParticipating(const Equipe* equipe) const
 {
 	if (equipe == nullptr)		return false;
@@ -46,6 +54,17 @@ bool Match::isThisEquipeParticipating(const Equipe* equipe) const
 	if (equipe->id() == m_arb1)	return true;
 	if (equipe->id() == m_arb2)	return true;
 	return false;
+}
+
+void Match::clear()
+{
+	for (std::map<unsigned int, Match>::const_iterator it = m_byId.begin(); it != m_byId.end(); )
+	{
+		if (it->second.equipe1() && it->second.equipe2())
+			++it;
+		else
+			it = m_byId.erase(it);
+	}
 }
 
 const Match* Match::byId(const unsigned int id)
@@ -60,6 +79,9 @@ const Match* Match::byId(const unsigned int id)
 
 void Match::toCSV(const std::string& filename)
 {
+	// clear matchs null
+	clear();
+
 	fstream handle;
 	handle.open(filename.c_str(), ios_base::out);
 
@@ -70,9 +92,8 @@ void Match::toCSV(const std::string& filename)
 	handle << "\"" << (int)(SAISON * 10000u) << "\",\"1\",NULL,NULL,NULL,NULL,\"0\",\"1\",\"" << (int)SAISON << "\"," << std::endl;
 
 	// ecriture de chaque ligne
-	for (std::map<unsigned int, Match>::const_iterator it = m_byId.begin(); it != m_byId.end(); it++)
-		if (it->second.equipe1() && it->second.equipe2())
-			handle << it->second.toCSVLine() << std::endl;
+	for (std::map<unsigned int, Match>::const_iterator it = m_byId.begin(); it != m_byId.end(); ++it)
+		handle << it->second.toCSVLine() << std::endl;
 }
 
 namespace {
