@@ -5,6 +5,20 @@
 #include <global.hpp>
 #include <Poule.hpp>
 
+void clear(std::vector<std::string>& equipe)
+{
+    for (std::vector<std::string>::const_iterator it = equipe.begin(); it != equipe.end();)
+    {
+        if (Equipe::byName(*it) == nullptr)
+        {
+            std::cout << "Attention, l'equipe " << *it << " n'existe pas !" << std::endl;
+            it = equipe.erase(it);
+        }
+        else
+            ++it;
+    }
+}
+
 void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::string>& nomPoules, std::map<std::string, Poule>& out)
 {
     // nombre de poules
@@ -86,10 +100,16 @@ int main(int argc, char **argv)
     Equipe::readCSV(filename);
 
     // recuperation equipes niveau
-    const std::vector<std::string> niveauA = getConfigAsVectorString("Equipes niveau A", {}, "config.ini");
-    const std::vector<std::string> niveauB = getConfigAsVectorString("Equipes niveau B", {}, "config.ini");
-    const std::vector<std::string> niveauC = getConfigAsVectorString("Equipes niveau C", {}, "config.ini");
-    const std::vector<std::string> niveauD = getConfigAsVectorString("Equipes niveau D", {}, "config.ini");
+    std::vector<std::string> niveauA = getConfigAsVectorString("Equipes niveau A", {}, "config.ini");
+    std::vector<std::string> niveauB = getConfigAsVectorString("Equipes niveau B", {}, "config.ini");
+    std::vector<std::string> niveauC = getConfigAsVectorString("Equipes niveau C", {}, "config.ini");
+    std::vector<std::string> niveauD = getConfigAsVectorString("Equipes niveau D", {}, "config.ini");
+
+    // nettoyage des niveaux (equipes qui n'existent pas)
+    clear(niveauA);
+    clear(niveauB);
+    clear(niveauC);
+    clear(niveauD);
 
     // tirage poules
     std::map<std::string, Poule> poule;
