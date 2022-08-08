@@ -95,15 +95,23 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
 
 int main(int argc, char **argv)
 {
+    // fichier .ini
+    std::string config = "config.ini";
+    if (argc > 1)
+        config = argv[1];
+
+    // fichier resultats
+    const std::string resultat = getConfigAsString("Fichier resultat", "resultat.ini", config);
+
     // recuperation des equipes
-    std::string filename = getConfigAsString("Fichier CSV equipe", "data/f_equipe.csv", "config.ini");
+    std::string filename = getConfigAsString("Fichier CSV equipe", "data/f_equipe.csv", config);
     Equipe::readCSV(filename);
 
     // recuperation equipes niveau
-    std::vector<std::string> niveauA = getConfigAsVectorString("Equipes niveau A", {}, "config.ini");
-    std::vector<std::string> niveauB = getConfigAsVectorString("Equipes niveau B", {}, "config.ini");
-    std::vector<std::string> niveauC = getConfigAsVectorString("Equipes niveau C", {}, "config.ini");
-    std::vector<std::string> niveauD = getConfigAsVectorString("Equipes niveau D", {}, "config.ini");
+    std::vector<std::string> niveauA = getConfigAsVectorString("Equipes niveau A", {}, config);
+    std::vector<std::string> niveauB = getConfigAsVectorString("Equipes niveau B", {}, config);
+    std::vector<std::string> niveauC = getConfigAsVectorString("Equipes niveau C", {}, config);
+    std::vector<std::string> niveauD = getConfigAsVectorString("Equipes niveau D", {}, config);
 
     // nettoyage des niveaux (equipes qui n'existent pas)
     clear(niveauA);
@@ -113,10 +121,10 @@ int main(int argc, char **argv)
 
     // tirage poules
     std::map<std::string, Poule> poule;
-    const std::vector<std::string> pouleNameA = getConfigAsVectorString("Noms poule A", {}, "config.ini");
-    const std::vector<std::string> pouleNameB = getConfigAsVectorString("Noms poule B", {}, "config.ini");
-    const std::vector<std::string> pouleNameC = getConfigAsVectorString("Noms poule C", {}, "config.ini");
-    const std::vector<std::string> pouleNameD = getConfigAsVectorString("Noms poule D", {}, "config.ini");
+    const std::vector<std::string> pouleNameA = getConfigAsVectorString("Noms poule A", {}, config);
+    const std::vector<std::string> pouleNameB = getConfigAsVectorString("Noms poule B", {}, config);
+    const std::vector<std::string> pouleNameC = getConfigAsVectorString("Noms poule C", {}, config);
+    const std::vector<std::string> pouleNameD = getConfigAsVectorString("Noms poule D", {}, config);
     tiragePoule(niveauA, pouleNameA, poule);
     tiragePoule(niveauB, pouleNameB, poule);
     tiragePoule(niveauC, pouleNameC, poule);
@@ -127,7 +135,7 @@ int main(int argc, char **argv)
     {
         const std::string& name = it.first;
         Poule& p = it.second;
-        const std::string arbitre = getConfigAsString("Arbitre poule " + name, "", "config.ini");
+        const std::string arbitre = getConfigAsString("Arbitre poule " + name, "", config);
         Poule& a = poule[arbitre];
         for (Equipe* const& jt : a.equipes())
             p.addArbitre(jt->nom());
@@ -138,11 +146,11 @@ int main(int argc, char **argv)
         it->second.genereMatchs();
 
     // sauvegarde de la liste des matchs au format CSV
-    filename = getConfigAsString("Fichier CSV match", "data/f_match.csv", "config.ini");
+    filename = getConfigAsString("Fichier CSV match", "data/f_match.csv", config);
     Match::toCSV(filename);
 
     std::cout << "Nombre total de matchs: " << (int)Match::getMatch().size() << std::endl;
-    setConfigInt("Nombre total de matchs", (int)Match::getMatch().size(), "resultat.ini");
+    setConfigInt("Nombre total de matchs", (int)Match::getMatch().size(), resultat);
 
     return 0;
 }

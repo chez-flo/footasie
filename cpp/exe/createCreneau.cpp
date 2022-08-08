@@ -26,12 +26,20 @@ bool isVacances(const Date& date, const std::map<std::string, std::vector<Date> 
 
 int main(int argc, char **argv)
 {
+    // fichier .ini
+    std::string config = "config.ini";
+    if (argc > 1)
+        config = argv[1];
+
+    // fichier resultats
+    const std::string resultat = getConfigAsString("Fichier resultat", "resultat.ini", config);
+
     // annee
     std::vector<Date> annee = {
         Date("01/09/2022"),     // rentree
         Date("08/07/2023")      // vacances
     };
-    annee = getConfigAsVectorDate("Annee", annee, "config.ini");
+    annee = getConfigAsVectorDate("Annee", annee, config);
 
     // jours feries
     std::vector<Date> ferie = { // valable pour tous les stades
@@ -42,29 +50,29 @@ int main(int argc, char **argv)
         Date("18/05/2023"),     // ascension
         Date("29/05/2023")      // pentecote
     };
-    ferie = getConfigAsVectorDate("Jours feries", ferie, "config.ini");
+    ferie = getConfigAsVectorDate("Jours feries", ferie, config);
 
     // vacances
     std::vector<Date> toussaint = {
         Date("22/10/2022"),
         Date("07/11/2022")
     };
-    toussaint = getConfigAsVectorDate("Vacances Toussaint", toussaint, "config.ini");
+    toussaint = getConfigAsVectorDate("Vacances Toussaint", toussaint, config);
     std::vector<Date> noel = {
         Date("17/12/2022"),
         Date("03/01/2023")
     };
-    noel = getConfigAsVectorDate("Vacances de Noel", noel, "config.ini");
+    noel = getConfigAsVectorDate("Vacances de Noel", noel, config);
     std::vector<Date> hiver = {
         Date("11/02/2023"),
         Date("27/02/2023")
     };
-    hiver = getConfigAsVectorDate("Vacances d'hiver", hiver, "config.ini");
+    hiver = getConfigAsVectorDate("Vacances d'hiver", hiver, config);
     std::vector<Date> printemps = {
         Date("15/04/2023"),
         Date("02/05/2023")
     };
-    printemps = getConfigAsVectorDate("Vacances de printemps", printemps, "config.ini");
+    printemps = getConfigAsVectorDate("Vacances de printemps", printemps, config);
     std::map<std::string, std::vector<Date> > vacances = {
         {"toussaint", toussaint},
         {"noel", noel},
@@ -74,13 +82,13 @@ int main(int argc, char **argv)
 
     // terrains
     std::vector<int> dispoChabert = { 0, 2, 2, 2, 2, 1, 0 };
-    dispoChabert = getConfigAsVectorInt("Disponibilite Chabert", dispoChabert, "config.ini");
+    dispoChabert = getConfigAsVectorInt("Disponibilite Chabert", dispoChabert, config);
 
     std::vector<int> dispoBiot = { 0, 2, 1, 2, 2, 2, 0 };
-    dispoBiot = getConfigAsVectorInt("Disponibilite Biot", dispoBiot, "config.ini");
+    dispoBiot = getConfigAsVectorInt("Disponibilite Biot", dispoBiot, config);
 
     std::vector<int> dispoFontonne = { 0, 2, 2, 0, 2, 2, 0 };
-    dispoFontonne = getConfigAsVectorInt("Disponibilite Fontonne", dispoFontonne, "config.ini");
+    dispoFontonne = getConfigAsVectorInt("Disponibilite Fontonne", dispoFontonne, config);
 
     // construction de la liste des creneaux disponibles
     for (Date date = annee[0]; date < annee[1]; date += 1)
@@ -101,11 +109,11 @@ int main(int argc, char **argv)
     }
 
     // sauvegarde de la liste des creneaux au format CSV
-    const std::string filename = getConfigAsString("Fichier CSV creneau", "data/f_creneau.csv", "config.ini");
+    const std::string filename = getConfigAsString("Fichier CSV creneau", "data/f_creneau.csv", config);
     Creneau::toCSV(filename);
 
     std::cout << "Nombre total de creneaux: " << (int)Creneau::getCreneaux().size() << std::endl;
-    setConfigInt("Nombre total de creneaux", (int)Creneau::getCreneaux().size(), "resultat.ini");
+    setConfigInt("Nombre total de creneaux", (int)Creneau::getCreneaux().size(), resultat);
 
     return 0;
 }

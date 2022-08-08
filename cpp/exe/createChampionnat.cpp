@@ -133,18 +133,26 @@ void createChampionnat(const unsigned int enchainement, const std::vector<Date>&
 
 int main(int argc, char** argv)
 {
+    // fichier .ini
+    std::string config = "config.ini";
+    if (argc > 1)
+        config = argv[1];
+
+    // fichier resultats
+    const std::string resultat = getConfigAsString("Fichier resultat", "resultat.ini", config);
+
     // chargement initial de la liste des equipes
-    std::string filename = getConfigAsString("Fichier CSV equipe", "data/f_equipe.csv", "config.ini");
+    std::string filename = getConfigAsString("Fichier CSV equipe", "data/f_equipe.csv", config);
     Equipe::readCSV(filename);
 
     // chargement de la liste des creneaux et des matchs au format CSV
-    filename = getConfigAsString("Fichier CSV creneau", "data/f_creneau.csv", "config.ini");
+    filename = getConfigAsString("Fichier CSV creneau", "data/f_creneau.csv", config);
     Creneau::fromCSV(filename);
-    filename = getConfigAsString("Fichier CSV match", "data/f_match.csv", "config.ini");
+    filename = getConfigAsString("Fichier CSV match", "data/f_match.csv", config);
     Match::fromCSV(filename);
 
     // parametre : enchainement des matchs
-    const unsigned int enchainement = getConfigAsUInt("Enchainement des matchs", 5u, "config.ini");
+    const unsigned int enchainement = getConfigAsUInt("Enchainement des matchs", 5u, config);
 
     // liste des ponts
     std::vector<Date> pont = {
@@ -169,13 +177,13 @@ int main(int argc, char** argv)
         Date("06/01/2023"),     // juste apres nouvel an
         Date("19/05/2023")      // pont de la Pentecote
     };
-    pont = getConfigAsVectorDate("Ponts", pont, "config.ini");
+    pont = getConfigAsVectorDate("Ponts", pont, config);
 
     // creation du championnat
     createChampionnat(enchainement, pont);
 
     // sauvegarde championnat (format CSV)
-    filename = getConfigAsString("Fichier CSV championnat", "data/f_creneau_championnat.csv", "config.ini");
+    filename = getConfigAsString("Fichier CSV championnat", "data/f_creneau_championnat.csv", config);
     Creneau::toCSV(filename);
 
 
@@ -186,7 +194,7 @@ int main(int argc, char** argv)
         if (c.match() != SAISON * 10000u)
             ++nbAlloue;
     std::cout << "Nombre de creneaux alloues: " << nbAlloue << std::endl;
-    setConfigInt("Nombre de creneaux alloues", nbAlloue, "resultat.ini");
+    setConfigInt("Nombre de creneaux alloues", nbAlloue, resultat);
 
     // nombre de creneaux libres en fin d'annee
     int nbLibre = 0;
@@ -197,7 +205,7 @@ int main(int argc, char** argv)
         ++nbLibre;
     }
     std::cout << "Nombre de creneaux libres en fin d'annee: " << nbLibre << std::endl;
-    setConfigInt("Nombre de creneaux libres en fin d'annee", nbLibre, "resultat.ini");
+    setConfigInt("Nombre de creneaux libres en fin d'annee", nbLibre, resultat);
 
     return 0;
 }
