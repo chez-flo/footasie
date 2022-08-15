@@ -89,7 +89,7 @@ void Match::toCSV(const std::string& filename)
 	handle << "\"mat_id\", \"mat_eq_id_1\", \"mat_eq_id_2\", \"mat_eq_id_3\", \"mat_eq_id_4\", \"mat_journee\", \"mat_statut\", \"mat_pou_id\", \"mat_sai_annee\", \"mat_commentaire\"" << std::endl;
 
 	// ecriture match amical de l'annee
-	handle << "\"" << (int)(SAISON * 10000u) << "\",\"1\",NULL,NULL,NULL,NULL,\"0\",\"1\",\"" << (int)SAISON << "\"," << std::endl;
+	handle << "\"" << (int)(SAISON * 10000u) << "\",\"1\",NULL,NULL,NULL,NULL,\"0\",\"1\",\"" << (int)SAISON << "\",\"\"" << std::endl;
 
 	// ecriture de chaque ligne
 	for (std::map<unsigned int, Match>::const_iterator it = m_byId.begin(); it != m_byId.end(); ++it)
@@ -142,6 +142,28 @@ void Match::fromCSV(const std::string& filename)
 	}
 }
 
+void Match::toSql(const std::string& filename)
+{
+	// clear matchs null
+	clear();
+
+	fstream handle;
+	handle.open(filename.c_str(), ios_base::out);
+
+	// ecriture match amical de l'annee
+	handle << "insert into f_match values (\"" << (int)(SAISON * 10000u) << "\",\"1\",NULL,NULL,NULL,NULL,\"0\",\"1\",\"" << (int)SAISON << "\",\"\");" << std::endl;
+
+	// ecriture de chaque ligne
+	for (std::map<unsigned int, Match>::const_iterator it = m_byId.begin(); it != m_byId.end(); ++it)
+	{
+		// match
+		handle << "insert into f_match values (" << it->second.toCSVLine() << ");" << std::endl;
+		// scores
+		handle << "insert into f_score (sco_mat_id, sco_eq_id, sco_bp, sco_bc, sco_points) values (\"" << (int)it->second.m_id << "\",\"" << (int)it->second.m_eq1 << "\", NULL, NULL, NULL);" << std::endl;
+		handle << "insert into f_score (sco_mat_id, sco_eq_id, sco_bp, sco_bc, sco_points) values (\"" << (int)it->second.m_id << "\",\"" << (int)it->second.m_eq2 << "\", NULL, NULL, NULL);" << std::endl;
+	}
+}
+
 std::vector<Match> Match::getJournee(const unsigned int journee)
 {
 	std::vector<Match> out;
@@ -172,7 +194,7 @@ string Match::toCSVLine() const
 	out << "\"" << (int)m_journee << "\",";
 	out << "\"1\",";
 	out << "\"" << (int)m_poule << "\",";
-	out << "\"" << (int)SAISON << "\",";
+	out << "\"" << (int)SAISON << "\",\"\"";
 
 	return out.str();
 }

@@ -186,6 +186,10 @@ int main(int argc, char** argv)
     filename = getConfigAsString("Fichier CSV championnat", "data/f_creneau_championnat.csv", config);
     Creneau::toCSV(filename);
 
+    // sauvegarde championnat (format Sql)
+    filename = getConfigAsString("Fichier Sql championnat", "data/championnat.txt", config);
+    Creneau::updateSql(filename);
+
 
     // logs
     // nombre de creneaux alloues

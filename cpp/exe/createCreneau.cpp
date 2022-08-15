@@ -109,8 +109,12 @@ int main(int argc, char **argv)
     }
 
     // sauvegarde de la liste des creneaux au format CSV
-    const std::string filename = getConfigAsString("Fichier CSV creneau", "data/f_creneau.csv", config);
+    std::string filename = getConfigAsString("Fichier CSV creneau", "data/f_creneau.csv", config);
     Creneau::toCSV(filename);
+
+    // sauvegarde de la liste des creneaux au format Sql
+    filename = getConfigAsString("Fichier Sql creneau", "data/creneau.txt", config);
+    Creneau::toSql(filename);
 
     std::cout << "Nombre total de creneaux: " << (int)Creneau::getCreneaux().size() << std::endl;
     setConfigInt("Nombre total de creneaux", (int)Creneau::getCreneaux().size(), resultat);

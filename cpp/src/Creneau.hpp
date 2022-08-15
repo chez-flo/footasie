@@ -22,6 +22,8 @@ public:
 	static std::vector<Creneau>& getCreneaux() { return m_creneaux; }
 	static void toCSV(const std::string& filename);
 	static void fromCSV(const std::string& filename);
+	static void toSql(const std::string& filename);
+	static void updateSql(const std::string& filename);
 
 	static std::vector<Creneau> getCreneauxFromDate(const Date& date);
 
@@ -34,6 +36,7 @@ private:
 	unsigned int m_match;
 	bool m_isValid;
 
+	std::string toSqlLine() const;
 	std::string toCSVLine() const;
 };
 

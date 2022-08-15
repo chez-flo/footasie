@@ -16,6 +16,11 @@ public:
 
 	// setters
 	void setIdPoule(const unsigned int id) { m_id = id; }
+	void setIdArbitre(const unsigned int id) { m_arb = id; }
+
+	// getters
+	unsigned int getIdPoule() const { return m_id; }
+	unsigned int getIdArbitre() const { return m_arb; }
 
 	// adders
 	void addEquipe(const std::string& name);
@@ -26,6 +31,7 @@ public:
 
 private:
 	unsigned int m_id = 0u;
+	unsigned int m_arb = 0u;
 
 	std::vector<Equipe*> m_equipe;
 	std::vector<Equipe*> m_arbitre;

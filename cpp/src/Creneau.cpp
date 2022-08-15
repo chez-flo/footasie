@@ -123,6 +123,35 @@ void Creneau::fromCSV(const std::string& filename)
 	}
 }
 
+void Creneau::toSql(const std::string& filename)
+{
+	fstream handle;
+	handle.open(filename.c_str(), ios_base::out);
+
+	// ecriture de chaque ligne
+	for (std::vector<Creneau>::const_iterator it = m_creneaux.begin(); it != m_creneaux.end(); it++)
+		if (it->isValid())
+			handle << "insert into f_creneau(cre_date, cre_mat_id, cre_ter_id) values("
+					<< it->toSqlLine()
+					<< ");" << std::endl;
+}
+
+void Creneau::updateSql(const std::string& filename)
+{
+	static const unsigned int FREEID = SAISON * 10000u;
+
+	fstream handle;
+	handle.open(filename.c_str(), ios_base::out);
+
+	// ecriture de chaque ligne
+	for (const Creneau& c : m_creneaux)
+		if (c.isValid() && c.match() != FREEID)
+			handle << "UPDATE f_creneau SET cre_mat_id = \"" << (int)c.match() << "\" WHERE cre_date = \""
+					<< c.date().toCSVLine() << "\" AND cre_ter_id = \""
+					<< c.stade() << "\" AND cre_mat_id = \""
+					<< FREEID << "\" LIMIT 1;" << std::endl;
+}
+
 std::vector<Creneau> Creneau::getCreneauxFromDate(const Date& date)
 {
 	std::vector<Creneau> out;
@@ -135,16 +164,24 @@ std::vector<Creneau> Creneau::getCreneauxFromDate(const Date& date)
 	return out;
 }
 
-std::string Creneau::toCSVLine() const
+std::string Creneau::toSqlLine() const
 {
 	static const unsigned int FREEID = SAISON * 10000u;
 
 	ostringstream out;
-	out << "\"" << (int)m_id
-		<< "\",\"" << m_date.toCSVLine()
+	out << "\"" << m_date.toCSVLine()
 		<< "\",\"" << (int)(m_match ? m_match : FREEID)
 		<< "\",\"" << m_stade
 		<< "\"";
+
+	return out.str();
+}
+
+std::string Creneau::toCSVLine() const
+{
+	ostringstream out;
+	out << "\"" << (int)m_id
+		<< "\"," << toSqlLine();
 
 	return out.str();
 }

@@ -33,6 +33,7 @@ public:
 	static const Match* byId(const unsigned int id);
 	static void toCSV(const std::string& filename);
 	static void fromCSV(const std::string& filename);
+	static void toSql(const std::string& filename);
 
 	static const std::map<unsigned int, Match>& getMatch() { return m_byId; }
 	static std::vector<Match> getJournee(const unsigned int journee);

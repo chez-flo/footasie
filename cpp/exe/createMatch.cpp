@@ -1,5 +1,6 @@
 #include <random>
 #include <iostream>
+#include <fstream>
 #include <algorithm>
 #include <getConfig.hpp>
 #include <global.hpp>
@@ -93,6 +94,43 @@ void tiragePoule(const std::vector<std::string>& equipe, const std::vector<std::
     }
 }
 
+void requetePouleEtEquipe(const std::map<std::string, Poule>& poule, const std::string& config)
+{
+    // fichier de requete
+    const std::string filename = getConfigAsString("Fichier Sql equipe", "data/equipe.txt", config);
+
+    // ouverture fichier
+    std::fstream handle;
+    handle.open(filename.c_str(), std::ios_base::out);
+
+    // ecriture equipes pour chaque poule
+    handle << "insert into f_equipe_poule_saison values((select eq_id from f_equipe where eq_nom = \"Creneau Libre\"), (select pou_id from f_poule where pou_nom = \"Creneau Libre\"), \"" << (int)SAISON << "\");" << std::endl;
+    handle << "insert into f_equipe_poule_saison values((select eq_id from f_equipe where eq_nom = \"Amical\"), (select pou_id from f_poule where pou_nom = \"Amical\"), \"" << (int)SAISON << "\");" << std::endl;
+    for (const std::pair<std::string, Poule>& it : poule)
+    {
+        const Poule& p = it.second;
+        for (const Equipe* e : p.equipes())
+            handle << "insert into f_equipe_poule_saison values((select eq_id from f_equipe where eq_nom = \""
+                    << e->nom() << "\"), \"" << (int)p.getIdPoule() << "\", \"" << (int)SAISON << "\");" << std::endl;
+    }
+
+    // ecriture poule pour chaque poule
+    handle << "insert into f_saison values(\"" << (int)SAISON << "\", \"1\", \"0\", \"0\", \"0\", \"0\");" << std::endl;
+    handle << "insert into f_saison values(\"" << (int)SAISON << "\", \"2\", \"0\", \"0\", \"0\", \"0\");" << std::endl;
+    for (const std::pair<std::string, Poule>& it : poule)
+    {
+        const Poule& p = it.second;
+        const std::string& nom = it.first;
+        const std::vector<unsigned int> montee = getConfigAsVectorUInt("Montee/Descente poule " + nom, {2,2}, config);
+        handle << "insert into f_saison values(\"" << (int)SAISON << "\", \""
+            << (int)p.getIdPoule() << "\", \""
+            << (int)p.equipes().size() << "\", \""
+            << (int)montee.front() << "\", \""
+            << (int)montee.back() << "\", \""
+            << (int)p.getIdArbitre() << "\");" << std::endl;
+    }
+}
+
 int main(int argc, char **argv)
 {
     // fichier .ini
@@ -137,9 +175,13 @@ int main(int argc, char **argv)
         Poule& p = it.second;
         const std::string arbitre = getConfigAsString("Arbitre poule " + name, "", config);
         Poule& a = poule[arbitre];
+        p.setIdArbitre(POULES.find(arbitre)->second);
         for (Equipe* const& jt : a.equipes())
             p.addArbitre(jt->nom());
     }
+
+    // requetes pour poules et equipes
+    requetePouleEtEquipe(poule, config);
 
     // generation matchs
     for (std::map<std::string, Poule>::iterator it = poule.begin(); it != poule.end(); it++)
@@ -148,6 +190,10 @@ int main(int argc, char **argv)
     // sauvegarde de la liste des matchs au format CSV
     filename = getConfigAsString("Fichier CSV match", "data/f_match.csv", config);
     Match::toCSV(filename);
+
+    // sauvegarde de la liste des matchs au format Sql
+    filename = getConfigAsString("Fichier Sql match", "data/match.txt", config);
+    Match::toSql(filename);
 
     std::cout << "Nombre total de matchs: " << (int)Match::getMatch().size() << std::endl;
     setConfigInt("Nombre total de matchs", (int)Match::getMatch().size(), resultat);
