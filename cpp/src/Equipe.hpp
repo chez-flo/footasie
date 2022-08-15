@@ -2,13 +2,14 @@
 #define EQUIPE_HPP
 
 #include <string>
+#include <vector>
 #include <map>
 
 class Equipe
 {
 public:
 	Equipe() = default;
-	Equipe(const unsigned int id, const std::string& name, const unsigned int terrain = 0u, const std::string& entrainement = "", const unsigned int ami = 0u);
+	Equipe(const unsigned int id, const std::string& name, const unsigned int terrain = 0u, const std::vector<std::string>& entrainement = {}, const unsigned int ami = 0u);
 	Equipe(const Equipe& eq);
 	~Equipe() = default;
 
@@ -24,13 +25,13 @@ public:
 	const Equipe* ami() const { return byName(m_byId[m_ami]); }
 	const std::string& nom() const { return m_name; }
 	unsigned int terrain() const { return m_terrain; }
-	const std::string& entrainement() const { return m_entrainement; }
+	const std::vector<std::string>& entrainement() const { return m_entrainement; }
 
 private:
 	unsigned int m_id = 0u;
 	std::string m_name = "";
 	unsigned int m_terrain = 0u;
-	std::string m_entrainement = "";
+	std::vector<std::string> m_entrainement = {};
 	unsigned int m_ami = 0u;
 	bool m_isValid = false;
 	

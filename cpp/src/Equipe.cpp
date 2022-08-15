@@ -8,7 +8,7 @@ using namespace std;
 map<std::string, Equipe> Equipe::m_byName;
 map<unsigned int, std::string> Equipe::m_byId;
 
-Equipe::Equipe(const unsigned int id, const std::string& name, const unsigned int terrain, const std::string& entrainement, const unsigned int ami)
+Equipe::Equipe(const unsigned int id, const std::string& name, const unsigned int terrain, const std::vector<std::string>& entrainement, const unsigned int ami)
 	: m_id(id)
 	, m_name(name)
 	, m_terrain(terrain)
@@ -81,20 +81,32 @@ namespace {
 		return strtoul(subline.substr(1u, subline.length() - 1).c_str(), NULL, 10);
 	}
 
-	string findEntrainement(const string& line)
+	vector<string> findEntrainement(const string& line)
 	{
 		string::size_type d = line.find(",");
 		d = line.find(",", d + 1u);
 		d = line.find(",", d + 1u);
 		string::size_type f = line.find(",", d + 1u);
 		if (f == string::npos || f >= line.length() || f-d < 3u)
-			return "";
+			return {};
 
 		const string subline = line.substr(d + 1u, f-d-1u);
 		if (subline.front() != '"' || subline.back() != '"')
-			return "";
+			return {};
 
-		return subline.substr(1u, subline.length() - 2u);
+		const string entrainement = subline.substr(1u, subline.length() - 2u);
+
+		vector<string> out;
+		d = 0u;
+		f = entrainement.find(".");
+		while (f != string::npos && f < line.length() && f - d >= 3u)
+		{
+			out.push_back(entrainement.substr(d, f - d));
+			d = f + 1u;
+			f = entrainement.find(".", d);
+		}
+		out.push_back(entrainement.substr(d));
+		return out;
 	}
 
 	unsigned int findAmi(const string& line)

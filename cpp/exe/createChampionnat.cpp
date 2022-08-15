@@ -25,14 +25,16 @@ bool testPreference(const Match& match, const Creneau& creneau)
     // test terrain
     if (creneau.stade() == eq1->terrain())  return false;
     // test entrainement
-    if (creneau.date().isThisDay(eq1->entrainement()))  return false;
+    for (const std::string& day : eq1->entrainement())
+        if (creneau.date().isThisDay(day))  return false;
 
     // tests equipe 2
     const Equipe* eq2 = match.equipe2();
     // test terrain
     if (creneau.stade() == eq2->terrain())  return false;
     // test entrainement
-    if (creneau.date().isThisDay(eq2->entrainement()))  return false;
+    for (const std::string& day : eq2->entrainement())
+        if (creneau.date().isThisDay(day))  return false;
 
     return true;
 }
@@ -42,10 +44,10 @@ bool testEnchainement(const Match& match, const Creneau& creneau, unsigned int e
 {
     // tests equipe 1
     const Equipe* eq1 = match.equipe1();
-    if (creneau.date() < lastMatch[eq1->id() + 5])  return false;
+    if (creneau.date() < lastMatch[eq1->id()] + enchainement)  return false;
     // tests equipe 2
     const Equipe* eq2 = match.equipe1();
-    if (creneau.date() < lastMatch[eq2->id() + 5])  return false;
+    if (creneau.date() < lastMatch[eq2->id()] + enchainement)  return false;
 
     return true;
 }
