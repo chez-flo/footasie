@@ -7,6 +7,7 @@
 using namespace std;
 
 std::map<unsigned int, Match> Match::m_byId;
+unsigned int Match::MINID = SAISON * 10000u;
 
 Match::Match()
 {
@@ -35,7 +36,11 @@ Match::Match(const unsigned int poule, const unsigned int journee, Equipe* eq1, 
 	, m_arb2(arb2 ? arb2->id() : 0u)
 {
 	m_id = id;
-	m_byId.insert({ m_id, *this });
+	if (m_id >= MINID)
+	{
+		MINID = m_id;
+		m_byId.insert({ m_id, *this });
+	}
 }
 
 bool Match::isThisEquipePlaying(const Equipe* equipe) const
@@ -56,7 +61,7 @@ bool Match::isThisEquipeParticipating(const Equipe* equipe) const
 	return false;
 }
 
-void Match::clear()
+void Match::clean()
 {
 	for (std::map<unsigned int, Match>::const_iterator it = m_byId.begin(); it != m_byId.end(); )
 	{
@@ -80,7 +85,7 @@ const Match* Match::byId(const unsigned int id)
 void Match::toCSV(const std::string& filename)
 {
 	// clear matchs null
-	clear();
+	clean();
 
 	fstream handle;
 	handle.open(filename.c_str(), ios_base::out);
@@ -145,7 +150,7 @@ void Match::fromCSV(const std::string& filename)
 void Match::toSql(const std::string& filename)
 {
 	// clear matchs null
-	clear();
+	clean();
 
 	fstream handle;
 	handle.open(filename.c_str(), ios_base::out);
@@ -201,9 +206,9 @@ string Match::toCSVLine() const
 
 unsigned int Match::GetIDMatch()
 {
-	static const unsigned int MINID = SAISON * 10000u;
 	if (Match::m_byId.empty() || Match::m_byId.crbegin()->first < MINID)
-		return MINID + 1u;
+		return ++MINID;
 
-	return Match::m_byId.crbegin()->first + 1u;
+	MINID = Match::m_byId.crbegin()->first + 1u;
+	return MINID;
 }

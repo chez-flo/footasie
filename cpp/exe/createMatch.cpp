@@ -183,6 +183,13 @@ int main(int argc, char **argv)
     // requetes pour poules et equipes
     requetePouleEtEquipe(poule, config);
 
+    // recuperation de la liste des matchs deja prevus
+    filename = getConfigAsString("Fichier CSV match entree", "data/f_match_entree.csv", config);
+    Match::fromCSV(filename);
+
+    // clear de la liste (maj du min id)
+    Match::clear();
+
     // generation matchs
     for (std::map<std::string, Poule>::iterator it = poule.begin(); it != poule.end(); it++)
         it->second.genereMatchs();

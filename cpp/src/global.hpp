@@ -11,7 +11,8 @@ static const std::map<std::string, unsigned int> POULES = {
 	{"B2", 13u},
 	{"C1", 14u},
 	{"C2", 15u},
-	{"D",  19u}
+	{"D",  19u},
+	{"C",  21u}
 };
 
 #endif
