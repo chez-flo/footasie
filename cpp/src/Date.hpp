@@ -13,6 +13,8 @@ public:
 	Date(const Date& date);
 	~Date() = default;
 
+	Date& operator=(const Date& date);
+
 	bool operator==(const Date& date) const;
 	bool operator!=(const Date& date) const;
 	bool operator<(const Date& date) const;
@@ -20,9 +22,9 @@ public:
 	bool operator>(const Date& date) const;
 	bool operator>=(const Date& date) const;
 
-	Date& operator+(int jour);
+	Date operator+(int jour) const;
 	void operator+=(int jour);
-	Date& operator-(int jour);
+	Date operator-(int jour) const;
 	void operator-=(int jour);
 
 	bool isThisDay(const std::string& day) const;

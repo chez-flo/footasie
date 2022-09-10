@@ -197,7 +197,7 @@ string Match::toCSVLine() const
 	else
 		out << "NULL,";
 	out << "\"" << (int)m_journee << "\",";
-	out << "\"1\",";
+	out << "\"0\",";
 	out << "\"" << (int)m_poule << "\",";
 	out << "\"" << (int)SAISON << "\",\"\"";
 

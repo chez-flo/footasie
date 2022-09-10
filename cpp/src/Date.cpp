@@ -15,6 +15,14 @@ Date::Date(const Date& date)
 
 }
 
+Date& Date::operator=(const Date& date)
+{
+	m_tm = date.m_tm;
+	m_isValid = date.m_isValid;
+
+	return *this;
+}
+
 bool Date::operator==(const Date& date) const
 {
 	return m_tm.tm_year == date.m_tm.tm_year 
@@ -51,10 +59,11 @@ bool Date::operator>=(const Date& date) const
 	return operator>(date) || operator==(date);
 }
 
-Date& Date::operator+(int jour)
+Date Date::operator+(int jour) const
 {
-	operator+=(jour);
-	return *this;
+	Date cpy(*this);
+	cpy += jour;
+	return cpy;
 }
 
 void Date::operator+=(int jour)
@@ -63,10 +72,9 @@ void Date::operator+=(int jour)
 	mktime(&m_tm);
 }
 
-Date& Date::operator-(int jour)
+Date Date::operator-(int jour) const
 {
-	operator+=(-jour);
-	return *this;
+	return operator+(-jour);
 }
 
 void Date::operator-=(int jour)

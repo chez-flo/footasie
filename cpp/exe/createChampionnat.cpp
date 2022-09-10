@@ -40,14 +40,16 @@ bool testPreference(const Match& match, const Creneau& creneau)
 }
 
 // return true si enchainement OK
-bool testEnchainement(const Match& match, const Creneau& creneau, unsigned int enchainement, std::map<unsigned int, Date>& lastMatch)
+bool testEnchainement(const Match& match, const Creneau& creneau, unsigned int enchainement, const std::map<unsigned int, Date>& lastMatch)
 {
     // tests equipe 1
     const Equipe* eq1 = match.equipe1();
-    if (creneau.date() < lastMatch[eq1->id()] + enchainement)  return false;
+    std::map<unsigned int, Date>::const_iterator last1 = lastMatch.find(eq1->id());
+    if (last1 != lastMatch.end() && creneau.date() < (last1->second + enchainement))  return false;
     // tests equipe 2
-    const Equipe* eq2 = match.equipe1();
-    if (creneau.date() < lastMatch[eq2->id()] + enchainement)  return false;
+    const Equipe* eq2 = match.equipe2();
+    std::map<unsigned int, Date>::const_iterator last2 = lastMatch.find(eq2->id());
+    if (last2 != lastMatch.end() && creneau.date() < (last2->second + enchainement))  return false;
 
     return true;
 }
@@ -125,6 +127,8 @@ void createChampionnat(const unsigned int enchainement, const std::vector<Date>&
                 // tous les tests sont OK, on met a jour le creneau et on arrete la boucle
                 OK = true;
                 creneau.setMatch(match);
+                lastMatch[match.equipe1()->id()] = creneau.date();
+                lastMatch[match.equipe2()->id()] = creneau.date();
                 break;
             }
 
