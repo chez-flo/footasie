@@ -145,28 +145,20 @@ int main(int argc, char **argv)
     std::string filename = getConfigAsString("Fichier CSV equipe", "data/f_equipe.csv", config);
     Equipe::readCSV(filename);
 
-    // recuperation equipes niveau
-    std::vector<std::string> niveauA = getConfigAsVectorString("Equipes niveau A", {}, config);
-    std::vector<std::string> niveauB = getConfigAsVectorString("Equipes niveau B", {}, config);
-    std::vector<std::string> niveauC = getConfigAsVectorString("Equipes niveau C", {}, config);
-    std::vector<std::string> niveauD = getConfigAsVectorString("Equipes niveau D", {}, config);
-
-    // nettoyage des niveaux (equipes qui n'existent pas)
-    clear(niveauA);
-    clear(niveauB);
-    clear(niveauC);
-    clear(niveauD);
-
     // tirage poules
     std::map<std::string, Poule> poule;
-    const std::vector<std::string> pouleNameA = getConfigAsVectorString("Noms poule A", {}, config);
-    const std::vector<std::string> pouleNameB = getConfigAsVectorString("Noms poule B", {}, config);
-    const std::vector<std::string> pouleNameC = getConfigAsVectorString("Noms poule C", {}, config);
-    const std::vector<std::string> pouleNameD = getConfigAsVectorString("Noms poule D", {}, config);
-    tiragePoule(niveauA, pouleNameA, poule);
-    tiragePoule(niveauB, pouleNameB, poule);
-    tiragePoule(niveauC, pouleNameC, poule);
-    tiragePoule(niveauD, pouleNameD, poule);
+    const unsigned int nbNiveaux = getConfigAsUInt("Nombre de niveaux", 4u, config);
+    for (unsigned int N = 1u; N <= nbNiveaux; ++N)
+    {
+        // recuperation equipes niveau
+        std::vector<std::string> niveau = getConfigAsVectorString("Equipes niveau " + std::to_string(N), {}, config);
+        // nettoyage du niveau (equipes qui n'existent pas)
+        clear(niveau);
+        // recuperation des poules de ce niveau
+        const std::vector<std::string> pouleName = getConfigAsVectorString("Noms poules niveau " + std::to_string(N), {}, config);
+        // tirage
+        tiragePoule(niveau, pouleName, poule);
+    }
 
     // arbitrage
     for (std::pair<const std::string, Poule>& it : poule)
