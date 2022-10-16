@@ -80,9 +80,15 @@
 				extract($rowArb2) ;
 			}
 			if($arb2!="") {
-				$texte = "<li>" . $jour . " : " . $eq1 . " contre " . $eq2 . " arbitr&eacute; par " . $arb . " et " . $arb2 . " &agrave; " . $ter_nom . ".</li>" ;
+				$texte = "<li>" . $jour . " : " . $eq1 . " contre " . $eq2 . " arbitr&eacute; par " . $arb . " et " . $arb2 . " &agrave; " . $ter_nom ;
 			} else {
-				$texte = "<li>" . $jour . " : " . $eq1 . " contre " . $eq2 . " arbitr&eacute; par " . $arb . " &agrave; " . $ter_nom . ".</li>" ;
+				$texte = "<li>" . $jour . " : " . $eq1 . " contre " . $eq2 . " arbitr&eacute; par " . $arb . " &agrave; " . $ter_nom ;
+			}
+			if(empty($mat_commentaire) {
+				$texte .= ".</li>" ;
+			}
+			else {
+				$texte .= " (" . $mat_commentaire . ").</li>" ;
 			}
 			if($eq_id == $arbId) {
 				$arbitrage[$a] = $texte ;
