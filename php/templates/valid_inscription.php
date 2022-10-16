@@ -22,6 +22,7 @@
 						TBL_SOCIETE .  
 					" where eps_eq_id = eq_id " .
 						" and eq_soc_id = soc_id " .
+						" and eps_pou_id = 2 " .
 						" and eps_sai_annee = '".SAISON_INS."' " .
 					" order by eq_nom " ;
 				
