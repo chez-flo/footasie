@@ -43,11 +43,13 @@
 			//$headers.= "Bcc: $dest\n";
 			$headers.= "MIME-Version: 1.0\n";
 			$headers .= "Content-Type: text/html; charset=\"utf8\"";
+			//$dest = "test-xoq7mb1me@srv1.mail-tester.com" ;
 			//echo $dest . "<br/>" ;
 			//echo html_entity_decode($sujet) . "<br/>" ;
 			//echo html_entity_decode($texte) . "<br/>" ;
 			//echo $headers . "<br/>" ;
-			mail($dest,html_entity_decode($sujet),html_entity_decode($texte),$headers);
+			$err = mail($dest,html_entity_decode($sujet),html_entity_decode($texte),$headers);
+			//echo "Retour envoi mail : " . $err ;
 		}
 	}
 
