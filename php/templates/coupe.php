@@ -38,9 +38,7 @@
 						<LI>Nombre de p&eacute;nalit&eacute;s d'arbitrage</li>
 						<LI>Diff&eacute;rence de buts particuli&egrave;re</li>
 					</UL>
-					<p>Les qualifi&eacute;s seront les 2 premiers de chaque groupe et les 2 meilleurs troisi&egrave;mes. Les 16&egrave;mes de finales opposeront les 15 premiers et le meilleur second aux 16 autres &eacute;quipes sur tirage au sort entre les 2 chapeaux.
-					Il y aura ensuite tirage au sort int&eacute;gral entre les &eacute;quipes qualifi&eacute;es &agrave; chaque tour de la phase finale.</p>
-					<p>Concernant les phases finales, cette ann&eacute;e nous remettons en place le syst&egrave;me &agrave; deux arbitres afin que tout le monde ait au moins un arbitre, plus d'&eacute;limination pour arbitrage manqu&eacute;, mais un handicap de 3 buts pour l'&eacute;quipe qui aura loup&eacute; son arbitrage.</p>
+					<p>Cette ann&eacute;e, la ELOCAR Cup se d&eacute;roulera sous la forme d'un tournoi &agrave; rondes suisses, &agrave; savoir que chaque rencontre sera d&eacute;termin&eacute;e en fonction du classement en cours.</p>
 				</td>
 			</tr>
 		</table>
@@ -62,7 +60,7 @@
 			$resultJournee = $mysqli->query($sSQLJournee) ;
 			while ($row = mysqli_fetch_array($resultJournee)) {
 				extract($row) ;
-				if($pou_nom != "A") {
+				if($pou_nom != "A" && $pou_nom != "Swiss ELOCAR Cup" ) {
 					echo " | " ;
 				}
 				echo "<A href=#" . $pou_nom . ">Poule " . $pou_nom . "</A>" ;

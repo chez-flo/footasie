@@ -4,6 +4,7 @@
 	if(isset($_POST['gen_mdp'])) {
 		$flag=false ;
 		$mail = securite_bdd($_POST['mail']) ;
+		$mail = str_replace("\\", "", $mail) ;
 		$jou_id = "" ;
 		$sSQLVerif= "SELECT jou_id FROM " . TBL_JOUEUR . " WHERE jou_mail = '$mail' " ;
 		$resultVerif = $mysqli->query($sSQLVerif) ;
@@ -21,7 +22,7 @@
 			envoiMailMdp($mail, $pass) ;
 			$messageOk = "Votre mot de passe a &eacute;t&eacute; reg&eacuten&eacuter&eacute et vous a &eacute;t&eacute; envoy&eacute; par mail." ;
 		} else {
-			$message = "Cette adresse mail n'existe pas ..." ;
+			$message = "Cette adresse mail n'existe pas (" . $mail . ")" ;
 		}
 	}
 ?>

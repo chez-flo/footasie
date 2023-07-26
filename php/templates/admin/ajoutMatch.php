@@ -29,7 +29,7 @@
 		" FROM " . TBL_EVENEMENT . ", " . TBL_POULE . ", " . TBL_SAISON .
 		" WHERE eve_id = pou_eve_id " .
 			" and sai_pou_id = pou_id " .
-			" and eve_id in ('1', '4') " .
+			" and eve_id in ('1', '3', '4') " .
 			" and pou_id <> '1' " .
 			" and sai_annee = '" . SAISON . "' " .
 		" ORDER BY pou_id " ;

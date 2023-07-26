@@ -49,9 +49,7 @@ header('Content-type: text/html; charset=UTF-8');
 							$nbPen = 1 ;
 						} elseif($cpt==1) {
 							$nbPen = 4 ;
-						} elseif($cpt==2) {
-							$nbPen = 5 ;
-						} elseif($cpt==3) {
+						} elseif($cpt>=2) {
 							$nbPen = 5 ;
 						}
 						$query5 = "insert into ".TBL_PENALITE." (pen_eq_id, pen_pou_id, pen_mat_id, pen_point, pen_type, pen_commentaire, pen_date) values " . 
