@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <map>
 #include <algorithm>
 #include <random>
@@ -10,11 +11,11 @@ using Equipes = std::vector<Equipe>;
 struct Rencontre
 {
     int points = 0;
-    std::vector<std::string> adversaires;
+    Equipes adversaires;
 };
 using Rencontres = std::map<std::string, Rencontre>;
 
-Rencontres getRencontres(const std::vector<std::string> &equipes, const std::string& config)
+Rencontres getRencontres(const Equipes& equipes, const std::string& config)
 {
     // base de requetes
     const std::string baseQueryPoints = "Tournoi suisse - points de ";
@@ -100,6 +101,30 @@ Matchs getProchainsMatchs(const Equipes &equipes, const Rencontres &rencontres)
     return out;
 }
 
+void saveResultatAndUpdateConfig(const Matchs& matchs, const std::string& file, const std::string& config)
+{
+    std::fstream h(file, std::ios::out);
+    if (h)
+    {
+        const std::string baseQueryAdversaires = "Tournoi suisse - adversaires de ";
+        for (const Match& match : matchs)
+        {
+            // sauvegarde match
+            h << match.first << " - " << match.second << std::endl;
+            // update config equipe 1
+            std::string queryAdversaires = baseQueryAdversaires + match.first;
+            Equipes adversaires = getConfigAsVectorString(queryAdversaires, {}, config);
+            adversaires.push_back(match.second);
+            setConfigVectorString(queryAdversaires, adversaires, config);
+            // update config equipe 
+            queryAdversaires = baseQueryAdversaires + match.second;
+            adversaires = getConfigAsVectorString(queryAdversaires, {}, config);
+            adversaires.push_back(match.first);
+            setConfigVectorString(queryAdversaires, adversaires, config);
+        }
+    }
+}
+
 int main(int argc, char** argv)
 {
     // fichier .ini
@@ -116,6 +141,9 @@ int main(int argc, char** argv)
     std::mt19937 g(rd());
     std::shuffle(std::begin(equipes), std::end(equipes), g);
     Matchs prochainsMatchs = getProchainsMatchs(equipes, rencontres);
+    // resultats
+    std::string resultat = getConfigAsString("Tournoi suisse - fichier matchs", "data/Match-suisse.ini", config);
+    saveResultatAndUpdateConfig(prochainsMatchs, resultat, config);
 
     return 0;
 }

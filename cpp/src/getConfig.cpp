@@ -126,7 +126,8 @@ vector< string > getConfigAsVectorString(const string& query, const vector< stri
         pos = values.find(";");
         while (pos < values.length() && pos != string::npos)
         {
-            out.push_back(values.substr(0, pos));
+            const std::string val = values.substr(0, pos);
+            if (!val.empty()) out.push_back(val);
             values = values.substr(pos+1);
             pos = values.find(";");
         }
@@ -310,7 +311,7 @@ void setConfigString(const string &query, const string &value, const string &fil
         {
             continue;
         }
-        if (pos >= it->length()-1)
+        if (pos > it->length()-1)
         {
             continue;
         }
