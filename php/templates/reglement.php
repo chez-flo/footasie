@@ -7,8 +7,8 @@
 <p>Deux documents fixent les r&egrave;gles d'organisation du championnat de football de l'ASIE :
 
 <ul>
-<li>un document <i><u><a href="<?php echo DOC ; ?>Organisation ASIE 2018 - Football.pdf">Organisation</a></u></i> du tournoi, pour les aspects inscriptions, calendrier, discipline, etc.</li>
-<li>un document <i><u><a href="<?php echo DOC ; ?>Reglement ASIE 2018 - Football.pdf">R&egrave;glement</a></u></i> sportif &agrave; appliquer lors des rencontres.</li>
+<li>un document <i><u><a href="<?php echo DOC ; ?>Organisation ASIE 2023 - Football.pdf">Organisation</a></u></i> du tournoi, pour les aspects inscriptions, calendrier, discipline, etc.</li>
+<li>un document <i><u><a href="<?php echo DOC ; ?>Reglement ASIE 2023 - Football.pdf">R&egrave;glement</a></u></i> sportif &agrave; appliquer lors des rencontres.</li>
 </ul> 
 
 </p>
