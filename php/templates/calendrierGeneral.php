@@ -39,7 +39,8 @@
 		" WHEN 7 THEN 'Juillet' WHEN 8 THEN 'Ao&ucirc;t' WHEN 9 THEN 'Septembre' WHEN 10 THEN 'Octobre' WHEN 11 THEN 'Novembre' WHEN 12 THEN 'D&eacute;cembre' ELSE 'autre' END) jour, " .
 		" cre_id, e1.eq_nom eq1, e2.eq_nom eq2, e3.eq_nom arb, e1.eq_id eqId1, e2.eq_id eqId2, e3.eq_id arbId, ter_nom, sco1.sco_bp score1, sco2.sco_bp score2, sco1.sco_pen pen1, sco2.sco_pen pen2, CONCAT(eve_nom, ' : ', pou_nom) poule, eve_id, " .
 		" CASE when mat_statut = 1 then '" . COLOR_JOUE . "' when cre_date < sysdate() then '" . COLOR_ATTENTE . "' when mat_statut = 2 then '" . COLOR_REPORT . "' when mat_statut = 3 then '" . COLOR_ARBITRAGE . "' when cre_date > sysdate() then '" . COLOR_PROGRAMME . "' else '' end style, " .
-		" mat_id, mat_statut, ter_adresse " .
+		" mat_id, mat_statut, ter_adresse, " .
+		" CASE when sysdate() < DATE_ADD(cre_date, INTERVAL -1 DAY) then 'ok' else 'ko' end flagReport " .
 		" FROM " . TBL_EVENEMENT . ", " . TBL_SAISON . ", " . TBL_POULE . ", " . TBL_SCORE . " sco1, " . TBL_SCORE . " sco2, " . TBL_EPS . ", " . TBL_EQUIPE . " e1, " . TBL_EQUIPE . " e2, " . TBL_EQUIPE . " e3, " . TBL_MATCH . ", " . TBL_CRENEAU . ", " . TBL_TERRAIN . 
 		" WHERE eve_id = pou_eve_id " .
 			" and eps_eq_id = e1.eq_id " .
@@ -65,7 +66,8 @@
 			" CASE month(cre_date) WHEN 1 THEN 'Janvier' WHEN 2 THEN 'F&eacute;vrier' WHEN 3 THEN 'Mars' WHEN 4 THEN 'Avril' WHEN 5 THEN 'Mai' WHEN 6 THEN 'Juin' " .
 			" WHEN 7 THEN 'Juillet' WHEN 8 THEN 'Ao&ucirc;t' WHEN 9 THEN 'Septembre' WHEN 10 THEN 'Octobre' WHEN 11 THEN 'Novembre' WHEN 12 THEN 'D&eacute;cembre' ELSE 'autre' END) jour, " .
 			" cre_id, eq_nom eq1, '' eq2, '' arb, eq_id eqId1, '' eqId2, '' arbId, ter_nom, '' score1, '' score2, '' pen1, '' pen2, '' poule, '' eve_id, " .
-			" '" . COLOR_LIBRE . "' style, mat_id, mat_statut, ter_adresse " .
+			" '" . COLOR_LIBRE . "' style, mat_id, mat_statut, ter_adresse, " .
+			" 'ok' flagReport " .
 			" FROM " . TBL_EVENEMENT . ", " . TBL_SAISON . ", " . TBL_POULE . ", " . TBL_EPS . ", " . TBL_EQUIPE . ", " . TBL_MATCH . ", " . TBL_CRENEAU . ", " . TBL_TERRAIN . 
 			" WHERE eve_id = pou_eve_id " .
 				" and eps_eq_id = eq_id " .
@@ -82,7 +84,7 @@
 				" and date_format(cre_date, '%Y%m%d') >= date_format(now(), '%Y%m%d') " .
 		" ORDER BY cre_date, ter_nom, cre_id " ;
 	$result = $mysqli->query($sSQL) ;
-	//echo $sSQL ;
+//	echo $sSQL ;
 	$mois_prec = "" ;
 	$semaine_prec = "" ;
 	$jour_prec = "" ;
@@ -143,7 +145,7 @@
 		echo "<tr class='".$bgColor."'>" ;
 		if($eq2<>"") {
 			extract(color($score1, $score2, $pen1, $pen2)) ;
-			echo "<td align=center width='40%' class='".$color1."' style='font-size:15px;'>" ;
+			echo "<td align=right width='25%' class='".$color1."' style='font-size:15px;'>" ;
 			echo "<a href='index.php?op=eq&id=".$eqId1."'>".$eq1."</a>" ;
 			$sSQLPen1 = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $eqId1 ;
 			$resultPen1 = $mysqli->query($sSQLPen1) ;
@@ -151,13 +153,13 @@
 				extract($rowPen1) ;
 				echo "<sup>" . $pen_type . "</sup>" ;
 			}
-			echo "</td><td align=center width='20%' style='font-weight: bold'>" ;
+			echo "</td><td align=center width='50%' style='font-weight: bold'>" ;
 			if($score1!="" && $score1==$score2 && $eve_id==4) {
 				echo $score1." (".$pen1.") - (".$pen2.") ".$score2 ;
 			} else {
 				echo $score1." - ".$score2 ;
 			}
-			echo "</td><td align=center width='40%' class='".$color2."'>" ;
+			echo "</td><td align=left width='25%' class='".$color2."'>" ;
 			echo "<a href='index.php?op=eq&id=".$eqId2."'>".$eq2."</a>" ;
 			$sSQLPen2 = "select pen_type from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $eqId2 ;
 			$resultPen2 = $mysqli->query($sSQLPen2) ;
@@ -174,7 +176,7 @@
 		}
 		echo "</tr>" ;
 		echo "<tr class='".$bgColor."'>" ;
-		echo "<td align=left style='padding-left:10px;font-size:14px;' width='40%'>" ;
+		echo "<td align=left style='padding-left:10px;font-size:14px;' width='25%'>" ;
 		if($arb != "") {
 			echo "<i>Arb : <a href='index.php?op=eq&id=".$arbId."'>".$arb."</a>" ;
 			$sSQLArb = "select * from f_penalite where pen_mat_id = " . $mat_id . " and pen_eq_id = " . $arbId ;
@@ -198,26 +200,30 @@
 			echo "</i>" ;
 		}
 		echo "</td>" ;
-		echo "<td align=center width='20%'>" ;
+		echo "<td align=center width='50%'>" ;
 		if($eq2=="" && $eqId1==1) { 
-			echo "<a class='boutonDem' href=\"index.php?op=dem&id=".$cre_id."&opp=a\";'>Demander</a>" ; 
+			echo "<a class='boutonDem' href=\"index.php?op=dem&id=".$cre_id."&opp=calG\";'>Demander</a>" ; 
 		
 		}
 		if(isCapitaine() && $arb!= "Amical") {
 			if($style==COLOR_ATTENTE) {
 				if($arbId==$_SESSION["eq_id"] || $arbId2==$_SESSION["eq_id"]) {
-					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Score</a>" ;
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=calG\";'>Score</a>" ;
 				} else if($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"]) {
-					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=a\";'>Envoyer Score</a>" ;
+					echo "<a class='boutonMajScore' href=\"index.php?op=score&id=".$mat_id."&opp=calG\";'>Envoyer Score</a>" ;
 				}
 			}
 			if($style!=COLOR_JOUE &&
 				($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"])) {
-				echo "<a class='boutonReport' href=\"index.php?op=demRep&id=".$mat_id."&opp=a\";'>Demander Report</a>" ;
+				if($flagReport=='ok') {
+					echo "<a class='boutonReport' href=\"index.php?op=demRep&id=".$mat_id."&opp=calG\";'>Demander Report</a>" ;
+				} else {
+					echo "<a class='boutonForfait' href=\"index.php?op=forfait&id=".$mat_id."&opp=calG\";'>D&eacute;clarer Forfait</a>" ;
+				}
 			}
 		}
 		echo "</td>" ;
-		echo "<td align=right style='padding-right:10px' width='40%'>" ;
+		echo "<td align=right style='padding-right:10px' width='25%'>" ;
 		echo "<i>".lienMap($ter_nom, $ter_adresse)."</i>" ;
 		echo "</td></tr>" ;
 		if(isAdmin()) {
@@ -232,7 +238,7 @@
 				}
 				if($mat_statut!=1) {
 					echo "<a class='boutonReport' href=\"index.php?op=rep&id=".$mat_id."&opp=calG\";'>Reporter</a>" ;
-					echo "<a class='boutonModArb' href=\"index.php?op=modArb&id=".$mat_id."&opp=a\";'>Modifier Arbitre</a>" ;
+					echo "<a class='boutonModArb' href=\"index.php?op=modArb&id=".$mat_id."&opp=calG\";'>Modifier Arbitre</a>" ;
 				}
 			} else {
 				echo "<a class='boutonDem' href=\"index.php?op=addM&id=".$cre_id."&opp=calG\";'>Ajout Match</a>" ;

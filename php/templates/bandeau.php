@@ -81,6 +81,7 @@
 										echo "<option value='".optionRedirect("cal")."'>Calendrier</option>" ;
 									}
 								?>
+								<option value='<?php echo optionRedirect("ins"); ?>'>Inscriptions</option>
 								<option value='<?php echo optionRedirect("reg"); ?>'>R&egrave;glement</option>
 								<option value='<?php echo optionRedirect("stade"); ?>'>Stades</option>
 								<option value='<?php echo optionRedirect("stat"); ?>'>Statistiques</option>

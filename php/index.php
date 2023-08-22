@@ -108,6 +108,14 @@ function envoiScore() {
 	return $retour ;
 }
 
+function forfait() {
+	
+	$titre = "déclarer forfait" ;
+		
+	$retour = array('titre' => $titre) ;
+	return $retour ;
+}
+
 function score() {
 	
 	$titre = "R&eacute;sultats" ;
@@ -437,6 +445,18 @@ if (isset($_GET['op'])) {
 				if(isset($_GET['id'])) {
 					extract(report()) ;
 					include("templates/admin/demReport.php") ;
+				}
+				else {
+					extract(calendrierG()) ;
+					include("templates/calendrierGeneral.php") ;
+				}
+			}
+			break ;
+		case 'forfait' : // Demande de report
+			if(isCapitaine()) {
+				if(isset($_GET['id'])) {
+					extract(forfait()) ;
+					include("templates/demForfait.php") ;
 				}
 				else {
 					extract(calendrierG()) ;

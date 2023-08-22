@@ -436,7 +436,8 @@ $(document).ready(function(){
 									" CASE month(cre_date) WHEN 1 THEN 'Janvier' WHEN 2 THEN 'F&eacute;vrier' WHEN 3 THEN 'Mars' WHEN 4 THEN 'Avril' WHEN 5 THEN 'Mai' WHEN 6 THEN 'Juin' " .
 									" WHEN 7 THEN 'Juillet' WHEN 8 THEN 'Ao&ucirc;t' WHEN 9 THEN 'Septembre' WHEN 10 THEN 'Octobre' WHEN 11 THEN 'Novembre' WHEN 12 THEN 'D&eacute;cembre' ELSE 'autre' END) jour, " .
 									" mat_id, e1.eq_nom eq1, e2.eq_nom eq2, e3.eq_nom arb, e1.eq_id eqId1, e2.eq_id eqId2, e3.eq_id arbId, ter_nom, sco1.sco_bp score_1, sco2.sco_bp score_2, sco1.sco_pen pen_1, sco2.sco_pen pen_2, CONCAT(eve_nom, ' : ', pou_nom) pou_nom, eve_id, " .
-									" CASE when mat_statut = 1 then '" . COLOR_JOUE . "' when cre_date < sysdate() then '" . COLOR_ATTENTE . "' when mat_statut = 2 then '" . COLOR_REPORT . "' when mat_statut = 3 then '" . COLOR_ARBITRAGE . "' when cre_date > sysdate() then '" . COLOR_PROGRAMME . "' else '' end style, mat_statut " .
+									" CASE when mat_statut = 1 then '" . COLOR_JOUE . "' when cre_date < sysdate() then '" . COLOR_ATTENTE . "' when mat_statut = 2 then '" . COLOR_REPORT . "' when mat_statut = 3 then '" . COLOR_ARBITRAGE . "' when cre_date > sysdate() then '" . COLOR_PROGRAMME . "' else '' end style, mat_statut, " .
+									" CASE when sysdate() < DATE_ADD(cre_date, INTERVAL -1 DAY) then 'ok' else 'ko' end flagReport " .
 									" FROM " . TBL_EVENEMENT . ", " . TBL_SAISON . ", " . TBL_POULE . ", " . TBL_SCORE . " sco1, " . TBL_SCORE . " sco2, " . TBL_EPS . ", " . TBL_EQUIPE . " e1, " . TBL_EQUIPE . " e2, " . TBL_EQUIPE . " e3, " . TBL_MATCH . ", " . TBL_CRENEAU . ", " . TBL_TERRAIN . 
 									" WHERE eve_id = pou_eve_id " .
 										" and eps_eq_id = e1.eq_id " .
@@ -521,7 +522,11 @@ $(document).ready(function(){
 										}
 										if($style!=COLOR_JOUE &&
 											($eqId1==$_SESSION["eq_id"] || $eqId2==$_SESSION["eq_id"])) {
-											echo "<a class='boutonReport' href=\"index.php?op=demRep&id=".$mat_id."&opp=a\";'>Demander Report</a>" ;
+											if($flagReport=='ok') {
+												echo "<a class='boutonReport' href=\"index.php?op=demRep&id=".$mat_id."&opp=a\";'>Demander Report</a>" ;
+											} else {
+												echo "<a class='boutonForfait' href=\"index.php?op=forfait&id=".$mat_id."&opp=a\";'>D&eacute;clarer Forfait</a>" ;
+											}
 										}
 									}
 									/*if(isCapitaine() && $style==COLOR_ATTENTE) {

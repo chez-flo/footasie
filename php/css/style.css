@@ -187,7 +187,7 @@ nav li:hover .submenu {
 }
 /* Boutons */
 
-.boutonDem, .boutonModArb, .boutonMajScore, .boutonReport, .boutonAnnuler, .boutonValider, .boutonRefuserDate, .boutonRefuserReport, .boutonRetour, .boutonRazScore, .boutonSupprimer, .boutonConvoquer, .boutonInviteJoueur {
+.boutonForfait, .boutonDem, .boutonModArb, .boutonMajScore, .boutonReport, .boutonAnnuler, .boutonValider, .boutonRefuserDate, .boutonRefuserReport, .boutonRetour, .boutonRazScore, .boutonSupprimer, .boutonConvoquer, .boutonInviteJoueur {
 	height: 25px;
 	text-align:center;
 	vertical-align: middle;
@@ -200,13 +200,13 @@ nav li:hover .submenu {
 	background-color: white; 
 }
 
-.boutonRetour:hover, .boutonDem:hover, .boutonModArb:hover, .boutonMajScore:hover, .boutonReport:hover, .boutonAnnuler:hover, .boutonValider:hover, .boutonRefuserDate:hover, .boutonRefuserReport:hover, .boutonRazScore:hover, .boutonSupprimer:hover, .boutonConvoquer:hover, .boutonInviteJoueur:hover {
+.boutonForfait:hover, .boutonRetour:hover, .boutonDem:hover, .boutonModArb:hover, .boutonMajScore:hover, .boutonReport:hover, .boutonAnnuler:hover, .boutonValider:hover, .boutonRefuserDate:hover, .boutonRefuserReport:hover, .boutonRazScore:hover, .boutonSupprimer:hover, .boutonConvoquer:hover, .boutonInviteJoueur:hover {
 	font-weight: normal;
 	color: white;
 	cursor: pointer;
 }
 
-.boutonRetour, .boutonRefuserReport { color: #FF0000; border: 1px solid #FF0000; }
+.boutonForfait, .boutonRetour, .boutonRefuserReport { color: #FF0000; border: 1px solid #FF0000; }
 .boutonValider, .boutonConvoquer { color: #4CAF50; border: 1px solid #4CAF50; }
 .boutonMajScore, .boutonRazScore, .boutonInviteJoueur { color: #66D9FF; border: 1px solid #66D9FF; }
 .boutonReport { color: #E6AC00; border: 1px solid #E6AC00; }
@@ -215,7 +215,7 @@ nav li:hover .submenu {
 .boutonDem { color: #7BEA7B; border: 1px solid #7BEA7B; }
 .boutonSupprimer { color: #000000; border: 1px solid #000000; }
 
-.boutonRetour:hover, .boutonRefuserReport:hover { background-color: #FF4D4D; }
+.boutonForfait:hover, .boutonRetour:hover, .boutonRefuserReport:hover { background-color: #FF4D4D; }
 .boutonValider:hover, .boutonConvoquer:hover { background-color: #7BEA7B; }
 .boutonMajScore:hover, .boutonRazScore:hover, .boutonInviteJoueur:hover { background-color: #CCF2FF; }
 .boutonReport:hover { background-color: #FFD24D; }
