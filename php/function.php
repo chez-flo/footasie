@@ -917,7 +917,7 @@
 		$sSqlGrp .= " and eps_eq_id = eq_id "  ;
 		$sSqlGrp .= " and eps_sai_annee = '" . SAISON . "' " ;
 		$sSqlGrp .= " and pou_eve_id = eve_id " ;
-		$sSqlGrp .= " and pou_eve_id > 1 " ;
+		$sSqlGrp .= " and pou_eve_id > 0 " ;
 		//$sSqlGrp .= " and eq_id < '1000000' " ;
 		if($search<>"") {
 			$sSqlGrp .= " and eq_nom like '%".$search."%' " ;

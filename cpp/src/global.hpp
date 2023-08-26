@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-static const unsigned int SAISON = 2022u;
+static const unsigned int SAISON = 2023u;
 static const std::map<std::string, unsigned int> POULES = {
 	{"A",  11u},
 	{"B1", 12u},
