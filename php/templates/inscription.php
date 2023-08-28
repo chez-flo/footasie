@@ -170,7 +170,7 @@
 					<td>
 						<select name="type" id="type" onchange="changeType(this) ;">
 							<option value='0'>--- Veuillez choisir ---</option>
-							<option value='1'>R&eacute;inscription &eacute;quipe <?php echo SAISON ; ?></option>
+							<option value='1'>R&eacute;inscription &eacute;quipe <?php echo SAISON_INS-1 ; ?></option>
 							<option value='2'>Nouvelle &eacute;quipe</option>
 						</select>
 					</td>
@@ -186,12 +186,12 @@
 									" from " . TBL_EPS . ", " . 
 										TBL_EQUIPE .  
 									" where eps_eq_id = eq_id " .
-										" and eps_sai_annee = '".SAISON."' " .
-										" and eps_pou_id between 10 and 30 " .
+										" and eps_sai_annee = ". SAISON_INS ."-1 " .
+										" and eps_pou_id = 2 " .
 										" and not exists (select eq_id, eq_nom " .
 									" from " . TBL_EPS . 
 									" where eps_eq_id = eq_id " .
-										" and eps_sai_annee = '".SAISON_INS."') " .
+										" and eps_sai_annee = ". SAISON_INS .") " .
 									" order by eq_nom " ;
 								
 								$resultEquipe = $mysqli->query($sSQLEquipe) ;
