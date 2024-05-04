@@ -119,9 +119,12 @@ $(document).ready(function(){
 							" (select count(*) from " . TBL_SCORE . ", " . TBL_MATCH . " where sco_eq_id = eq_id and sco_mat_id = mat_id and mat_pou_id = pou_id and sco_bp> sco_bc and mat_sai_annee = '" . SAISON . "') g, " .
 							" (select count(*) from " . TBL_SCORE . ", " . TBL_MATCH . " where sco_eq_id = eq_id and sco_mat_id = mat_id and mat_pou_id = pou_id and sco_bp= sco_bc and mat_sai_annee = '" . SAISON . "') n, " .
 							" (select count(*) from " . TBL_SCORE . ", " . TBL_MATCH . " where sco_eq_id = eq_id and sco_mat_id = mat_id and mat_pou_id = pou_id and sco_bp< sco_bc and mat_sai_annee = '" . SAISON . "') p, " .
-							" (select coalesce(sum(pen_point),0) from " . TBL_PENALITE . ", " . TBL_MATCH . ", " . TBL_POULE . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id and pou_eve_id = eve_id and pen_type = 'A') nbPen, " .
-							" (select coalesce(sum(pen_point),0) from " . TBL_PENALITE . ", " . TBL_MATCH . ", " . TBL_POULE . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id and pou_eve_id = eve_id and pen_type = 'F') nbFor, " .
-							" (select coalesce(sum(pen_point),0) from " . TBL_PENALITE . ", " . TBL_MATCH . ", " . TBL_POULE . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id and pou_eve_id = eve_id and pen_type = 'R') nbRep, " .
+							" (select count(*) from " . TBL_PENALITE . ", " . TBL_MATCH . ", " . TBL_POULE . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id and pou_eve_id = eve_id and pen_type = 'A') nbPen, " .
+							" (select coalesce(sum(pen_point),0) from " . TBL_PENALITE . ", " . TBL_MATCH . ", " . TBL_POULE . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id and pou_eve_id = eve_id and pen_type = 'A') nbPenPoints, " .
+							" (select count(*) from " . TBL_PENALITE . ", " . TBL_MATCH . ", " . TBL_POULE . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id and pou_eve_id = eve_id and pen_type = 'F') nbFor, " .
+							" (select coalesce(sum(pen_point),0) from " . TBL_PENALITE . ", " . TBL_MATCH . ", " . TBL_POULE . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id and pou_eve_id = eve_id and pen_type = 'F') nbForPoints, " .
+							" (select count(*) from " . TBL_PENALITE . ", " . TBL_MATCH . ", " . TBL_POULE . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id and pou_eve_id = eve_id and pen_type = 'R') nbRep, " .
+							" (select coalesce(sum(pen_point),0) from " . TBL_PENALITE . ", " . TBL_MATCH . ", " . TBL_POULE . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id and pou_eve_id = eve_id and pen_type = 'R') nbRepPoints, " .
 							" coalesce(sum(sco_bp),0) bp, coalesce(sum(sco_bc),0) bc, coalesce(sum(sco_bp)-sum(sco_bc),0) diff, " .
 							" coalesce(sum(sco_points)-(select coalesce(sum(pen_point),0) from " . TBL_PENALITE . ", " . TBL_MATCH . " where pen_eq_id = eq_id and pen_mat_id = mat_id and mat_sai_annee = '" . SAISON . "' and pen_pou_id = pou_id),0)/(select count(*) from " . TBL_SCORE . ", " . TBL_MATCH . " where sco_eq_id = eq_id and sco_mat_id = mat_id and mat_pou_id = pou_id and sco_points is not null and mat_sai_annee = '" . SAISON . "') ratio " .
 
@@ -164,9 +167,9 @@ $(document).ready(function(){
 						"<TD WIDTH=15 ALIGN=center style='border-left: 2px solid #F0F0FF'>".$bp."</TD>" .
 						"<TD WIDTH=15 ALIGN=center>".$bc."</TD>" .
 						"<TD WIDTH=15 ALIGN=center>".$diff."</TD>" .
-						"<TD WIDTH=15 ALIGN=center style='border-left: 2px solid #F0F0FF'>".$nbPen."</TD>" .
-						"<TD WIDTH=15 ALIGN=center>".$nbRep."</TD>" .
-						"<TD WIDTH=15 ALIGN=center>".$nbFor."</TD>" .
+						"<TD WIDTH=15 ALIGN=center style='border-left: 2px solid #F0F0FF'>".$nbPenPoints." (".$nbPen".)</TD>" .
+						"<TD WIDTH=15 ALIGN=center>".$nbRepPoints." (".$nbRep".)</TD>" .
+						"<TD WIDTH=15 ALIGN=center>".$nbForPoints." (".$nbFor".)</TD>" .
 						"<TD WIDTH=15 ALIGN=center><B>".$ratio."</B></TD>" .
 					"</TR>" ;
 					

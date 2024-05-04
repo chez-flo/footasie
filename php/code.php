@@ -175,7 +175,7 @@ header('Content-type: text/html; charset=UTF-8');
 					$result7 = $mysqli->query($query7) ;
 					while ($row7 = mysqli_fetch_array($result7)) {
 						extract($row7) ;
-						if($cptPen>2) {
+						if($cptPen>1) {
 							$query6 = "insert into ".TBL_PENALITE." (pen_eq_id, pen_pou_id, pen_mat_id, pen_point, pen_type, pen_commentaire, pen_date) values " . 
 									"('".$eq_id."', '".$pou_id."', '".$mat_id."', '1', 'R', '".mysqli_real_escape_string($mysqli,$report_text)."', now()) ;" ;
 						} else {
@@ -204,7 +204,7 @@ header('Content-type: text/html; charset=UTF-8');
 				$result7 = $mysqli->query($query7) ;
 				while ($row7 = mysqli_fetch_array($result7)) {
 					extract($row7) ;
-					if($cptPen>2) {
+					if($cptPen>1) {
 						$query6 = "insert into ".TBL_PENALITE." (pen_eq_id, pen_pou_id, pen_mat_id, pen_point, pen_type, pen_commentaire, pen_date) values " . 
 								"('".$eq_id."', '".$pou_id."', '".$mat_id."', '1', 'R', '".mysqli_real_escape_string($mysqli,$report_text)."', now()) ;" ;
 					} else {

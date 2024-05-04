@@ -61,7 +61,7 @@
 				" and sai_annee = '" . SAISON . "' " .
 				" and (e1.eq_id = " . $eq_id . " or e2.eq_id = " . $eq_id . " or e3.eq_id = " . $eq_id . ")" .
 				" and date_format(cre_date, '%v') = '" . $semChoix . "' " .
-				" and mat_statut <> '1' " .
+				" and (mat_statut <> '1' or eve_id = '1')" .
 			" ORDER BY cre_date, ter_nom, cre_id " ;
 		//echo $sSQLSemaine . "<br/>" ;
 		$resultSemaine = $mysqli->query($sSQLSemaine) ;
