@@ -4,7 +4,7 @@
 <CENTER>
 <TABLE CELLPADDING=0 CELLSPACING=0>	
 <TR><TD width='800' align=justify>
-<center><b>R&eacute;glement des phases finales de la ELOCAR Cup <?php echo NOM_SAISON ; ?></b></center>
+<center><b>R&eacute;glement des phases finales de <?php echo NOM_EVENEMENT . " " . NOM_SAISON ; ?></b></center>
 <p>Les arbitrages se font désormais à 2 équipes afin qu'il n'y ait plus de phase finale sans arbitre. Tout d&eacute;faut d'arbitrage entra&icirc;nera donc un handicap de 3 buts lors de la rencontre de la même phase.<br><br>
 En cas d'&eacute;galit&eacute;, les tirs au but s'appliquent. Un premi&egrave;re phase de 5 tirs au but puis si &eacute;galit&eacute;, un par un.<br>
 Le tireur ne peut frapper la balle qu'une seule fois. En particulier, il ne peut reprendre la balle apr&egrave;s rebond sur la barre transversale, un poteau ou sur le gardien.<br>

@@ -26,7 +26,7 @@
 		<TABLE CELLPADDING=0 CELLSPACING=0 style='margin-bottom: 10px'>	
 			<TR>
 				<TD width='800' align=justify>
-					<center><b>R&eacute;glement des phases de Poules de la ELOCAR Cup <?php echo NOM_SAISON ; ?></b></center>
+					<center><b>R&eacute;glement des phases de Poules de <?php echo NOM_EVENEMENT . " " . NOM_SAISON ; ?></b></center>
 					<p>Dans les poules, le classement des &eacute;quipes s'effectue &agrave; l'aide des crit&egrave;res suivants :</p>
 					<UL>
 						<LI>Plus grand nombre de points</li>
@@ -38,7 +38,7 @@
 						<LI>Nombre de p&eacute;nalit&eacute;s d'arbitrage</li>
 						<LI>Diff&eacute;rence de buts particuli&egrave;re</li>
 					</UL>
-					<p>Cette ann&eacute;e, la ELOCAR Cup se d&eacute;roulera sous la forme d'un tournoi &agrave; rondes suisses, &agrave; savoir que chaque rencontre sera d&eacute;termin&eacute;e en fonction du classement en cours.</p>
+					<p>Cette ann&eacute;e, <?php echo NOM_EVENEMENT ; ?> se d&eacute;roulera sous la forme d'un tournoi &agrave; rondes suisses, &agrave; savoir que chaque rencontre sera d&eacute;termin&eacute;e en fonction du classement en cours.</p>
 				</td>
 			</tr>
 		</table>

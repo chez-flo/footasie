@@ -64,7 +64,7 @@
 									$rowCoupeF = mysqli_fetch_array($resultCoupeF) ;
 									extract($rowCoupeF) ;
 									if($cptC>0 || $cptF>0) {
-										echo "<option disabled>ELOCAR Cup</option>" ;
+										echo "<option disabled>" . NOM_EVENEMENT . "</option>" ;
 										if($cptC>0) {
 											echo "<option value='".optionRedirect("coupe")."'>Phases de poule</option>" ;
 										}
@@ -145,7 +145,7 @@
 											$rowCoupeF = mysqli_fetch_array($resultCoupeF) ;
 											extract($rowCoupeF) ;
 											if($cptC>0 || $cptF>0) {
-												echo "<span id='menuCoupe'><li><a href='#'>ELOCAR Cup" ;
+												echo "<span id='menuCoupe'><li><a href='#'>" . NOM_EVENEMENT ;
 												echo "<img src='".IMG."down.png' alt='down' height='20' width='20' style='display: none;'>" ;
 												echo "<img src='".IMG."right.png' alt='right' height='20' width='20'></a>" ;
 												echo "<ul id='menuCoupe_' style='display:none ;'>" ;

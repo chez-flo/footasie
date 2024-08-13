@@ -59,7 +59,7 @@ function stade() {
 }
 
 function coupe() {
-	$titre = "Calendrier de la Phase de Poules de la ELOCAR Cup" ;
+	$titre = "Calendrier de la Phase de Poules de " . NOM_EVENEMENT ;
 		
 	$retour = array('titre' => $titre) ;
 	
@@ -67,7 +67,7 @@ function coupe() {
 }
 
 function coupeF() {
-	$titre = "Calendrier des Phases Finales de la ELOCAR Cup" ;
+	$titre = "Calendrier des Phases Finales de " . NOM_EVENEMENT ;
 		
 	$retour = array('titre' => $titre) ;
 	
