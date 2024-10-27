@@ -1,38 +1,38 @@
 "eq_id","eq_nom","eq_ter_id","eq_jour","eq_ami_id","eq_coupe","eq_couleur","eq_couleur_ext","eq_soc_id","eq_commentaire"
 "1","Créneau Libre",NULL,NULL,"0","0",NULL,NULL,"0",NULL
-"2","SAP 1","3","mardi","19","1","Bleu / Blanc","Rouge","32","Nous avons aussi un entrainement le vendredi et preferons les terrains de mougins/valbonne/Eucas/roquefort/biot"
+"2","SAP 1","3","mardi.vendredi","19","1","Bleu / Blanc","Rouge","32","Nous avons aussi un entrainement le vendredi et preferons les terrains de mougins/valbonne/Eucas/roquefort/biot"
 "3","BeMore","0","aucun","0","0","Rouge / Noir",,"13",
-"4","Amadeus 5","1","lundi.jeudi","34","1","Rose","Noir","46",
+"4","Amadeus 5","1","lundi.vendredi","34","1","Rose","Noir","46",
 "5","Amadeus 14","1","jeudi","0","0","Orange","Vert","46",
 "6","Oxya 1","0",,"0","0","Rouge",,"0",NULL
-"7","Docapost 1","3","mercredi","61","1","Bleu","Rouge","18",
+"7","Docaposte 1","3","lundi.mercredi","61","1","Bleu","Rouge","18",
 "8","Amadeus 17","1","vendredi","0","0","Bleu Ciel",,"46",
-"9","Amadeus 1","1","lundi.jeudi","47","1","Blanc","Noir","46","Si on peut éviter mardi aussi on prend. Merci "
-"10","ARM 2","3","mercredi","7","0","Blanc","bleu","9",
-"11","Amicale PNS","6","lundi.mercredi","15","0","Beige","Bleu","7",
+"9","Amadeus 1","1","lundi.vendredi","47","1","Blanc","Noir","46",
+"10","ARM 2","3","mercredi","7","1","Blanc","bleu","9",
+"11","Amicale PNS","6","lundi.mercredi","15","0","Bleu/Vert","Beige","7",
 "12","ST","4","aucun","0","0","Blanc / Bleu",,"36",
-"13","Bealink","0","lundi","0","0","Blanc, violet et turquoise",,"17",
+"13","Bealink","0","lundi","0","0","Blanc",,"17",
 "14","Sogeti High Tech","4","mardi","0","0","Rouge et Blanc",,"34","Merci Thibaut pour l'organisation"
-"15","Air France","6","vendredi","11","1","Blancs",,"2",
+"15","Air France","6","vendredi","0","1","Blancs",,"2",
 "16","Ausy","1","vendredi","0","0","Rouge","Jaune","12",NULL
-"17","Elocar","3","aucun","313","1","Blanc","Jaune","19","Let's go !!!"
+"17","Elocar PLANISWARE","3","aucun","313","1","Noir et rose","Blanc","19","Bisous !"
 "18","ASSCA 1","0","vendredi","0","0","Blanc",,"0",NULL
-"19","SAP 2","3","mardi","0","1","Rouge","Bleu","32",
+"19","SAP","3","mardi.vendredi","0","1","Rouge","Bleu","32",
 "20","Amadeus 8","1","aucun","0","0","Bleu","Orange","46",
 "21","Storm Consulting","0","vendredi","0","0","Jaune","Or","37",NULL
 "22","Atos 1","4","vendredi","0","0","Bleu",,"11",
-"23","Amadeus 13","6","mercredi","307","0","Bleu Ciel",,"46",
+"23","Amadeus 13","1","mercredi","48","1","Bleu Ciel",,"46","Terrain préféré : Biot "
 "24","Silicon Mobility","3","mardi","0","0","Noir","Bleu","33",NULL
 "25","WallStreet Systems","4","lundi","0","0","Blanc","Orange","44","Si possible, éviter la poule de Fortinet"
 "26","Amadeus 12","4","mercredi","0","0","Bleu",,"0",NULL
 "27","Amadeus 9","1","vendredi","0","0","Orange","Noir","46",
 "28","Thales 1","3","mercredi","55","1","Vert / Blanc (Rayé)",,"39",
 "29","Sopra 1","4",,"0","0","Rouge",,"0",NULL
-"30","Airbus","4","lundi","0","0","Bleu","blanc","4",
+"30","Airbus","3","vendredi","45","1","Bleu","blanc","4","à bientot sur le terrain"
 "31","Appolonia","1","jeudi","11","1","Bleu","Blanc","8",
 "32","Amadeus 7","1","vendredi","0","0","Vert","Vert","46",
 "33","Amadeus 15","1","jeudi","0","0","Turquoise","Noir","46",
-"34","Amadeus 2","1","aucun","0","1","Rouge",,"46","Pour le terrain préférentiel, la Fontonne."
+"34","Amadeus 2","3","vendredi","4","1","Rouge",,"46",
 "35","Orange 1","0","jeudi","0","0","Orange / Noir",,"0",NULL
 "36","Amadeus 3","6","mardi","0","0","Bleu",,"46",NULL
 "37","CNAF","0","mardi","0","0","Grenat",,"15",
@@ -45,25 +45,25 @@
 "44","Galderma 1","5",,"0","0","Bleu Ciel","Gris","0",NULL
 "45","Teach on Mars","3","mercredi","11","1","Jaune","Violet","38",
 "46","Alten","1","aucun","0","0","Rouge",,"6",
-"47","Amadeus 11","5","vendredi","9","0","Rouge","Blanc","46",
-"48","Amadeus 4","1","mercredi","23","0","Jaune","Jaune","46","Salut Florian, comme l'année dernière nous aimerions privilégier le terrain de la Fontonne et/ou biot dans la mesure du possible bien sûr. Merci"
-"49","Astek","5","vendredi","0","0","Vert",,"10",
+"47","Amadeus 11","1","vendredi","9","0","Rouge","Blanc","46",
+"48","Amadeus 4","1","mardi.mercredi","23","1","Violet",,"46",
+"49","Astek 1","5","vendredi","0","0","Vert",,"10",
 "50","USAC","0","lundi","55","0","Blanc","Noir","43",
 "51","Sopra 2","4","vendredi","0","0","Blanc",,"0",NULL
-"52","ARM 1","3","mardi","10","1","Bleu","blanc","9",
-"53","Alithya","3","mercredi","287","1","Bleu",,"5","Chauuuud !"
+"52","ARM 1","3","mardi","10","0","Bleu","blanc","9",
+"53","Alithya","3","mercredi","287","1","Bleu",,"5",
 "54","Questel","3","lundi","70","0","Bleu / Or","Rouge","31","Bonjour, Merci de ne nous placez aucun match entre du 11-mars-2024 à 10-Avr-2024 (si possible) sinon, je perderai des points à déplacer les matchs., Merci.. "
 "55","Thales 2","3","aucun","28","0","Vert / Blanc (Rayé)",,"39",
 "56","CGI","3","aucun","61","1","Blanc","Rouge","14",
 "57","Amadeus 18","6","jeudi","0","0","Orange / Indigo",,"0",NULL
-"58","Docapost 2","3","vendredi","7","0","Blanc",,"18",
-"59","CNRS 1","0","aucun","0","1","Bleu Marine",,"16",
+"58","Docaposte 2","3","vendredi","7","0","Blanc",,"18",
+"59","CNRS 1","0","aucun","0","1","bleu","blanc","16",
 "60","Air France 2","4","mardi","0","0","Blanc","Blanc","2","Merci de remplacer Philippe Ravaine par Julien Bourel jubourel@airfrance.fr"
-"61","Amadeus 16","1","mardi","56","1","Bleu","Blanc","46",
+"61","Amadeus 16","1","lundi.mardi","56","1","Bleu","Blanc","46",
 "62","Cadence","0",,"0","0","Rouge / Blanc",,"0",NULL
 "63","Orange 2","0","jeudi","0","0","Orange / Noir",,"0",NULL
 "64","Itek","0",,"0","0","Noir",,"0",NULL
-"65","Atos 2","6","lundi.vendredi","0","1","Bleu","Jaune","11",
+"65","Atos 2","6","vendredi","0","1","Bleu","Jaune","11",
 "66","Fortinet 2","7","lundi","0","0","Blanc/Rouge",,"20",
 "67","Kinaxia","0","lundi","0","0","Noir",,"0",NULL
 "68","Transvalor/INEO Défense","3","mardi","0","0","Noir","Orange","41",NULL
@@ -95,23 +95,23 @@
 "139","Fortinet",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "143","Ricardo France",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "144","Graphie 4",NULL,NULL,"0","0",NULL,NULL,"0",NULL
-"148","INEO Défense",NULL,NULL,"0","0",NULL,NULL,"0",NULL
+"148","Ineo Defense","3","vendredi","0","0","Bleu marine & vert",,"41",NULL
 "150","Transvalor",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "187","Elsys",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "208","Ricardo",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "225","RTE Services",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "228","Amadeus 19",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "230","Amical",NULL,NULL,"0","0",NULL,NULL,"0",NULL
-"259","Sopra Steria","3","mardi","0","0","Blanc",,"35",
+"259","Sopra Steria","3","mardi","0","1","Blanc",,"35",
 "264","Galderma",NULL,NULL,"0","0",NULL,NULL,"21",NULL
 "265","Sopra Steria 2","3","mardi","0","0","Rouge","blanc","35",
 "272","Septeo Proptech","3","mardi","295","0","Noir","Blanc","24","Anciennement Kinaxia 1"
 "274","Orange SCE","4","mercredi","17","0","Blanc",,"28",
 "286","Nice ATC","0","jeudi","0","0","Blanc",,"25",
-"287","IT Forever - INGEY","3","aucun","17","0","bleu","orange","51",
+"287","Agilion - INGEY","3","lundi","41","1","Noir","Rouge","51","Demander a Marc s’il souhaite etre responsable"
 "288","NXP","3","jeudi","0","0","bleu ciel",,"26",
 "294","Kinaxia 2","4","jeudi","0","0","Blanc","Noir","24",
-"295","AddixWare","5","lundi","0","1","Bleu marine",,"1",
+"295","AddixGroup","3","lundi","0","1","Bleu marine",,"1",
 "296","Ausy 2",NULL,NULL,"0","0",NULL,NULL,"12",NULL
 "300","Sopra Steria 3","3","mardi","0","0","blanc",,"35",
 "302","Travelaer",NULL,NULL,"0","0",NULL,NULL,"42",NULL
@@ -122,20 +122,26 @@
 "307","Bioparc and Co","5","aucun","0","1","jaune","blanc","21",
 "308","Rugby Tag",NULL,NULL,"0","0",NULL,NULL,"0","Equipe créée pour prendre un créneau le vendredi à Chabert suite à la reconstruction du CIV"
 "309","rabie","0","aucun","0","0","blanc","bleu","35",
-"310","akt.io","3","lundi","0","1","Bleu","Jaune","52","Vous pouvez enlever Stéphane PERRIN et Quentin FONS des responsables"
+"310","akt.io","3","vendredi","0","1","Bleu","Jaune","52","Hello, On risque de changer plein de choses pour la rentrée: nom d'entreprise qui devrait changer, on va refaire nos maillots par la meme occasion et on devrait changer de responsables. On vous tient au courant. "
 "311","Oticon Medical","5","aucun","0","0","Orange","Blanc","53",
-"313","CE Fortinet","3","jeudi","41","1","rouge","noir","20",
+"313","CE Fortinet","3","lundi","41","1","rouge","noir","20",
 "314","Celeste","4","jeudi","0","0","Bleu","Rose","59",
 "315","Inetum","0","aucun","0","0","Bleu","Blanc","62",
-"317","Symphony","1","vendredi","0","1","Violet et blanc",,"63","Une seule facture pour ligue et coupe si possible"
+"317","Symphony","1","vendredi","32","1","Violet et blanc",,"63",
 "318","ASD FRANCE","5","aucun","0","0","Blanc",,"58",
-"319","AKKODIS I&S","5","jeudi","0","1","Bleu Foncé","Bleu Foncé","3",
-"320","FC Simo","6","vendredi","0","1","Noir","Blanc","33",
+"319","AKKODIS I&S","3","jeudi","0","1","Bleu Foncé","Bleu Foncé","3",
+"320","FC Simo","6","vendredi","0","1","Blanc","Bleu","33","Responsable 3:  ousseynou.ndiaye@silicon-mobility.com"
 "321","Transperfect Traduction","0","jeudi","0","1","bleu foncé",,"40",
 "322","Randstad Digital","0","aucun","22","1","BLEU",,"64","Evolution de l'équipe AUSY"
-"323","Pompier compagnie Antibes","0","aucun","313","1","Bleu foncé ",,"65",
+"323","SP CIE Antibes","0","aucun","313","1","Bleu","Blanc","67",
 "324","Renault-Bosh","3","mardi","0","1","Blanc",,"66",
-"325","SAP Labs France","3","mardi","19","0","Bleu/Blanc","Rouge","32","Salut FLo"
+"325","SAP Labs France","3","mardi.vendredi","19","0","Bleu/Blanc/Jeune","Rouge","32",
+"326","D.Consulting","3","mercredi","15","0","blanc","jaune","69",
+"327","FutureTech Solutions","5","aucun","31","0","noir",,"70","Mon téléphone au cas ou vous avez besoin"
+"328","Sporting Astek","0","mercredi","0","1","Vert","Rose","10","Bonsoir. Nous souhaitons svp intégrer une poule C, l'équipe a un bon niveau. Merci, excellente soirée"
+"329","Advans Group","4","vendredi","327","1","Bleu","Jaune","73","Pour le paiment, merci d'adresser la facture au nom : CSE AViSTO ( adresse : 2323 chemin de saint bernard 06220 Valllauris ) "
+"330","CELAD","0","vendredi","0","1","Bleu","-","74",
+"331","Bioman Cleaner","4","lundi","0","1","Vert",,"75",
 "1000000","Coupe Phases de Poule",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "2000000","Coupe Phases Finales",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "3000000","Réservé",NULL,NULL,"0","1",NULL,NULL,"0",NULL
@@ -204,4 +210,4 @@
 "20000130","Q2_2",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "20000228","WE+","0","aucun","0","0","Bleu","Rouge","54",NULL
 "20000249","Two Stars","0","mercredi","0","0","Orange","Or","0",NULL
-"20000253","Instant System","3","lundi","0","0","Violet","Blanc","50",
+"20000253","Instant System","3","lundi","0","1","Violet","Blanc","50",
