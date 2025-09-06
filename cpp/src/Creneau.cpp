@@ -31,6 +31,20 @@ Creneau::~Creneau()
 
 }
 
+void Creneau::clean(const Date& debut)
+{
+	// suppression des creneaux deja utilise ou avant la date consideree
+	for (std::vector<Creneau>::const_iterator it = m_creneaux.begin(); it != m_creneaux.end();)
+	{
+		if (it->match() != SAISON * 10000u)
+			it = m_creneaux.erase(it);
+		else if (it->date() < debut)
+			it = m_creneaux.erase(it);
+		else
+			it++;
+	}
+}
+
 void Creneau::toCSV(const std::string& filename)
 {
 	fstream handle;

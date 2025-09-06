@@ -184,7 +184,7 @@ int main(int argc, char **argv)
 
     // generation matchs
     for (std::map<std::string, Poule>::iterator it = poule.begin(); it != poule.end(); it++)
-        it->second.genereMatchs();
+        it->second.genereMatchs(true);
 
     // sauvegarde de la liste des matchs au format CSV
     filename = getConfigAsString("Fichier CSV match", "data/f_match.csv", config);

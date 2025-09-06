@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include <map>
 #include <global.hpp>
 #include <getConfig.hpp>
@@ -100,8 +101,11 @@ bool testAmi(const Match& match, const Creneau& creneau)
     return true;
 }
 
-void createChampionnat(const unsigned int enchainement, const std::vector<Date>& pont)
+std::map<unsigned int, Date> createChampionnat(const unsigned int enchainement, const std::vector<Date>& pont)
 {
+    // retour
+    std::map<unsigned int, Date> out;
+
     // map des derniers matchs joues par l'equipe (pour conserver l'ordre des journees)
     std::map<unsigned int, Date> lastMatch;
 
@@ -129,12 +133,17 @@ void createChampionnat(const unsigned int enchainement, const std::vector<Date>&
                 creneau.setMatch(match);
                 lastMatch[match.equipe1()->id()] = creneau.date();
                 lastMatch[match.equipe2()->id()] = creneau.date();
+
+                if (out[match.poule()] < creneau.date()) out[match.poule()] = creneau.date();
+
                 break;
             }
 
             if (!OK)    std::cout << "ATTENTION, impossible de programmer la rencontre " << (int)match.id() << std::endl;
         }
     }
+
+    return out;
 }
 
 int main(int argc, char** argv)
@@ -186,7 +195,7 @@ int main(int argc, char** argv)
     pont = getConfigAsVectorDate("Ponts", pont, config);
 
     // creation du championnat
-    createChampionnat(enchainement, pont);
+    auto final = createChampionnat(enchainement, pont);
 
     // sauvegarde championnat (format CSV)
     filename = getConfigAsString("Fichier CSV championnat", "data/f_creneau_championnat.csv", config);
@@ -216,6 +225,12 @@ int main(int argc, char** argv)
     }
     std::cout << "Nombre de creneaux libres en fin d'annee: " << nbLibre << std::endl;
     setConfigInt("Nombre de creneaux libres en fin d'annee", nbLibre, resultat);
+
+    for (const auto& val : final) {
+        std::stringstream key;
+        key << "Dernier match poule id " << val.first;
+        setConfigDate(key.str(), val.second, resultat);
+    }
 
     return 0;
 }

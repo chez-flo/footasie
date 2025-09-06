@@ -59,7 +59,7 @@ namespace
 	}
 }
 
-void Poule::genereMatchs()
+void Poule::genereMatchs(const bool genereRetours)
 {
 	// liste des equipes de base
 	std::vector<Equipe*> equipes;
@@ -106,14 +106,17 @@ void Poule::genereMatchs()
 	for (std::vector<Match>::const_iterator it = m_match.begin(); it != m_match.end(); it = (it->arbitre1() == nullptr) ? m_match.erase(it) : it + 1);
 
 	// generation de la phase retour
-	const int nbMatchsAller = (int)m_match.size();
-	for (int n = 0; n < nbMatchsAller; ++n)
+	if (genereRetours) 
 	{
-		Equipe* eq1 = m_match[n].equipe2();
-		Equipe* eq2 = m_match[n].equipe1();
-		Equipe* arb = arbitres[idArb];
-		m_match.push_back(Match(m_id, m_match[n].journee() + nbJournees, eq1, eq2, arb, nullptr));
-		idArb = (idArb + 1) % (int)arbitres.size();
+		const int nbMatchsAller = (int)m_match.size();
+		for (int n = 0; n < nbMatchsAller; ++n)
+		{
+			Equipe* eq1 = m_match[n].equipe2();
+			Equipe* eq2 = m_match[n].equipe1();
+			Equipe* arb = arbitres[idArb];
+			m_match.push_back(Match(m_id, m_match[n].journee() + nbJournees, eq1, eq2, arb, nullptr));
+			idArb = (idArb + 1) % (int)arbitres.size();
+		}
 	}
 }
 

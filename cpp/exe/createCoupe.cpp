@@ -123,7 +123,7 @@ void createCoupe(const unsigned int enchainement, const Date& debut, const std::
                 if (!testPreference(match, creneau))                            continue;   // preferences (jour et terrain)
                 if (!testEnchainement(match, creneau, enchainement, lastMatch)) continue;   // enchainement
                 if (!testArbitrage(match, creneau))                             continue;   // arbitrage
-                //if (!testAmi(match, creneau))                                   continue;   // ami
+                if (!testAmi(match, creneau))                                   continue;   // ami
 
                 // tous les tests sont OK, on met a jour le creneau et on arrete la boucle
                 OK = true;
@@ -186,6 +186,9 @@ int main(int argc, char** argv)
     };
     pont = getConfigAsVectorDate("Ponts", pont, config);
     Date debut = getConfigAsDate("Debut de la coupe", Date("15/05/2023"), config);
+
+    // nettoyage creneaux non-voulus
+    Creneau::clean(debut);
 
     // creation du championnat
     createCoupe(enchainement, debut, pont);

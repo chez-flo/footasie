@@ -21,6 +21,7 @@ public:
 
 	unsigned int id() const { return m_id; }
 	unsigned int journee() const { return m_journee; }
+	unsigned int poule() const { return m_poule; }
 	Equipe* equipe1() const { return Equipe::byId(m_eq1); }
 	Equipe* equipe2() const { return Equipe::byId(m_eq2); }
 	Equipe* arbitre1() const { return Equipe::byId(m_arb1); }

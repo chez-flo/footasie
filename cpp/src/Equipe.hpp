@@ -27,6 +27,13 @@ public:
 	unsigned int terrain() const { return m_terrain; }
 	const std::vector<std::string>& entrainement() const { return m_entrainement; }
 
+	unsigned int chapeau() const { return m_chapeau; }
+	const std::string& poule() const { return m_poule; }
+
+	// setters
+	void setChapeau(const unsigned int chapeau) { m_chapeau = chapeau; }
+	void setPoule(const std::string& poule) { m_poule = poule; }
+
 private:
 	unsigned int m_id = 0u;
 	std::string m_name = "";
@@ -34,6 +41,9 @@ private:
 	std::vector<std::string> m_entrainement = {};
 	unsigned int m_ami = 0u;
 	bool m_isValid = false;
+
+	unsigned int m_chapeau = 0u;
+	std::string m_poule = "";
 	
 	static std::map<std::string, Equipe> m_byName;
 	static std::map<unsigned int, std::string> m_byId;

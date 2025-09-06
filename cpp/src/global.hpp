@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-static const unsigned int SAISON = 2024u;
+static const unsigned int SAISON = 2025u;
 static const std::map<std::string, unsigned int> POULES = {
 	{"A",  11u},
 	{"B1", 12u},
@@ -16,7 +16,8 @@ static const std::map<std::string, unsigned int> POULES = {
 	{"D3", 18u},
 	{"D",  19u},
 	{"C3", 20u},
-	{"C",  21u}
+	{"C",  21u},
+	{"B",  22u}
 };
 static const std::map<std::string, unsigned int> POULESCOUPE = {
 	{"A", 31u},

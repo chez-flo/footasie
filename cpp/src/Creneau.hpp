@@ -20,6 +20,7 @@ public:
 	bool isValid() const { return m_isValid; }
 
 	static std::vector<Creneau>& getCreneaux() { return m_creneaux; }
+	static void clean(const Date& debut);
 	static void toCSV(const std::string& filename);
 	static void fromCSV(const std::string& filename);
 	static void toSql(const std::string& filename);
