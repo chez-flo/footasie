@@ -38,7 +38,7 @@
 						<LI>Nombre de p&eacute;nalit&eacute;s d'arbitrage</li>
 						<LI>Diff&eacute;rence de buts particuli&egrave;re</li>
 					</UL>
-					<p>Cette ann&eacute;e, <?php echo NOM_EVENEMENT ; ?> se d&eacute;roulera sous la forme d'un tournoi &agrave; rondes suisses, &agrave; savoir que chaque rencontre sera d&eacute;termin&eacute;e en fonction du classement en cours.</p>
+					<p>Cette ann&eacute;e, <?php echo NOM_EVENEMENT ; ?> se d&eacute;roulera sous la forme d'un tournoi dans un format analogue &agrave; celui de la Ligue des Champions. &Agrave; savoir : les &eacute;quipes sont r&eacute;parties par chapeaux, chacune rencontrera des &eacute;quipes des autres chapeaux pendant la phase de poule &eacute;tablissant ainsi un classement. Enfin, les 4 ou 8 meilleurs au classement (selon disponibilit&eacute;s des terrains) se d&eacute;partageront pendant une phase finale &agrave; &eacute;liminations directes.</p>
 				</td>
 			</tr>
 		</table>

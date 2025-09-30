@@ -19,6 +19,7 @@ public:
 	static void readCSV(const std::string& filename);
 	static Equipe* byName(const std::string& name);
 	static Equipe* byId(const unsigned int& id) { return byName(m_byId[id]); }
+	static std::vector<Equipe*> getAllPlayingEquipe();
 
 	// getters
 	unsigned int id() const { return m_id; }
@@ -28,11 +29,11 @@ public:
 	const std::vector<std::string>& entrainement() const { return m_entrainement; }
 
 	unsigned int chapeau() const { return m_chapeau; }
-	const std::string& poule() const { return m_poule; }
+	const unsigned int poule() const { return m_poule; }
 
 	// setters
 	void setChapeau(const unsigned int chapeau) { m_chapeau = chapeau; }
-	void setPoule(const std::string& poule) { m_poule = poule; }
+	void setPoule(const unsigned int poule) { m_poule = poule; }
 
 private:
 	unsigned int m_id = 0u;
@@ -43,7 +44,7 @@ private:
 	bool m_isValid = false;
 
 	unsigned int m_chapeau = 0u;
-	std::string m_poule = "";
+	unsigned int m_poule = 0u;
 	
 	static std::map<std::string, Equipe> m_byName;
 	static std::map<unsigned int, std::string> m_byId;

@@ -28,7 +28,7 @@
 "27","Amadeus 9","1","vendredi","0","0","Orange","Noir","46",
 "28","Thales 1","3","mercredi","55","1","Vert / Blanc (Rayé)","Rouge / Noir","39",
 "29","Sopra 1","4",,"0","0","Rouge",,"0",NULL
-"30","Airbus","3","vendredi","45","1","Bleu","blanc","4",
+"30","Airbus","3","vendredi","11","1","Bleu","blanc","4",
 "31","Appolonia","1","jeudi","259","1","Bleu foncé","Blanc","8",
 "32","Amadeus 7","1","vendredi","0","0","Vert","Vert","46",
 "33","Amadeus 15","1","jeudi","0","0","Turquoise","Noir","46",
@@ -39,8 +39,8 @@
 "38","Pro BTP","7","aucun","31","0","Jaune",,"30",
 "39","Amadeus 6","1","aucun","0","0","Vert","Vert","46","Terrains de préférence: Fort Carré + Fontonne"
 "40","CNRS 2","0",,"0","0","Bleu",,"16",NULL
-"41","Accenture","3","mercredi","313","0","Noir","Vert","60",
-"42","AGOS d'Inria","5","jeudi","0","0","Rouge","bleu","23",
+"41","Accenture","0",,"0","0",,,"0",
+"42","AGOS d'Inria","3","jeudi","0","0","Blanc","Bleu","23",
 "43","Harvest","6","mercredi","0","0","Blanc",,"22",
 "44","Galderma 1","5",,"0","0","Bleu Ciel","Gris","0",NULL
 "45","Teach on Mars","3","mercredi","11","0","Jaune","Violet","38",
@@ -54,7 +54,7 @@
 "53","Alithya","3","jeudi","287","1","Bleu",,"5",
 "54","Questel","3","lundi","70","0","Bleu / Or","Rouge","31","Bonjour, Merci de ne nous placez aucun match entre du 11-mars-2024 à 10-Avr-2024 (si possible) sinon, je perderai des points à déplacer les matchs., Merci.. "
 "55","Thales 2","3","aucun","28","0","Vert / Blanc (Rayé)",,"39",
-"56","CGI","3","aucun","61","1","Blanc","Rouge","14",
+"56","CGI","3","aucun","11","1","Blanc","Rouge","14",
 "57","Amadeus 18","6","jeudi","0","0","Orange / Indigo",,"0",NULL
 "58","Docaposte 2","3","vendredi","7","0","Noir",,"18",
 "59","CNRS 1","7","aucun","0","1","bleu","blanc","16",
@@ -124,7 +124,7 @@
 "309","rabie","0","aucun","0","0","blanc","bleu","35",
 "310","Vancelian (akt.io)","3","vendredi","0","0","Bleu","Jaune","52","Hello, On risque de changer plein de choses pour la rentrée: nom d'entreprise qui devrait changer, on va refaire nos maillots par la meme occasion et on devrait changer de responsables. On vous tient au courant. "
 "311","Oticon Medical","5","aucun","0","0","Orange","Blanc","53",
-"313","CE Fortinet","3","lundi","41","1","rouge","noir","20",
+"313","CE Fortinet","3","mardi","0","1","rouge","noir","20",
 "314","Celeste","4","jeudi","0","0","Bleu","Rose","59",
 "315","Inetum","0","aucun","0","0","Bleu","Blanc","62",
 "317","Symphony","3","vendredi","13","1","Rouge","Violet et blanc","63",
@@ -136,7 +136,7 @@
 "323","SP CIE Antibes","0","aucun","313","0","Bleu","Blanc","67",
 "324","Renault-Bosh","3","mardi","0","0","Blanc",,"66",
 "325","SAP Labs France","3","mardi","19","1","Bleu/Blanc/Jeune","Rouge","32",
-"326","D.Consulting","3","mercredi","15","0","blanc","jaune","69",
+"326","D.Consulting","3","vendredi","15","0","blanc","jaune","69",
 "327","FutureTech Solutions","5","aucun","31","0","noir",,"70","Mon téléphone au cas ou vous avez besoin"
 "328","Sporting Astek","5","vendredi","0","1","Blanc","Noir","10","Cette année on fait les arbitrages promis, en forme (on joue la montée)"
 "329","Advans Group","4","vendredi","327","1","Bleu","Jaune","73",
@@ -147,6 +147,7 @@
 "335","Les Scorpions d'EURECOM","0","aucun","0","1","Bleu/Violet",,"122",
 "336","Mines Paris - PSL","0","vendredi","0","1","Blanc","Bleu","123",
 "337","Leyton","5","aucun","0","1","Bleu marine",,"124","Nous allons nous organiser des entrainements de notre côté pour évaluer notre niveau global, nous vous contacterons si nous souhaitons intégrer une poule de niveau C1"
+"338","EURECOM","0","aucun","0","1","azur","blanc","122",
 "1000000","Coupe Phases de Poule",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "2000000","Coupe Phases Finales",NULL,NULL,"0","0",NULL,NULL,"0",NULL
 "3000000","Réservé",NULL,NULL,"0","0",NULL,NULL,"0",NULL

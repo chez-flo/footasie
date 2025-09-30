@@ -157,10 +157,10 @@
 					<td align="justify">
 						<center><b>Veuillez lire attentivement les indications de ce paragraphe.</b></center>
 						<p>Remplissez ce bulletin pour toutes les équipes de votre société.</p>
-						<p><b>IMPORTANT</b> : vous trouverez une question demandant si vous souhaitez vous inscrire pour la coupe ELOCAR. Merci d'y répondre afin que nous sachions comment nous organiser. Bien entendu, la tenue ou non de cette coupe, ainsi que la formule qu'elle adoptera dépendra du nombre de participants et des créneaux que nous aurons réussi à obtenir.</p>
-						<p>Je vous rappelle que l'inscription avait été fixée l'année dernière à 300€ pour le championnat et le tarif de la coupe était de l'ordre de 50€ les années précédentes (pas de coupe l'année dernière). Ces valeurs indicatives sont susceptibles d'évoluer en fonction des tarifs de location des terrains que nous ne connaissons pas encore tous.</p>
+						<p><b>IMPORTANT</b> : vous trouverez une question demandant si vous souhaitez vous inscrire pour la coupe ELOCAR. Votre réponse n'est pas engageante, elle n'est qu'informative, nous redemanderons en cours d'année si vous y participerez. Bien entendu, la tenue ou non de cette coupe, ainsi que la formule qu'elle adoptera dépendra du nombre de participants et des créneaux que nous aurons réussi à obtenir.</p>
+						<p>Nous vous rappellons que l'inscription avait été fixée l'année dernière à <?php echo TARIF_CHAMPIONNAT ; ?>€ pour le championnat et le tarif de la coupe était de l'ordre de <?php echo TARIF_COUPE ; ?>€ les années précédentes. Ces valeurs indicatives sont susceptibles d'évoluer en fonction des tarifs de location des terrains que nous ne connaissons pas encore tous et est voté lors de l'AG de l'ASIE (à laquelle il faut venir, c'est important).</p>
 						<p><b>Pour les nouvelles équipes</b> : si vous souhaitez directement intégrer le championnat par une poule de niveau C, veuillez faire votre demande dans les commentaires, on verra ce qu'on pourra faire.</p>
-						<p>Mon mail est <u><i><a href="mailto:foot@asiesophia.fr">foot@asiesophia.fr</a></i></u> ou <u><i><a href="mailto:florian.joyeux@gmail.com">florian.joyeux@gmail.com</a></i></u> si vous avez des questions à poser au préalable.</p>
+						<p>Notre mail est <u><i><a href="mailto:foot@asiesophia.fr">foot@asiesophia.fr</a></i></u> si vous avez des questions à poser au préalable.</p>
 					</td>
 				</tr>
 			</table>

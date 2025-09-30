@@ -61,11 +61,7 @@
 	echo "<table cellpadding=1 cellspacing=1 style='font-size: 15px ;'><tr>" ;
 	echo "<tr><td colspan='2'>".$jour." &agrave; ".$ter_nom." : ".$eq1." contre ".$eq2." arbitr&eacute; par ".$arb." en ".$poule."</td></tr>" ;
 	
-	if($pou_id < 30) {
-		$date_max = SAISON+1 . '-05-01 12:30:00';
-	} else {
-		$date_max = SAISON+1 . '-07-01 12:30:00';
-	}
+	$date_max = DATE_REPORT . ' 12:30:00';
 	
 	//echo "<option value='0'>Aucun pour le moment ".$eqId1." - ".$eqId2." - ".$arbId."</option>" ;
 	$sSQLLibre = "SELECT cre_id, CONCAT(CASE dayofweek(cre_date) WHEN 2 THEN 'Lundi' WHEN 3 THEN 'Mardi' WHEN 4 THEN 'Mercredi' WHEN 5 THEN 'Jeudi' WHEN 6 THEN 'Vendredi' ELSE 'autre' END, " .
@@ -86,8 +82,7 @@
 				" and sai_annee = '" . SAISON . "' " .
 				" and mat_id = " . SAISON . "0000 " .
 				" and mat_pou_id = pou_id " .
-				//" and date_format(cre_date, '%Y%m%d') between date_format(now(), '%Y%m%d') and date_format(DATE_ADD('".$date_match."', INTERVAL 2 MONTH), '%Y%m%d') " .
-				//" and date_format(cre_date, '%Y%m%d') between date_format(now(), '%Y%m%d') and date_format(DATE_ADD('".$date_match."', INTERVAL 12 MONTH), '%Y%m%d') " .
+				" and date_format(cre_date, '%Y%m%d') between date_format(now(), '%Y%m%d') and date_format(DATE_ADD('" . $date_match . "', INTERVAL " . DELAI_REPORT . " DAY), '%Y%m%d') " .
 				" and date_format(cre_date, '%Y%m%d') between date_format(now(), '%Y%m%d') and date_format('" . $date_max . "', '%Y%m%d')" .
 		" ORDER BY cre_date, ter_nom, cre_id " ;
 	//echo $sSQLLibre ;

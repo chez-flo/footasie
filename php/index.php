@@ -581,7 +581,12 @@ if (isset($_GET['op'])) {
 			break ;
 		case 'ins' : // Inscription
 			extract(inscription()) ;
-			include("templates/inscription.php") ;
+			if (INSCRIPTION_OUVERTE == 1) {
+				include("templates/inscription.php") ;
+			}
+			else {
+				include("templates/inscription_off.php") ;
+			}
 			break ;
 		case 'vins' : // Validation Inscription
 			extract(inscription()) ;

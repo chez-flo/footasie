@@ -1,0 +1,58 @@
+-----------------------
+		Accenture
+		Amadeus 5
+		Amadeus 1
+		Amicale PNS
+		Meilleurtaux.com
+A		Bealink
+	|-- ---
+	|	Amadeus 16
+	|	Docaposte 1
+	|	AddixGroup
+----|------------------
+	|	Atos 2
+	|-- ---
+		Thales 1
+		Amadeus 13
+		Air France
+B1		Amadeus 7
+		ARM 2
+		SAP
+	|-- ---
+	|	Agilion - INGEY
+	|	SP CIE Antibes
+----|------------------
+	|	Symphony
+	|	CGI
+	|	Amadeus 11
+	|-- ---
+		Elocar PLANISWARE
+B2		Amadeus 2
+		Appolonia
+		akt.io
+	|-- ---
+	|	AKKODIS I&S
+	|	Instant System
+----|------------------
+	|	CE Fortinet
+	|	Docaposte 2
+	|-- ---
+		CNRS 1
+		ARM 1
+C1		Amadeus 4
+		FC Simo
+	|-- ---
+	|	Sporting Astek
+	|	Advans Group
+	|	Sopra Steria
+----|------------------
+	|	FutureTech Solutions
+	|	D.Consulting
+	|	CELAD
+	|-- ---
+		Teach on Mars
+C2		Thales 2
+		SAP Labs
+		Airbus
+		Alithya	
+-----------------------

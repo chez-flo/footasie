@@ -387,17 +387,14 @@ $(document).ready(function(){
 												<?php
 													$i=0;
 													$j=1;
-													$sSQLJoueurs = "select typ_id, jou_nom, typ_nom, " .
+													$sSQLJoueurs = "select typ_id, jou_nom, typ_nom, jou_insc_etat, " .
 																		" CASE typ_id WHEN 2 THEN (select eq_nom " . 
 																									" from " . TBL_EJT . ", " . TBL_EQUIPE . 
 																									" where ejt_eq_id = eq_id " .
 																										" and ejt_typ_id = '1' " .
 																										" and ejt_sai_annee = " . SAISON . 
 																										" and ejt_jou_id = jou_id) " .
-																						" else '' end eq_nom, " .
-																		" CASE typ_id WHEN 1 THEN '" . COLOR_TITULAIRE . "' " .
-																					" WHEN 2 THEN '" . COLOR_JOKER . "' " .
-																					" else '' end color_joueur " . 
+																						" else '' end eq_nom " .
 																	" from " . TBL_EJT . ", " . TBL_JOUEUR . ", " . TBL_TYPE . 
 																	" where ejt_jou_id = jou_id " .
 																		" and ejt_typ_id = typ_id " .
@@ -413,6 +410,7 @@ $(document).ready(function(){
 															$j++ ;
 														}
 														$typ_id==2 ? $nom=$jou_nom . " (" . $eq_nom . ")" : $nom=$jou_nom ;
+														$jou_insc_etat==2 ? $color_joueur=COLOR_INSCRITOK : ($jou_insc_etat==1 ? $color_joueur=COLOR_CERTIFNOK : $color_joueur=COLOR_NONINSCRIT) ;
 														echo "<td style='color:".$color_joueur.";'><img src='". IMG ."joueur.png' height='20'>&nbsp;".$nom."</td>" ;
 													}
 												?>

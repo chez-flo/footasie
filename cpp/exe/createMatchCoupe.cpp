@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <getConfig.hpp>
 #include <global.hpp>
+#include <melange.hpp>
 #include <Poule.hpp>
 
 void clear(std::vector<std::string>& equipe)
@@ -20,26 +21,6 @@ void clear(std::vector<std::string>& equipe)
     }
 }
 
-std::vector<std::string> melangePoule(std::vector<std::string> nomPoules)
-{
-    // init random
-    static std::random_device rd;   // seed
-    static std::default_random_engine gen(rd());
-    // init out
-    std::vector<std::string> out;
-    // melange
-    while (!nomPoules.empty())
-    {
-        // tirage aleatoire
-        std::uniform_int_distribution<> rand(0, (int)nomPoules.size() - 1);
-        const int p = rand(gen);
-        out.push_back(nomPoules[p]);
-        nomPoules.erase(nomPoules.begin() + p);
-    }
-
-    return out;
-}
-
 void tiragePoule(const std::vector<std::vector<std::string> >& equipe, const std::vector<std::string>& nomPoules, std::map<std::string, Poule>& out)
 {
     // initialisation des poules
@@ -47,7 +28,7 @@ void tiragePoule(const std::vector<std::vector<std::string> >& equipe, const std
         out[*it].setIdPoule(POULESCOUPE.find(*it)->second);
 
     // remplissage des poules au fur et a mesure des chapeaux
-    std::vector<std::string> dispoule = melangePoule(nomPoules);
+    std::vector<std::string> dispoule = melange(nomPoules);
     for (const std::vector<std::string>& chapeau : equipe)
     {
         for (const std::string& eq : chapeau)
@@ -57,7 +38,7 @@ void tiragePoule(const std::vector<std::vector<std::string> >& equipe, const std
             out[poule].addEquipe(eq);
             // retrait de la poule
             dispoule.pop_back();
-            if (dispoule.empty())   dispoule = melangePoule(nomPoules);
+            if (dispoule.empty())   dispoule = melange(nomPoules);
         }
     }
 }
@@ -95,7 +76,7 @@ void requetePouleEtEquipe(const std::map<std::string, Poule>& poule, const std::
             << (int)p.equipes().size() << "\", \""
             << (int)montee.front() << "\", \""
             << (int)montee.back() << "\", \""
-            << (int)p.getIdArbitre() << "\");" << std::endl;
+            << (int)p.getFirstIdArbitre() << "\");" << std::endl;
     }
 }
 
@@ -139,12 +120,10 @@ int main(int argc, char **argv)
         const std::string& name = pouleName[n];
         Poule& p = poule[name];
         const unsigned int m = (n + 1u) % (pouleName.size());
-        std::string arbitre = pouleName[m];
-        arbitre = getConfigAsString("Arbitre de coupe poule " + name, arbitre, config);
-        Poule& a = poule[arbitre];
-        p.setIdArbitre(POULESCOUPE.find(arbitre)->second);
-        for (Equipe* const& jt : a.equipes())
-            p.addArbitre(jt->nom());
+        std::vector<std::string> arbitre = { pouleName[m] };
+        arbitre = getConfigAsVectorString("Arbitre de coupe poule " + name, arbitre, config);
+        for (const auto val : arbitre)
+            p.addIdArbitre(POULESCOUPE.find(val)->second);
     }
 
     // requetes pour poules et equipes

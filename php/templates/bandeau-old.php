@@ -236,9 +236,6 @@
 								<a href="https://www.elocar.fr/" target="_blank">
 									<img src="<?php echo IMG ; ?>elocar.jpeg" style="height:68px; border: 1px #EBEDF0 solid;" alt="Elocar"/>
 								</a>
-								<a href="https://www.kruz-antibes.fr/" target="_blank">
-									<img src="<?php echo IMG ; ?>kruz.jpg" style="height:68px; border: 1px #EBEDF0 solid; background-color=white;" alt="Kruz"/>
-								</a>
 							</td>
 						</tr>
 					</table>	

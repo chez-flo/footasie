@@ -150,6 +150,17 @@ void Equipe::readCSV(const std::string& filename)
 	}
 }
 
+std::vector<Equipe*>Equipe::getAllPlayingEquipe()
+{
+	std::vector<Equipe*> out;
+	for (auto& val : m_byName)
+	{
+		if (val.second.poule())
+			out.push_back(&val.second);
+	}
+	return out;
+}
+
 Equipe* Equipe::byName(const std::string& name)
 {
 	std::map<std::string, Equipe>::iterator it = m_byName.find(name);

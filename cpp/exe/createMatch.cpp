@@ -127,7 +127,7 @@ void requetePouleEtEquipe(const std::map<std::string, Poule>& poule, const std::
             << (int)p.equipes().size() << "\", \""
             << (int)montee.front() << "\", \""
             << (int)montee.back() << "\", \""
-            << (int)p.getIdArbitre() << "\");" << std::endl;
+            << (int)p.getFirstIdArbitre() << "\");" << std::endl;
     }
 }
 
@@ -165,11 +165,9 @@ int main(int argc, char **argv)
     {
         const std::string& name = it.first;
         Poule& p = it.second;
-        const std::string arbitre = getConfigAsString("Arbitre poule " + name, "", config);
-        Poule& a = poule[arbitre];
-        p.setIdArbitre(POULES.find(arbitre)->second);
-        for (Equipe* const& jt : a.equipes())
-            p.addArbitre(jt->nom());
+        const std::vector<std::string> arbitre = getConfigAsVectorString("Arbitre poule " + name, {}, config);
+        for (const auto val : arbitre)  
+            p.addIdArbitre(POULES.find(val)->second);
     }
 
     // requetes pour poules et equipes
@@ -183,8 +181,14 @@ int main(int argc, char **argv)
     Match::clear();
 
     // generation matchs
+    //*///
+    const std::vector<std::string> ordre = getConfigAsVectorString("Ordre generation", {}, config);
+    for (const std::string &val : ordre)
+        poule[val].genereMatchs(true);
+    /*///
     for (std::map<std::string, Poule>::iterator it = poule.begin(); it != poule.end(); it++)
         it->second.genereMatchs(true);
+    //*///
 
     // sauvegarde de la liste des matchs au format CSV
     filename = getConfigAsString("Fichier CSV match", "data/f_match.csv", config);

@@ -2,33 +2,20 @@
 
 #include <random>
 #include <algorithm>
+#include <melange.hpp>
 
 void Poule::addEquipe(const std::string& name)
 {
 	Equipe* equipe = Equipe::byName(name);
 	if (equipe && equipe->isValid())
+	{
 		m_equipe.push_back(equipe);
-}
-
-void Poule::addArbitre(const std::string& name)
-{
-	Equipe* equipe = Equipe::byName(name);
-	if (equipe && equipe->isValid())
-		m_arbitre.push_back(equipe);
+		equipe->setPoule(m_id);
+	}
 }
 
 namespace
 {
-	template<typename T>
-	std::vector<T> melange(const std::vector<T>& in)
-	{
-		static std::random_device rd;
-		static std::default_random_engine gen(rd());
-		std::vector<T> cpy = in;
-		std::shuffle(std::begin(cpy), std::end(cpy), gen);
-		return cpy;
-	}
-
 	std::vector<std::vector<int> > genereTable(const int nbEquipes)
 	{
 		// alloc
@@ -57,17 +44,65 @@ namespace
 
 		return out;
 	}
+
+	std::map<Equipe*, unsigned int> constructMapArbitrage(const std::vector<Equipe*>& equipe)
+	{
+		std::map<Equipe*, unsigned int> out;
+		for (const auto& val : equipe)	out[val] = 0u;
+		return out;
+	}
+
+	Equipe* getLessArbitre(std::map<Equipe*, unsigned int>& arbitre, const Poule &poule)
+	{
+		//*///
+		unsigned int nbArbitrages = 9999u;
+		std::vector<Equipe*> canArbitre;
+		// recherche les equipes qui peuvent arbitrer
+		for (std::map<Equipe*, unsigned int>::const_iterator it = arbitre.begin(); it != arbitre.end(); it++)
+		{
+			if (poule.cetteEquipePeutArbitrer(*(it->first)))
+			{
+				if (it->second < nbArbitrages)	// si cette equipe a moins d'arbitrage que les autres
+				{
+					canArbitre.clear();
+					canArbitre.push_back(it->first);
+					nbArbitrages = it->second;
+				}
+				else if (it->second == nbArbitrages)
+					canArbitre.push_back(it->first);
+			}
+		}
+		// on melange pour avoir une saisie aleatoire parmis les grands vainqueurs
+		Equipe* out = melange(canArbitre).front();
+		++arbitre[out];
+		return out;
+		/*///
+		// recherche 1ere equipe qui peut arbitrer
+		std::map<Equipe*, unsigned int>::iterator sel = arbitre.begin();
+		for (; !poule.cetteEquipePeutArbitrer(*(sel->first)) && sel != arbitre.end(); sel++);
+
+		// parcours de toutes les equipes pour prendre celle avec le moins d'arbitrage qui peut arbitrer
+		for (std::map<Equipe*, unsigned int>::iterator it = arbitre.begin(); it != arbitre.end(); it++)
+		{
+			if ((it->second < sel->second) && (poule.cetteEquipePeutArbitrer(*(it->first))))
+				sel = it;
+		}
+
+		// incremente le nombre d'arbitrages
+		++(sel->second);
+		return sel->first;
+		//*///
+	}
 }
 
 void Poule::genereMatchs(const bool genereRetours)
 {
 	// liste des equipes de base
-	std::vector<Equipe*> equipes;
-	for (Equipe*& eq : m_equipe)
-		equipes.push_back(eq);
-	std::vector<Equipe*> arbitres;
-	for (Equipe*& eq : m_arbitre)
-		arbitres.push_back(eq);
+	std::vector<Equipe*> equipes = melange(m_equipe);
+
+	// liste de toutes les equipes qui jouent, permet d'avoir un pool global d'arbitres
+	static std::map<Equipe*, unsigned int> arbitres = constructMapArbitrage(Equipe::getAllPlayingEquipe());
+
 	// gestion du nombre impair d'equipes
 	if ((int)equipes.size() % 2 == 1)
 		equipes.push_back(nullptr);
@@ -82,7 +117,6 @@ void Poule::genereMatchs(const bool genereRetours)
 	// generation de la table d'elaboration du championnat
 	const auto table = genereTable((int)equipes.size());
 	// generation des journees
-	int idArb = 0;
 	for (int j = 0; j < nbJournees; ++j)
 	{
 		// melange des equipes
@@ -92,6 +126,13 @@ void Poule::genereMatchs(const bool genereRetours)
 		{
 			Equipe* eq1 = equipes[newId[e]];
 			Equipe* eq2 = equipes[table[j][newId[e]]];
+			//*///
+			if (!ontIlsDejaJoue(eq1, eq2))
+			{
+				Equipe* arb = (eq1 == nullptr || eq2 == nullptr) ? nullptr : getLessArbitre(arbitres, *this);
+				m_match.push_back(Match(m_id, j+1, eq1, eq2, arb, nullptr));
+			}
+			/*///
 			Equipe* arb = (eq1 == nullptr || eq2 == nullptr) ? nullptr : arbitres[idArb];
 			if (!ontIlsDejaJoue(eq1, eq2))
 			{
@@ -99,6 +140,7 @@ void Poule::genereMatchs(const bool genereRetours)
 				if (arb != nullptr)
 					idArb = (idArb + 1) % (int)arbitres.size();
 			}
+			//*///
 		}
 	}
 
@@ -113,11 +155,22 @@ void Poule::genereMatchs(const bool genereRetours)
 		{
 			Equipe* eq1 = m_match[n].equipe2();
 			Equipe* eq2 = m_match[n].equipe1();
+			//*///
+			Equipe* arb = getLessArbitre(arbitres, *this);
+			m_match.push_back(Match(m_id, m_match[n].journee() + nbJournees, eq1, eq2, arb, nullptr));
+			/*///
 			Equipe* arb = arbitres[idArb];
 			m_match.push_back(Match(m_id, m_match[n].journee() + nbJournees, eq1, eq2, arb, nullptr));
 			idArb = (idArb + 1) % (int)arbitres.size();
+			//*///
 		}
 	}
+
+
+	// affichage arbitrage
+	std::cout << "Repartition arbitrages apres poule " << getIdPoule() << std::endl;
+	for (const auto& val : arbitres)	std::cout << "\t" << "Poule " << val.first->poule() << " - " << val.first->nom() << ": " << val.second << std::endl;
+	std::cout << std::endl;
 }
 
 bool Poule::ontIlsDejaJoue(const Equipe* eq1, const Equipe* eq2) const
